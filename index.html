@@ -15,13 +15,17 @@
     }
 
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #020617;
+      color: #0f172a;
+      scroll-behavior: smooth;
     }
 
-    /* Custom color utilities that match Cambodia flag theme */
+    /*Custom color utilities that match Cambodia flag theme */
     .gradient-blue-red {
       background: linear-gradient(135deg, #032E6B 0%, #6B0F47 50%, #D62829 100%);
       position: relative;
@@ -40,6 +44,8 @@
 
     .gradient-light {
       background: linear-gradient(180deg, #EEF2FF 0%, #FEFCE8 50%, #FEF2F2 100%);
+      position: relative;
+      overflow: hidden;
     }
 
     .text-cambodia-blue { color: #032E6B; }
@@ -111,256 +117,335 @@
       scroll-behavior: smooth;
     }
 
-    /* Team cards + avatar rings */
+    /* Team card + avatar rings */
     .team-card {
       position: relative;
       overflow: hidden;
     }
 
-    .avatar-wrap {
-      position: relative;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
     .avatar-pop {
-      width: 6rem;
-      height: 6rem;
-      border-radius: 9999px;
-      overflow: hidden;
-      border-width: 4px;
-      background: #ffffff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    @media (min-width: 768px) {
-      .avatar-pop {
-        width: 7rem;
-        height: 7rem;
-      }
     }
 
     .avatar-ring-blue {
       box-shadow:
         0 0 0 6px rgba(3, 46, 107, 0.18),
         0 18px 30px rgba(3, 46, 107, 0.28);
-      border-color: #032E6B;
     }
 
     .avatar-ring-red {
       box-shadow:
         0 0 0 6px rgba(214, 40, 41, 0.18),
         0 18px 30px rgba(214, 40, 41, 0.28);
-      border-color: #D62829;
     }
 
     .team-card:hover .avatar-pop {
       transform: translateY(-4px) scale(1.03);
     }
 
-    /* Small role icon that sits on the ring */
-    .role-badge {
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .avatar-icon {
       position: absolute;
-      bottom: -4px;
       right: -4px;
-      width: 30px;
-      height: 30px;
+      bottom: -4px;
+      width: 28px;
+      height: 28px;
       border-radius: 9999px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 16px;
+      background: radial-gradient(circle at 30% 30%, #fef3c7, #f97316);
+      box-shadow: 0 8px 18px rgba(249, 115, 22, 0.6);
       border: 2px solid #ffffff;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.5);
-      color: #0f172a;
       z-index: 10;
-      background: radial-gradient(circle at 30% 20%, #ffffff, #60a5fa);
     }
 
-    .role-badge--pink {
-      background: radial-gradient(circle at 30% 20%, #ffffff, #fb7185);
+    /* Sticky nav */
+    #main-nav {
+      background: linear-gradient(to bottom, rgba(15,23,42,0.85), transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
     }
 
-    .role-badge--green {
-      background: radial-gradient(circle at 30% 20%, #ffffff, #34d399);
+    #main-nav.nav-scrolled {
+      background: rgba(15,23,42,0.98);
+      box-shadow: 0 14px 35px rgba(15,23,42,0.65);
+      transform: translateY(0);
     }
 
-    .role-badge--amber {
-      background: radial-gradient(circle at 30% 20%, #ffffff, #f97316);
+    .nav-link {
+      position: relative;
     }
 
-    /* === Scroll reveal animations (upgraded) === */
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #f97316, #facc15);
+      border-radius: 999px;
+      transform: translateX(-50%);
+      transition: width 0.25s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 40%;
+    }
+
+    .nav-link-active {
+      color: #fbbf24 !important;
+    }
+
+    .nav-link-active::after {
+      width: 40%;
+    }
+
+    /* Back to top button */
+    #back-to-top {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      border: none;
+      background: radial-gradient(circle at 30% 30%, #f97316, #c026d3);
+      color: #f9fafb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 40px rgba(15,23,42,0.75);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px) scale(0.9);
+      transition: all 0.3s ease;
+      z-index: 50;
+    }
+
+    #back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    #back-to-top:hover {
+      transform: translateY(-4px) scale(1.06);
+    }
+
+    #back-to-top span {
+      transition: transform 0.3s ease;
+    }
+
+    #back-to-top:hover span {
+      transform: translateY(-2px);
+    }
+
+    /* Reveal on scroll */
     .reveal {
       opacity: 0;
-      transform: translateY(24px) scale(0.96);
-      filter: blur(6px);
-      transition:
-        opacity 0.7s ease-out,
-        transform 0.7s ease-out,
-        filter 0.7s ease-out;
-      will-change: opacity, transform, filter;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .reveal-left {
-      transform: translateX(-32px) scale(0.96);
+      transform: translateX(-32px);
     }
 
     .reveal-right {
-      transform: translateX(32px) scale(0.96);
+      transform: translateX(32px);
+    }
+
+    .reveal-zoom {
+      transform: scale(0.95);
     }
 
     .reveal-visible {
       opacity: 1;
-      transform: translate(0, 0) scale(1);
-      filter: blur(0);
+      transform: none;
     }
 
-    .reveal-delay-1 {
-      transition-delay: 0.15s;
-    }
-
-    .reveal-delay-2 {
-      transition-delay: 0.3s;
-    }
-
-    .reveal-delay-3 {
-      transition-delay: 0.45s;
-    }
-
-    /* subtle floating for hero icons/cards */
-    .float-soft {
-      animation: floatSoft 6s ease-in-out infinite;
-    }
-
-    @keyframes floatSoft {
-      0%   { transform: translateY(0px); }
-      50%  { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
-    }
-
-    /* Scroll indicator in hero */
-    .scroll-indicator-track {
-      position: relative;
-      width: 2px;
-      height: 40px;
-      border-radius: 999px;
-      overflow: hidden;
-      background: rgba(248, 250, 252, 0.35);
-    }
-
-    .scroll-indicator-dot {
+    /* Section separators (waves / diagonals) */
+    .section-wave {
       position: absolute;
       left: 0;
       right: 0;
+      bottom: -1px;
+      pointer-events: none;
+    }
+
+    .section-wave svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Stats counters */
+    .stat-number {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Flow journey line */
+    .flow-journey-wrapper {
+      position: relative;
+      margin-top: 2.5rem;
+    }
+
+    .flow-journey-line {
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #032E6B, #D62829);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flow-journey-dot {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #fef3c7, #f97316);
+      box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+
+    .flow-active .flow-journey-dot {
+      opacity: 1;
+      animation: journey-move 3.5s ease-in-out infinite;
+    }
+
+    .flow-journey-stops {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px;
+    }
+
+    .flow-journey-stop {
+      width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: #ffffff;
-      animation: scrollDot 1.2s ease-in-out infinite;
+      background-color: #f9fafb;
+      border: 2px solid rgba(15,23,42,0.4);
+      box-shadow: 0 6px 12px rgba(15,23,42,0.25);
     }
 
-    @keyframes scrollDot {
-      0% { transform: translateY(-4px); opacity: 0; }
-      15% { opacity: 1; }
-      100% { transform: translateY(32px); opacity: 0; }
+    @keyframes journey-move {
+      0% {
+        left: 2%;
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+      }
+      50% {
+        left: 98%;
+        box-shadow: 0 0 0 12px rgba(249, 115, 22, 0);
+      }
+      100% {
+        left: 2%;
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+      }
     }
 
-    /* === Scroll progress bar === */
-    #scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      width: 0;
-      z-index: 60;
-      background: linear-gradient(to right, #38bdf8, #6366f1, #ec4899, #f97316);
-      transform-origin: left;
+    /* Parallax helpers */
+    [data-parallax] {
+      will-change: transform;
+      transition: transform 0.1s linear;
     }
 
-    /* === Back-to-top button (unique orbit style) === */
-    .back-to-top {
-      position: fixed;
-      right: 1.5rem;
-      bottom: 1.5rem;
-      z-index: 50;
-      cursor: pointer;
-      border: none;
-      padding: 0;
-      border-radius: 9999px;
-      background: transparent;
-      opacity: 0;
-      transform: translateY(16px);
-      pointer-events: none;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-
-    .back-to-top-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .back-to-top-orbit {
-      position: relative;
-      width: 3.25rem;
-      height: 3.25rem;
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
-    }
-
-    .back-to-top-orbit::before {
-      content: '';
+    /* Team background blobs */
+    .team-blob {
       position: absolute;
-      inset: -2px;
-      background: conic-gradient(
-        from 180deg,
-        #38bdf8,
-        #d946ef,
-        #f97316,
-        #22c55e,
-        #38bdf8
-      );
-      opacity: 0.98;
-      animation: spinOrbit 6s linear infinite;
+      filter: blur(52px);
+      opacity: 0.6;
+      pointer-events: none;
     }
 
-    .back-to-top-core {
-      position: relative;
-      z-index: 1;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 9999px;
-      background: radial-gradient(circle at 30% 20%, #1e293b, #020617);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .team-blob-1 {
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f97316, #dc2626);
+      top: -40px;
+      left: -60px;
+    }
+
+    .team-blob-2 {
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #3b82f6, #a855f7);
+      bottom: -40px;
+      right: -40px;
+    }
+
+    /* Dark mode (theme-dark) */
+    body.theme-dark {
+      background-color: #020617;
       color: #e5e7eb;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .back-to-top-core svg {
-      width: 1.3rem;
-      height: 1.3rem;
-      animation: arrowFloat 2s ease-in-out infinite;
+    body.theme-dark .gradient-light {
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 50%, #020617 100%);
     }
 
-    .back-to-top:hover .back-to-top-core {
-      transform: translateY(-2px);
-      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.7);
+    body.theme-dark .bg-white {
+      background-color: #020617 !important;
     }
 
-    @keyframes spinOrbit {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+    body.theme-dark .text-cambodia-blue { color: #bfdbfe; }
+    body.theme-dark .text-cambodia-red  { color: #fecaca; }
+    body.theme-dark .text-gray-700,
+    body.theme-dark .text-gray-600 { color: #cbd5f5; }
+
+    body.theme-dark .border-cambodia-blue { border-color: #1d4ed8; }
+    body.theme-dark .border-cambodia-red  { border-color: #dc2626; }
+
+    body.theme-dark .step-card {
+      background: radial-gradient(circle at top left, #0f172a 0%, #020617 60%, #020617 100%);
+      border-color: rgba(148,163,184,0.25);
     }
 
-    @keyframes arrowFloat {
-      0%   { transform: translateY(2px); }
-      50%  { transform: translateY(-3px); }
-      100% { transform: translateY(2px); }
+    body.theme-dark .flow-journey-stop {
+      background-color: #020617;
+      border-color: rgba(148,163,184,0.7);
+    }
+
+    body.theme-dark footer {
+      background-color: #020617;
+    }
+
+    /* Small helper for glassy cards in dark mode */
+    body.theme-dark .team-card {
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.95), rgba(15,23,42,0.85));
+      border-color: rgba(148,163,184,0.4);
+      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
+    }
+
+    body.theme-dark .hover-lift:hover {
+      box-shadow: 0 22px 45px rgba(15,23,42,0.85);
+    }
+
+    /* Mobile nav simple dropdown */
+    #mobile-nav {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    #mobile-nav.open {
+      max-height: 220px;
     }
   </style>
 
@@ -368,18 +453,71 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
 </head>
 
-<body class="scroll-smooth">
-<div id="app" class="w-full">
+<body class="scroll-smooth" id="top">
+<!-- Back to top button -->
+<button id="back-to-top" aria-label="Back to top">
+  <span>🚀</span>
+</button>
 
-  <!-- Scroll progress bar -->
-  <div id="scroll-progress"></div>
+<!-- Sticky Nav -->
+<header id="main-nav" class="fixed top-0 inset-x-0 z-40">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 text-white">
+      <span class="w-8 h-8 rounded-full bg-white/10 border border-white/30 flex items-center justify-center text-sm">
+        📦
+      </span>
+      <span class="hidden sm:inline text-sm font-semibold tracking-wide">
+        DLTS Cambodia
+      </span>
+    </a>
+    <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-white/80">
+      <a href="#about" class="nav-link" data-section="about">About</a>
+      <a href="#features" class="nav-link" data-section="features">Why</a>
+      <a href="#flow" class="nav-link" data-section="flow">Flow</a>
+      <a href="#features-role" class="nav-link" data-section="features-role">Features</a>
+      <a href="#our-team" class="nav-link" data-section="our-team">Team</a>
+      <a href="#presentation" class="nav-link" data-section="presentation">Presentation</a>
+      <a href="#future" class="nav-link" data-section="future">Future</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button
+        id="theme-toggle"
+        class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border border-white/20 text-xs text-white hover:bg-white/20 transition"
+        aria-label="Toggle theme"
+      >
+        ☾
+      </button>
+      <button
+        id="mobile-nav-toggle"
+        class="md:hidden inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border border-white/20 text-white text-xs"
+        aria-label="Toggle navigation"
+      >
+        ☰
+      </button>
+    </div>
+  </div>
+  <!-- Mobile nav -->
+  <div id="mobile-nav" class="md:hidden bg-slate-950/95 text-white">
+    <div class="max-w-6xl mx-auto px-4 pb-3 flex flex-col gap-2 text-sm">
+      <a href="#about" class="nav-link block py-1" data-section="about">About</a>
+      <a href="#features" class="nav-link block py-1" data-section="features">Why</a>
+      <a href="#flow" class="nav-link block py-1" data-section="flow">Flow</a>
+      <a href="#features-role" class="nav-link block py-1" data-section="features-role">Features</a>
+      <a href="#our-team" class="nav-link block py-1" data-section="our-team">Team</a>
+      <a href="#presentation" class="nav-link block py-1" data-section="presentation">Presentation</a>
+      <a href="#future" class="nav-link block py-1" data-section="future">Future</a>
+    </div>
+  </div>
+</header>
+
+<div id="app" class="w-full pt-20">
 
   <!-- Hero Section -->
-  <section class="w-full gradient-blue-red text-white py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto relative z-10">
+  <section class="w-full gradient-blue-red text-white pt-24 pb-24 px-6 relative">
+    <div class="max-w-6xl mx-auto relative z-10 reveal reveal-zoom" data-reveal-delay="0">
 
       <!-- Hero Text -->
-      <div class="text-center mb-12 reveal">
+      <div class="text-center mb-12">
         <h1 id="main-title" class="text-5xl font-bold mb-4">
           Domestic Logistics Tracking Management System – Cambodia
         </h1>
@@ -405,14 +543,16 @@
 
       <!-- Hero Visual (responsive: vertical on mobile, horizontal on desktop) -->
       <div
-        class="mt-12 flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-10 reveal reveal-delay-1"
+        class="mt-12 flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-10"
       >
         <!-- Step 1: Origin -->
         <div
-          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300 float-soft"
+          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300 reveal"
+          data-reveal-delay="100"
         >
           <div
             class="w-32 h-24 rounded-xl shadow-2xl overflow-hidden border-2 border-white/30"
+            data-parallax="-0.08"
           >
             <img
               src="https://flagcdn.com/w320/kh.png"
@@ -430,7 +570,8 @@
         <!-- Arrow between Origin and In Transit -->
         <!-- Horizontal arrow (desktop) -->
         <div
-          class="hidden md:block text-5xl animate-pulse text-white/80"
+          class="hidden md:block text-5xl animate-pulse text-white/80 reveal"
+          data-reveal-delay="180"
         >
           →
         </div>
@@ -441,10 +582,12 @@
 
         <!-- Step 2: In Transit -->
         <div
-          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300 float-soft"
+          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300 reveal"
+          data-reveal-delay="220"
         >
           <div
             class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-2xl"
+            data-parallax="-0.04"
           >
             <svg width="100" height="70" viewBox="0 0 120 80">
               <!-- Truck Body -->
@@ -518,7 +661,8 @@
         <!-- Arrow between In Transit and Destination -->
         <!-- Horizontal arrow (desktop) -->
         <div
-          class="hidden md:block text-5xl animate-pulse text-white/80"
+          class="hidden md:block text-5xl animate-pulse text-white/80 reveal"
+          data-reveal-delay="260"
         >
           →
         </div>
@@ -529,9 +673,10 @@
 
         <!-- Step 3: Destination -->
         <div
-          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300 float-soft"
+          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300 reveal"
+          data-reveal-delay="300"
         >
-          <div class="relative">
+          <div class="relative" data-parallax="-0.06">
             <div
               class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-2xl flex items-center justify-center"
             >
@@ -565,35 +710,43 @@
       </div>
       
       <!-- CTA Buttons -->
-      <div class="flex gap-6 justify-center mt-12 flex-wrap reveal reveal-delay-2">
-        <button onclick="scrollToSection('features')" class="bg-white text-cambodia-blue px-10 py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-white/20 hover:scale-105 backdrop-blur-sm">
-          View Features →
+      <div class="flex gap-6 justify-center mt-12 flex-wrap">
+        <button
+          onclick="scrollToSection('features')"
+          class="group bg-white text-cambodia-blue px-10 py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-white/20 hover:scale-105 backdrop-blur-sm inline-flex items-center gap-2"
+        >
+          <span>View Features</span>
+          <span class="inline-block transform transition-transform group-hover:translate-x-1">
+            →
+          </span>
         </button>
-        <button onclick="scrollToSection('our-team')"
-        class="border-2 border-white text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-2xl hover:scale-105 backdrop-blur-sm">
-        Meet the Team 👥
+        <button
+          onclick="scrollToSection('our-team')"
+          class="group border-2 border-white text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-2xl hover:scale-105 backdrop-blur-sm inline-flex items-center gap-2"
+        >
+          <span>Meet the Team</span>
+          <span class="inline-block transform transition-transform group-hover:-translate-y-0.5">
+            👥
+          </span>
         </button>
       </div>
+    </div>
 
-      <!-- Scroll indicator -->
-      <div class="mt-10 flex justify-center reveal reveal-delay-3">
-        <div class="flex flex-col items-center text-white/80 text-xs tracking-[0.18em] uppercase">
-          <span class="mb-2">Scroll to explore</span>
-          <div class="scroll-indicator-track">
-            <div class="scroll-indicator-dot"></div>
-          </div>
-        </div>
-      </div>
+    <!-- Wave separator to next section -->
+    <div class="section-wave">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path fill="#EEF2FF" d="M0,80 C360,140 1080,0 1440,60 L1440,120 L0,120 Z"></path>
+      </svg>
     </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="w-full py-20 px-6 gradient-light">
-    <div class="max-w-6xl mx-auto">
-      <h2 id="about-title" class="text-4xl font-bold text-cambodia-blue text-center mb-8 reveal">
+    <div class="max-w-6xl mx-auto reveal" data-reveal-delay="0">
+      <h2 id="about-title" class="text-4xl font-bold text-cambodia-blue text-center mb-8">
         About the System
       </h2>
-      <div class="max-w-4xl mx-auto space-y-4 text-lg text-gray-700 reveal reveal-delay-1">
+      <div class="max-w-4xl mx-auto space-y-4 text-lg text-gray-700">
         <p>
           This is a web-based management system designed for domestic branch-to-branch logistics operations inside Cambodia.
           It provides a centralized platform for tracking shipments as they move between different provincial branches and cities.
@@ -604,7 +757,7 @@
           developed as our bachelor final project in Information Technology.
         </p>
 
-        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl mt-8 border border-cambodia-blue/10 reveal reveal-delay-2">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl mt-8 border border-cambodia-blue/10">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="flex items-start gap-3">
               <div class="text-3xl">📍</div>
@@ -626,16 +779,44 @@
     </div>
   </section>
 
+  <!-- Stats Section -->
+  <section id="stats" class="w-full py-10 px-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-slate-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="reveal reveal-zoom" data-reveal-delay="0">
+          <p class="text-xs uppercase tracking-wide text-slate-400 mb-1">Branches</p>
+          <p class="text-3xl font-bold stat-number" data-count="24">0</p>
+          <p class="text-xs text-slate-400 mt-1">across Cambodia</p>
+        </div>
+        <div class="reveal reveal-zoom" data-reveal-delay="80">
+          <p class="text-xs uppercase tracking-wide text-slate-400 mb-1">Shipments / Day</p>
+          <p class="text-3xl font-bold stat-number" data-count="1200">0</p>
+          <p class="text-xs text-slate-400 mt-1">peak volume</p>
+        </div>
+        <div class="reveal reveal-zoom" data-reveal-delay="160">
+          <p class="text-xs uppercase tracking-wide text-slate-400 mb-1">Provinces Covered</p>
+          <p class="text-3xl font-bold stat-number" data-count="25">0</p>
+          <p class="text-xs text-slate-400 mt-1">branch-to-branch</p>
+        </div>
+        <div class="reveal reveal-zoom" data-reveal-delay="240">
+          <p class="text-xs uppercase tracking-wide text-slate-400 mb-1">Avg Delivery</p>
+          <p class="text-3xl font-bold">1–2<span class="text-base ml-1">days</span></p>
+          <p class="text-xs text-slate-400 mt-1">within Cambodia</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Problem & Motivation Section -->
   <section id="features" class="w-full py-20 px-6 bg-gradient-to-br from-slate-50 via-white to-blue-50">
     <div class="max-w-6xl mx-auto">
-      <h2 id="problem-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">
+      <h2 id="problem-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal" data-reveal-delay="0">
         Why We Built This
       </h2>
       <div class="grid md:grid-cols-2 gap-8">
 
         <!-- Current Problems -->
-        <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8 hover-lift border-l-4 border-cambodia-red shadow-xl reveal reveal-left">
+        <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8 hover-lift border-l-4 border-cambodia-red shadow-xl reveal reveal-left" data-reveal-delay="100">
           <div class="flex items-center gap-3 mb-4">
             <div class="text-4xl">⚠️</div>
             <h3 class="text-2xl font-bold text-cambodia-red">Current Problems</h3>
@@ -649,7 +830,7 @@
         </div>
 
         <!-- Our Solution -->
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 hover-lift border-l-4 border-cambodia-blue shadow-xl reveal reveal-right reveal-delay-1">
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 hover-lift border-l-4 border-cambodia-blue shadow-xl reveal reveal-right" data-reveal-delay="180">
           <div class="flex items-center gap-3 mb-4">
             <div class="text-4xl">✅</div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Our Solution</h3>
@@ -669,13 +850,13 @@
   <!-- How It Works Flow -->
   <section id="flow" class="w-full py-20 px-6 gradient-light">
     <div class="max-w-7xl mx-auto">
-      <h2 id="flow-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">
+      <h2 id="flow-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal" data-reveal-delay="0">
         How the Tracking Works
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Step 1 -->
-        <div class="step-card reveal">
+        <div class="step-card reveal reveal-zoom" data-reveal-delay="40">
           <div class="icon-circle bg-blue-100 text-cambodia-blue">📦</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 1: Drop Off</h3>
@@ -684,7 +865,7 @@
         </div>
 
         <!-- Step 2 -->
-        <div class="step-card reveal reveal-delay-1">
+        <div class="step-card reveal reveal-zoom" data-reveal-delay="100">
           <div class="icon-circle bg-red-100 text-cambodia-red">🎫</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 2: Registration</h3>
@@ -693,7 +874,7 @@
         </div>
 
         <!-- Step 3 -->
-        <div class="step-card reveal reveal-delay-2">
+        <div class="step-card reveal reveal-zoom" data-reveal-delay="160">
           <div class="icon-circle bg-blue-100 text-cambodia-blue">🏢</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 3: At Origin</h3>
@@ -702,7 +883,7 @@
         </div>
 
         <!-- Step 4 -->
-        <div class="step-card reveal">
+        <div class="step-card reveal reveal-zoom" data-reveal-delay="220">
           <div class="icon-circle bg-red-100 text-cambodia-red">🚚</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 4: Assignment</h3>
@@ -711,7 +892,7 @@
         </div>
 
         <!-- Step 5 -->
-        <div class="step-card reveal reveal-delay-1">
+        <div class="step-card reveal reveal-zoom" data-reveal-delay="280">
           <div class="icon-circle bg-blue-100 text-cambodia-blue">📍</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 5: Arrival</h3>
@@ -720,7 +901,7 @@
         </div>
 
         <!-- Step 6 -->
-        <div class="step-card reveal reveal-delay-2">
+        <div class="step-card reveal reveal-zoom" data-reveal-delay="340">
           <div class="icon-circle bg-red-100 text-cambodia-red">✅</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 6: Delivery</h3>
@@ -732,7 +913,7 @@
       </div>
 
       <!-- Flow mini visual -->
-      <div class="mt-12 flex items-center justify-center gap-4 flex-wrap reveal reveal-delay-2">
+      <div class="mt-12 flex items-center justify-center gap-4 flex-wrap reveal" data-reveal-delay="380">
         <div class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-full bg-cambodia-blue text-white flex items-center justify-center font-bold text-sm">1</div>
           <span class="text-gray-600">→</span>
@@ -755,17 +936,32 @@
         </div>
         <div class="w-8 h-8 rounded-full bg-cambodia-red text-white flex items-center justify-center font-bold text-sm">6</div>
       </div>
+
+      <!-- Journey line -->
+      <div class="flow-journey-wrapper max-w-3xl mx-auto reveal" data-reveal-delay="420">
+        <div class="flow-journey-line">
+          <div class="flow-journey-dot"></div>
+          <div class="flow-journey-stops">
+            <div class="flow-journey-stop"></div>
+            <div class="flow-journey-stop"></div>
+            <div class="flow-journey-stop"></div>
+            <div class="flow-journey-stop"></div>
+            <div class="flow-journey-stop"></div>
+            <div class="flow-journey-stop"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Main Features by Role -->
   <section id="features-role" class="w-full py-20 px-6 bg-gradient-to-br from-white via-blue-50 to-red-50">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Main Features</h2>
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal" data-reveal-delay="0">Main Features</h2>
       <div class="grid md:grid-cols-3 gap-8">
 
         <!-- Admin/Cashier Card -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal reveal-left" data-reveal-delay="80">
           <div class="text-5xl mb-4 text-center">👨‍💼</div>
           <h3 class="text-2xl font-bold text-cambodia-blue text-center mb-4">For Admin/Cashier</h3>
           <ul class="space-y-3 text-gray-700">
@@ -777,7 +973,7 @@
         </div>
 
         <!-- Drivers Card -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-red relative overflow-hidden backdrop-blur-sm reveal reveal-delay-1">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-red relative overflow-hidden backdrop-blur-sm reveal reveal-zoom" data-reveal-delay="140">
           <div class="text-5xl mb-4 text-center">🚚</div>
           <h3 class="text-2xl font-bold text-cambodia-red text-center mb-4">For Drivers</h3>
           <ul class="space-y-3 text-gray-700">
@@ -788,7 +984,7 @@
         </div>
 
         <!-- Customers Card -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal reveal-delay-2">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal reveal-right" data-reveal-delay="200">
           <div class="text-5xl mb-4 text-center">👥</div>
           <h3 class="text-2xl font-bold text-cambodia-blue text-center mb-4">For Customers</h3>
           <ul class="space-y-3 text-gray-700">
@@ -805,11 +1001,11 @@
   <!-- Tracking Design -->
   <section id="tracking-design" class="w-full py-20 px-6 gradient-light">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Tracking Design</h2>
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal" data-reveal-delay="0">Tracking Design</h2>
       <div class="grid md:grid-cols-2 gap-8">
 
         <!-- Status-Based Tracking -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-blue-100 reveal reveal-left">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-blue-100 reveal reveal-left" data-reveal-delay="60">
           <div class="flex items-center gap-3 mb-4">
             <div class="text-4xl">📋</div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Status-Based Tracking (Core)</h3>
@@ -851,7 +1047,7 @@
         </div>
 
         <!-- Optional GPS Tracking -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-red-100 reveal reveal-right reveal-delay-1">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-red-100 reveal reveal-right" data-reveal-delay="120">
           <div class="flex items-center gap-3 mb-4">
             <div class="text-4xl">🛰️</div>
             <h3 class="text-2xl font-bold text-cambodia-red">Optional GPS Tracking</h3>
@@ -894,9 +1090,9 @@
 
   <!-- Technology Overview -->
   <section id="technology" class="w-full py-16 px-6 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Technology Stack</h2>
-      <div class="bg-gradient-to-r from-blue-50 via-white to-red-50 rounded-lg p-8 shadow-lg reveal reveal-delay-1">
+    <div class="max-w-6xl mx-auto reveal" data-reveal-delay="0">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12">Technology Stack</h2>
+      <div class="bg-gradient-to-r from-blue-50 via-white to-red-50 rounded-lg p-8 shadow-lg">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-xl font-bold text-cambodia-blue mb-4 flex items-center gap-2">
@@ -939,23 +1135,27 @@
   </section>
 
  <!-- Our Team Section -->
-<section id="our-team" class="w-full py-16 px-6 gradient-light">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4 reveal">Our Team</h2>
-    <p class="text-center text-gray-600 mb-12 text-lg reveal reveal-delay-1">
+<section id="our-team" class="w-full py-16 px-6 gradient-light relative overflow-hidden">
+  <!-- Background blobs -->
+  <div class="team-blob team-blob-1"></div>
+  <div class="team-blob team-blob-2"></div>
+
+  <div class="max-w-6xl mx-auto relative">
+    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4 reveal" data-reveal-delay="0">Our Team</h2>
+    <p class="text-center text-gray-600 mb-12 text-lg reveal" data-reveal-delay="60">
       BSc in IT – Final Year Project 2026 • Western University
     </p>
 
     <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
       <!-- Sokheng -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal reveal-left" data-reveal-delay="80">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-wrap">
-            <div class="avatar-pop avatar-ring-blue">
+          <div class="avatar-wrapper flex-shrink-0">
+            <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue bg-white">
               <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
             </div>
-            <div class="role-badge">⚙️</div>
+            <div class="avatar-icon">💻</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Hun Sokheng</h3>
@@ -971,13 +1171,13 @@
       </div>
 
       <!-- Koemsor -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-delay-1">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-right" data-reveal-delay="140">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-wrap">
-            <div class="avatar-pop avatar-ring-red">
+          <div class="avatar-wrapper flex-shrink-0">
+            <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red bg-white">
               <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
             </div>
-            <div class="role-badge role-badge--pink">🎨</div>
+            <div class="avatar-icon">🎨</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Say Koemsor</h3>
@@ -993,13 +1193,13 @@
       </div>
 
       <!-- Bronith -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal reveal-left" data-reveal-delay="200">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-wrap">
-            <div class="avatar-pop avatar-ring-blue">
+          <div class="avatar-wrapper flex-shrink-0">
+            <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue bg-white">
               <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
             </div>
-            <div class="role-badge role-badge--green">🗄️</div>
+            <div class="avatar-icon">🗄️</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Kouk Bronith</h3>
@@ -1015,13 +1215,13 @@
       </div>
 
       <!-- Chiva -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-delay-1">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-right" data-reveal-delay="260">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-wrap">
-            <div class="avatar-pop avatar-ring-red">
+          <div class="avatar-wrapper flex-shrink-0">
+            <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red bg-white">
               <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
             </div>
-            <div class="role-badge role-badge--amber">📑</div>
+            <div class="avatar-icon">📑</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Chun Chiva</h3>
@@ -1042,28 +1242,31 @@
 
 <!-- Presentation / Demo Section -->
 <section id="presentation" class="w-full py-16 px-6 bg-white">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4 reveal">
+  <div class="max-w-6xl mx-auto reveal" data-reveal-delay="0">
+    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4">
       Project Presentation
     </h2>
-    <p class="text-center text-gray-600 mb-8 text-lg reveal reveal-delay-1">
+    <p class="text-center text-gray-600 mb-8 text-lg">
       View our Western University final project presentation directly.
     </p>
 
     <!-- Button to open Canva presentation in a new tab -->
-    <div class="flex justify-center mb-10 reveal reveal-delay-2">
+    <div class="flex justify-center mb-10">
       <a
         href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 bg-cambodia-blue text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition-all duration-300 hover:scale-105"
+        class="group inline-flex items-center gap-2 bg-cambodia-blue text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition-all duration-300 hover:scale-105"
       >
-        🎥 Open Canva Presentation
+        🎥 <span>Open Canva Presentation</span>
+        <span class="inline-block transform transition-transform group-hover:translate-x-1">
+          ↗
+        </span>
       </a>
     </div>
 
     <!-- Nice preview card instead of iframe (because Canva blocks embedding Canva) -->
-    <div class="max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 flex flex-col md:flex-row gap-6 items-center reveal">
+    <div class="max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 flex flex-col md:flex-row gap-6 items-center">
       <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-md aspect-video">
         <img
           src="presentation_cover.jpg"
@@ -1094,9 +1297,9 @@
   
   <!-- Future Improvements -->
   <section id="future" class="w-full py-16 px-6 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Future Work</h2>
-      <div class="bg-gradient-to-br from-blue-50 to-red-50 rounded-lg p-8 shadow-lg reveal reveal-delay-1">
+    <div class="max-w-6xl mx-auto reveal" data-reveal-delay="0">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12">Future Work</h2>
+      <div class="bg-gradient-to-br from-blue-50 to-red-50 rounded-lg p-8 shadow-lg">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="flex items-start gap-3">
             <div class="text-3xl">📱</div>
@@ -1141,7 +1344,7 @@
   <!-- Footer -->
   <footer class="w-full bg-gray-900 text-white py-12 px-6">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-6 reveal">
+      <div class="text-center mb-6">
         <h3 class="text-2xl font-bold mb-2">
           Domestic Logistics Tracking Management System – Cambodia
         </h3>
@@ -1151,7 +1354,7 @@
         </p>
         <p class="text-gray-400">Western University – Final Project 2026</p>
       </div>
-      <div class="flex items-center justify-center gap-4 pt-6 border-t border-gray-700 reveal reveal-delay-1">
+      <div class="flex items-center justify-center gap-4 pt-6 border-t border-gray-700">
         <div class="w-16 h-11 rounded-lg overflow-hidden shadow-xl border-2 border-gray-600 hover:scale-110 transition-transform">
           <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
         </div>
@@ -1162,66 +1365,7 @@
     </div>
   </footer>
 
-  <!-- Back to top button -->
-  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
-    <div class="back-to-top-orbit">
-      <div class="back-to-top-core">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 19V5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M7 10L12 5L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-  </button>
-
 </div>
-
-<!-- Scroll reveal + back-to-top + progress script -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Scroll reveal
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-visible');
-          } else {
-            entry.target.classList.remove('reveal-visible');
-          }
-        });
-      },
-      {
-        threshold: 0.15
-      }
-    );
-
-    revealElements.forEach(el => revealObserver.observe(el));
-
-    // Back-to-top button + scroll progress
-    const backToTopBtn = document.getElementById('back-to-top');
-    const progressBar = document.getElementById('scroll-progress');
-    const showOffset = 280;
-
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.width = progress + '%';
-
-      if (scrollTop > showOffset) {
-        backToTopBtn.classList.add('back-to-top-visible');
-      } else {
-        backToTopBtn.classList.remove('back-to-top-visible');
-      }
-    });
-
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
-</script>
 
 <script>
   const defaultConfig = {
@@ -1251,6 +1395,164 @@
     }
   }
 
+  // === Custom interactions ===
+  document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const mainNav = document.getElementById('main-nav');
+    const backToTop = document.getElementById('back-to-top');
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const navLinks = document.querySelectorAll('.nav-link[data-section]');
+    const sections = Array.from(navLinks).map(link => document.getElementById(link.dataset.section));
+    const stats = document.querySelectorAll('.stat-number');
+    const flowSection = document.getElementById('flow');
+    const flowJourneyWrapper = flowSection ? flowSection.querySelector('.flow-journey-wrapper') : null;
+    const parallaxEls = document.querySelectorAll('[data-parallax]');
+
+    // Load theme from localStorage
+    const savedTheme = localStorage.getItem('dlts-theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('theme-dark');
+      if (themeToggle) themeToggle.textContent = '☀';
+    }
+
+    // Theme toggle
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('theme-dark');
+        const isDark = body.classList.contains('theme-dark');
+        themeToggle.textContent = isDark ? '☀' : '☾';
+        localStorage.setItem('dlts-theme', isDark ? 'dark' : 'light');
+      });
+    }
+
+    // Mobile nav toggle
+    if (mobileNavToggle && mobileNav) {
+      mobileNavToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('open');
+      });
+      // Close on click
+      mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => mobileNav.classList.remove('open'));
+      });
+    }
+
+    // Scroll events (nav, back-to-top, parallax, active links)
+    function onScroll() {
+      const y = window.scrollY || window.pageYOffset || 0;
+      if (mainNav) {
+        if (y > 10) {
+          mainNav.classList.add('nav-scrolled');
+        } else {
+          mainNav.classList.remove('nav-scrolled');
+        }
+      }
+
+      if (backToTop) {
+        if (y > 400) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+      }
+
+      // Parallax
+      parallaxEls.forEach(el => {
+        const speed = parseFloat(el.dataset.parallax || '0');
+        const offset = y * speed;
+        el.style.transform = `translateY(${offset}px)`;
+      });
+
+      // Active nav link
+      let current = null;
+      sections.forEach((section, index) => {
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        const top = rect.top + window.scrollY - 120;
+        if (y >= top) {
+          current = navLinks[index];
+        }
+      });
+      navLinks.forEach(link => link.classList.remove('nav-link-active'));
+      if (current) current.classList.add('nav-link-active');
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Back to top
+    if (backToTop) {
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const delay = el.dataset.revealDelay || '0';
+            el.style.transitionDelay = `${delay}ms`;
+            el.classList.add('reveal-visible');
+            revealObserver.unobserve(el);
+          }
+        });
+      },
+      {
+        threshold: 0.2
+      }
+    );
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Stats counters
+    const statsObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.count, 10) || 0;
+            let start = 0;
+            const duration = 1400;
+            const startTime = performance.now();
+
+            function update(now) {
+              const progress = Math.min((now - startTime) / duration, 1);
+              const value = Math.floor(progress * target);
+              el.textContent = value.toLocaleString();
+              if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+            statsObserver.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    stats.forEach(el => statsObserver.observe(el));
+
+    // Flow journey animation trigger
+    if (flowJourneyWrapper) {
+      const flowObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              flowJourneyWrapper.classList.add('flow-active');
+            } else {
+              flowJourneyWrapper.classList.remove('flow-active');
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      flowObserver.observe(flowJourneyWrapper);
+    }
+  });
+
+  // Keep element SDK init
   if (window.elementSdk) {
     window.elementSdk.init({
       defaultConfig,
