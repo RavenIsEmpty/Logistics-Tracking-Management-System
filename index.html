@@ -121,6 +121,8 @@
   <!-- Hero Section -->
   <section class="w-full gradient-blue-red text-white py-24 px-6 relative">
     <div class="max-w-6xl mx-auto relative z-10">
+
+      <!-- Hero Text -->
       <div class="text-center mb-12">
         <h1 id="main-title" class="text-5xl font-bold mb-4">
           Domestic Logistics Tracking Management System – Cambodia
@@ -131,78 +133,181 @@
         <p id="khmer-subtitle" class="text-lg opacity-90 mb-6">
           ប្រព័ន្ធតាមដានការដឹកជញ្ជូនក្នុងប្រទេស ប្រើស្ថានភាព និង GPS ជាជម្រើស
         </p>
-        <p id="hero-description"
-           class="text-lg max-w-3xl mx-auto leading-relaxed">
+        <p
+          id="hero-description"
+          class="text-lg max-w-3xl mx-auto leading-relaxed"
+        >
           This system helps customers track their packages between branches inside Cambodia. Branch staff create
           shipments, drivers update status along the route, and customers check their shipment status online using a
           simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network.
         </p>
-        <p class="text-lg mt-4 font-semibold">BSc in IT – Final Year Project 2026</p>
+        <p class="text-lg mt-4 font-semibold">
+          BSc in IT – Final Year Project 2026
+        </p>
         <p class="text-md opacity-90">Western University</p>
       </div>
 
-      <!-- Hero Visual -->
-      <div class="flex items-center justify-center gap-8 mt-12 flex-wrap">
-
-        <!-- Cambodia Flag -->
-        <div class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
-          <div class="w-32 h-24 rounded-xl shadow-2xl overflow-hidden border-2 border-white/30">
-            <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
+      <!-- Hero Visual (responsive: vertical on mobile, horizontal on desktop) -->
+      <div
+        class="mt-12 flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-10"
+      >
+        <!-- Step 1: Origin -->
+        <div
+          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300"
+        >
+          <div
+            class="w-32 h-24 rounded-xl shadow-2xl overflow-hidden border-2 border-white/30"
+          >
+            <img
+              src="https://flagcdn.com/w320/kh.png"
+              alt="Cambodia Flag"
+              class="w-full h-full object-cover"
+            />
           </div>
-          <p class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">
+          <p
+            class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm"
+          >
             Origin
           </p>
         </div>
 
-        <!-- Arrow -->
-        <div class="text-5xl animate-pulse">→</div>
+        <!-- Arrow between Origin and In Transit -->
+        <!-- Horizontal arrow (desktop) -->
+        <div
+          class="hidden md:block text-5xl animate-pulse text-white/80"
+        >
+          →
+        </div>
+        <!-- Vertical arrow (mobile) -->
+        <div class="md:hidden text-4xl animate-pulse text-white/80">
+          ↓
+        </div>
 
-        <!-- Truck with Package -->
-        <div class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
-          <div class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-2xl">
+        <!-- Step 2: In Transit -->
+        <div
+          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300"
+        >
+          <div
+            class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-2xl"
+          >
             <svg width="100" height="70" viewBox="0 0 120 80">
               <!-- Truck Body -->
-              <rect x="10" y="30" width="50" height="30" fill="#032E6B" rx="4" />
-              <rect x="60" y="35" width="40" height="25" fill="#D62829" rx="4" />
+              <rect
+                x="10"
+                y="30"
+                width="50"
+                height="30"
+                fill="#032E6B"
+                rx="4"
+              />
+              <rect
+                x="60"
+                y="35"
+                width="40"
+                height="25"
+                fill="#D62829"
+                rx="4"
+              />
               <!-- Windows -->
-              <rect x="65" y="40" width="15" height="12" fill="#ffffff" opacity="0.3" rx="2" />
+              <rect
+                x="65"
+                y="40"
+                width="15"
+                height="12"
+                fill="#ffffff"
+                opacity="0.3"
+                rx="2"
+              />
               <!-- Wheels -->
               <circle cx="30" cy="65" r="8" fill="#1a1a1a" />
               <circle cx="85" cy="65" r="8" fill="#1a1a1a" />
               <circle cx="30" cy="65" r="4" fill="#4a4a4a" />
               <circle cx="85" cy="65" r="4" fill="#4a4a4a" />
               <!-- Package on truck -->
-              <rect x="20" y="18" width="20" height="15" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5" rx="2" />
-              <line x1="20" y1="25" x2="40" y2="25" stroke="#f59e0b" stroke-width="2" />
-              <line x1="30" y1="18" x2="30" y2="33" stroke="#f59e0b" stroke-width="2" />
+              <rect
+                x="20"
+                y="18"
+                width="20"
+                height="15"
+                fill="#fbbf24"
+                stroke="#f59e0b"
+                stroke-width="1.5"
+                rx="2"
+              />
+              <line
+                x1="20"
+                y1="25"
+                x2="40"
+                y2="25"
+                stroke="#f59e0b"
+                stroke-width="2"
+              />
+              <line
+                x1="30"
+                y1="18"
+                x2="30"
+                y2="33"
+                stroke="#f59e0b"
+                stroke-width="2"
+              />
             </svg>
           </div>
-          <p class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">
+          <p
+            class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm"
+          >
             In Transit
           </p>
         </div>
 
-        <!-- Arrow -->
-        <div class="text-5xl animate-pulse">→</div>
+        <!-- Arrow between In Transit and Destination -->
+        <!-- Horizontal arrow (desktop) -->
+        <div
+          class="hidden md:block text-5xl animate-pulse text-white/80"
+        >
+          →
+        </div>
+        <!-- Vertical arrow (mobile) -->
+        <div class="md:hidden text-4xl animate-pulse text-white/80">
+          ↓
+        </div>
 
-        <!-- Location Pin with Flag -->
-        <div class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
+        <!-- Step 3: Destination -->
+        <div
+          class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300"
+        >
           <div class="relative">
-            <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-2xl flex items-center justify-center">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-2xl flex items-center justify-center"
+            >
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="white"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
               </svg>
             </div>
-            <div class="absolute -bottom-2 -right-2 w-10 h-7 rounded overflow-hidden shadow-lg border-2 border-white">
-              <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
+            <div
+              class="absolute -bottom-2 -right-2 w-10 h-7 rounded overflow-hidden shadow-lg border-2 border-white"
+            >
+              <img
+                src="https://flagcdn.com/w320/kh.png"
+                alt="Cambodia Flag"
+                class="w-full h-full object-cover"
+              />
             </div>
           </div>
-          <p class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">
+          <p
+            class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm"
+          >
             Destination
           </p>
         </div>
       </div>
-
+      
       <!-- CTA Buttons -->
       <div class="flex gap-6 justify-center mt-12 flex-wrap">
         <button onclick="scrollToSection('features')" class="bg-white text-cambodia-blue px-10 py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-white/20 hover:scale-105 backdrop-blur-sm">
