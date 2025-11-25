@@ -21,7 +21,7 @@
       padding: 0;
     }
 
-    /*Custom color utilities that match Cambodia flag theme */
+    /* Custom color utilities that match Cambodia flag theme */
     .gradient-blue-red {
       background: linear-gradient(135deg, #032E6B 0%, #6B0F47 50%, #D62829 100%);
       position: relative;
@@ -156,29 +156,30 @@
       color: #0f172a;
     }
 
-    /* === Scroll reveal animations === */
+    /* === Scroll reveal animations (upgraded) === */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(24px) scale(0.96);
+      filter: blur(6px);
       transition:
         opacity 0.7s ease-out,
-        transform 0.7s ease-out;
-      will-change: opacity, transform;
+        transform 0.7s ease-out,
+        filter 0.7s ease-out;
+      will-change: opacity, transform, filter;
     }
 
-    .reveal-up { }
-
     .reveal-left {
-      transform: translateX(-32px);
+      transform: translateX(-32px) scale(0.96);
     }
 
     .reveal-right {
-      transform: translateX(32px);
+      transform: translateX(32px) scale(0.96);
     }
 
     .reveal-visible {
       opacity: 1;
-      transform: translate(0, 0);
+      transform: translate(0, 0) scale(1);
+      filter: blur(0);
     }
 
     .reveal-delay-1 {
@@ -203,6 +204,92 @@
       50%  { transform: translateY(-8px); }
       100% { transform: translateY(0px); }
     }
+
+    /* === Back-to-top button (unique orbit style) === */
+    .back-to-top {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      z-index: 50;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      border-radius: 9999px;
+      background: transparent;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .back-to-top-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-to-top-orbit {
+      position: relative;
+      width: 3.25rem;
+      height: 3.25rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
+    }
+
+    .back-to-top-orbit::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: conic-gradient(
+        from 180deg,
+        #38bdf8,
+        #d946ef,
+        #f97316,
+        #22c55e,
+        #38bdf8
+      );
+      opacity: 0.98;
+      animation: spinOrbit 6s linear infinite;
+    }
+
+    .back-to-top-core {
+      position: relative;
+      z-index: 1;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 30% 20%, #1e293b, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7eb;
+    }
+
+    .back-to-top-core svg {
+      width: 1.3rem;
+      height: 1.3rem;
+      animation: arrowFloat 2s ease-in-out infinite;
+    }
+
+    .back-to-top:hover .back-to-top-core {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.7);
+    }
+
+    @keyframes spinOrbit {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes arrowFloat {
+      0%   { transform: translateY(2px); }
+      50%  { transform: translateY(-3px); }
+      100% { transform: translateY(2px); }
+    }
   </style>
 
   <style>@view-transition { navigation: auto; }</style>
@@ -217,7 +304,7 @@
     <div class="max-w-6xl mx-auto relative z-10">
 
       <!-- Hero Text -->
-      <div class="text-center mb-12 reveal reveal-up">
+      <div class="text-center mb-12 reveal">
         <h1 id="main-title" class="text-5xl font-bold mb-4">
           Domestic Logistics Tracking Management System – Cambodia
         </h1>
@@ -243,7 +330,7 @@
 
       <!-- Hero Visual (responsive: vertical on mobile, horizontal on desktop) -->
       <div
-        class="mt-12 flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-10 reveal reveal-up reveal-delay-1"
+        class="mt-12 flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-10 reveal reveal-delay-1"
       >
         <!-- Step 1: Origin -->
         <div
@@ -403,7 +490,7 @@
       </div>
       
       <!-- CTA Buttons -->
-      <div class="flex gap-6 justify-center mt-12 flex-wrap reveal reveal-up reveal-delay-2">
+      <div class="flex gap-6 justify-center mt-12 flex-wrap reveal reveal-delay-2">
         <button onclick="scrollToSection('features')" class="bg-white text-cambodia-blue px-10 py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-white/20 hover:scale-105 backdrop-blur-sm">
           View Features →
         </button>
@@ -418,10 +505,10 @@
   <!-- About Section -->
   <section id="about" class="w-full py-20 px-6 gradient-light">
     <div class="max-w-6xl mx-auto">
-      <h2 id="about-title" class="text-4xl font-bold text-cambodia-blue text-center mb-8 reveal reveal-up">
+      <h2 id="about-title" class="text-4xl font-bold text-cambodia-blue text-center mb-8 reveal">
         About the System
       </h2>
-      <div class="max-w-4xl mx-auto space-y-4 text-lg text-gray-700 reveal reveal-up reveal-delay-1">
+      <div class="max-w-4xl mx-auto space-y-4 text-lg text-gray-700 reveal reveal-delay-1">
         <p>
           This is a web-based management system designed for domestic branch-to-branch logistics operations inside Cambodia.
           It provides a centralized platform for tracking shipments as they move between different provincial branches and cities.
@@ -432,7 +519,7 @@
           developed as our bachelor final project in Information Technology.
         </p>
 
-        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl mt-8 border border-cambodia-blue/10 reveal reveal-up reveal-delay-2">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl mt-8 border border-cambodia-blue/10 reveal reveal-delay-2">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="flex items-start gap-3">
               <div class="text-3xl">📍</div>
@@ -457,7 +544,7 @@
   <!-- Problem & Motivation Section -->
   <section id="features" class="w-full py-20 px-6 bg-gradient-to-br from-slate-50 via-white to-blue-50">
     <div class="max-w-6xl mx-auto">
-      <h2 id="problem-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal reveal-up">
+      <h2 id="problem-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">
         Why We Built This
       </h2>
       <div class="grid md:grid-cols-2 gap-8">
@@ -496,13 +583,13 @@
   <!-- How It Works Flow -->
   <section id="flow" class="w-full py-20 px-6 gradient-light">
     <div class="max-w-7xl mx-auto">
-      <h2 id="flow-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal reveal-up">
+      <h2 id="flow-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">
         How the Tracking Works
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Step 1 -->
-        <div class="step-card reveal reveal-up">
+        <div class="step-card reveal">
           <div class="icon-circle bg-blue-100 text-cambodia-blue">📦</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 1: Drop Off</h3>
@@ -511,7 +598,7 @@
         </div>
 
         <!-- Step 2 -->
-        <div class="step-card reveal reveal-up reveal-delay-1">
+        <div class="step-card reveal reveal-delay-1">
           <div class="icon-circle bg-red-100 text-cambodia-red">🎫</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 2: Registration</h3>
@@ -520,7 +607,7 @@
         </div>
 
         <!-- Step 3 -->
-        <div class="step-card reveal reveal-up reveal-delay-2">
+        <div class="step-card reveal reveal-delay-2">
           <div class="icon-circle bg-blue-100 text-cambodia-blue">🏢</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 3: At Origin</h3>
@@ -529,7 +616,7 @@
         </div>
 
         <!-- Step 4 -->
-        <div class="step-card reveal reveal-up">
+        <div class="step-card reveal">
           <div class="icon-circle bg-red-100 text-cambodia-red">🚚</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 4: Assignment</h3>
@@ -538,7 +625,7 @@
         </div>
 
         <!-- Step 5 -->
-        <div class="step-card reveal reveal-up reveal-delay-1">
+        <div class="step-card reveal reveal-delay-1">
           <div class="icon-circle bg-blue-100 text-cambodia-blue">📍</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 5: Arrival</h3>
@@ -547,7 +634,7 @@
         </div>
 
         <!-- Step 6 -->
-        <div class="step-card reveal reveal-up reveal-delay-2">
+        <div class="step-card reveal reveal-delay-2">
           <div class="icon-circle bg-red-100 text-cambodia-red">✅</div>
           <div class="text-center">
             <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 6: Delivery</h3>
@@ -559,7 +646,7 @@
       </div>
 
       <!-- Flow mini visual -->
-      <div class="mt-12 flex items-center justify-center gap-4 flex-wrap reveal reveal-up reveal-delay-2">
+      <div class="mt-12 flex items-center justify-center gap-4 flex-wrap reveal reveal-delay-2">
         <div class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-full bg-cambodia-blue text-white flex items-center justify-center font-bold text-sm">1</div>
           <span class="text-gray-600">→</span>
@@ -588,10 +675,10 @@
   <!-- Main Features by Role -->
   <section id="features-role" class="w-full py-20 px-6 bg-gradient-to-br from-white via-blue-50 to-red-50">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal reveal-up">Main Features</h2>
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Main Features</h2>
       <div class="grid md:grid-cols-3 gap-8">
         <!-- Admin/Cashier Card -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal reveal-up">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal">
           <div class="text-5xl mb-4 text-center">👨‍💼</div>
           <h3 class="text-2xl font-bold text-cambodia-blue text-center mb-4">For Admin/Cashier</h3>
           <ul class="space-y-3 text-gray-700">
@@ -603,7 +690,7 @@
         </div>
 
         <!-- Drivers Card -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-red relative overflow-hidden backdrop-blur-sm reveal reveal-up reveal-delay-1">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-red relative overflow-hidden backdrop-blur-sm reveal reveal-delay-1">
           <div class="text-5xl mb-4 text-center">🚚</div>
           <h3 class="text-2xl font-bold text-cambodia-red text-center mb-4">For Drivers</h3>
           <ul class="space-y-3 text-gray-700">
@@ -614,7 +701,7 @@
         </div>
 
         <!-- Customers Card -->
-        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal reveal-up reveal-delay-2">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal reveal-delay-2">
           <div class="text-5xl mb-4 text-center">👥</div>
           <h3 class="text-2xl font-bold text-cambodia-blue text-center mb-4">For Customers</h3>
           <ul class="space-y-3 text-gray-700">
@@ -631,7 +718,7 @@
   <!-- Tracking Design -->
   <section id="tracking-design" class="w-full py-20 px-6 gradient-light">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal reveal-up">Tracking Design</h2>
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Tracking Design</h2>
       <div class="grid md:grid-cols-2 gap-8">
         <!-- Status-Based Tracking -->
         <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-blue-100 reveal reveal-left">
@@ -720,8 +807,8 @@
   <!-- Technology Overview -->
   <section id="technology" class="w-full py-16 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal reveal-up">Technology Stack</h2>
-      <div class="bg-gradient-to-r from-blue-50 via-white to-red-50 rounded-lg p-8 shadow-lg reveal reveal-up reveal-delay-1">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Technology Stack</h2>
+      <div class="bg-gradient-to-r from-blue-50 via-white to-red-50 rounded-lg p-8 shadow-lg reveal reveal-delay-1">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-xl font-bold text-cambodia-blue mb-4 flex items-center gap-2">
@@ -766,14 +853,14 @@
  <!-- Our Team Section -->
 <section id="our-team" class="w-full py-16 px-6 gradient-light">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4 reveal reveal-up">Our Team</h2>
-    <p class="text-center text-gray-600 mb-12 text-lg reveal reveal-up reveal-delay-1">
+    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4 reveal">Our Team</h2>
+    <p class="text-center text-gray-600 mb-12 text-lg reveal reveal-delay-1">
       BSc in IT – Final Year Project 2026 • Western University
     </p>
 
     <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
       <!-- Sokheng -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal reveal-up">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal">
         <div class="flex items-start gap-4 mb-4">
           <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
             <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
@@ -793,7 +880,7 @@
       </div>
 
       <!-- Koemsor -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-up reveal-delay-1">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-delay-1">
         <div class="flex items-start gap-4 mb-4">
           <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
             <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
@@ -813,7 +900,7 @@
       </div>
 
       <!-- Bronith -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal reveal-up">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal">
         <div class="flex items-start gap-4 mb-4">
           <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
             <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
@@ -833,7 +920,7 @@
       </div>
 
       <!-- Chiva -->
-      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-up reveal-delay-1">
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-delay-1">
         <div class="flex items-start gap-4 mb-4">
           <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
             <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
@@ -859,15 +946,15 @@
 <!-- Presentation / Demo Section -->
 <section id="presentation" class="w-full py-16 px-6 bg-white">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4 reveal reveal-up">
+    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4 reveal">
       Project Presentation
     </h2>
-    <p class="text-center text-gray-600 mb-8 text-lg reveal reveal-up reveal-delay-1">
+    <p class="text-center text-gray-600 mb-8 text-lg reveal reveal-delay-1">
       View our Western University final project presentation directly.
     </p>
 
     <!-- Button to open Canva presentation in a new tab -->
-    <div class="flex justify-center mb-10 reveal reveal-up reveal-delay-2">
+    <div class="flex justify-center mb-10 reveal reveal-delay-2">
       <a
         href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
         target="_blank"
@@ -879,7 +966,7 @@
     </div>
 
     <!-- Nice preview card instead of iframe (because Canva blocks embedding Canva) -->
-    <div class="max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 flex flex-col md:flex-row gap-6 items-center reveal reveal-up">
+    <div class="max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 flex flex-col md:flex-row gap-6 items-center reveal">
       <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-md aspect-video">
         <img
           src="presentation_cover.jpg"
@@ -911,8 +998,8 @@
   <!-- Future Improvements -->
   <section id="future" class="w-full py-16 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal reveal-up">Future Work</h2>
-      <div class="bg-gradient-to-br from-blue-50 to-red-50 rounded-lg p-8 shadow-lg reveal reveal-up reveal-delay-1">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Future Work</h2>
+      <div class="bg-gradient-to-br from-blue-50 to-red-50 rounded-lg p-8 shadow-lg reveal reveal-delay-1">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="flex items-start gap-3">
             <div class="text-3xl">📱</div>
@@ -957,7 +1044,7 @@
   <!-- Footer -->
   <footer class="w-full bg-gray-900 text-white py-12 px-6">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-6 reveal reveal-up">
+      <div class="text-center mb-6 reveal">
         <h3 class="text-2xl font-bold mb-2">
           Domestic Logistics Tracking Management System – Cambodia
         </h3>
@@ -967,7 +1054,7 @@
         </p>
         <p class="text-gray-400">Western University – Final Project 2026</p>
       </div>
-      <div class="flex items-center justify-center gap-4 pt-6 border-t border-gray-700 reveal reveal-up reveal-delay-1">
+      <div class="flex items-center justify-center gap-4 pt-6 border-t border-gray-700 reveal reveal-delay-1">
         <div class="w-16 h-11 rounded-lg overflow-hidden shadow-xl border-2 border-gray-600 hover:scale-110 transition-transform">
           <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
         </div>
@@ -978,15 +1065,27 @@
     </div>
   </footer>
 
+  <!-- Back to top button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <div class="back-to-top-orbit">
+      <div class="back-to-top-core">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 19V5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7 10L12 5L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </button>
+
 </div>
 
-<!-- Scroll reveal script -->
+<!-- Scroll reveal + back-to-top script -->
 <script>
-  // Scroll reveal using IntersectionObserver
   document.addEventListener('DOMContentLoaded', () => {
+    // Scroll reveal
     const revealElements = document.querySelectorAll('.reveal');
 
-    const observer = new IntersectionObserver(
+    const revealObserver = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1000,7 +1099,23 @@
       }
     );
 
-    revealElements.forEach(el => observer.observe(el));
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Back-to-top button
+    const backToTopBtn = document.getElementById('back-to-top');
+    const showOffset = 280;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > showOffset) {
+        backToTopBtn.classList.add('back-to-top-visible');
+      } else {
+        backToTopBtn.classList.remove('back-to-top-visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   });
 </script>
 
