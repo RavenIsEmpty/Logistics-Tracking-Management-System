@@ -117,32 +117,52 @@
       overflow: hidden;
     }
 
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .avatar-pop {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 9999px;
+      overflow: hidden;
+      border-width: 4px;
+      background: #ffffff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @media (min-width: 768px) {
+      .avatar-pop {
+        width: 7rem;
+        height: 7rem;
+      }
+    }
+
     .avatar-ring-blue {
       box-shadow:
         0 0 0 6px rgba(3, 46, 107, 0.18),
         0 18px 30px rgba(3, 46, 107, 0.28);
+      border-color: #032E6B;
     }
 
     .avatar-ring-red {
       box-shadow:
         0 0 0 6px rgba(214, 40, 41, 0.18),
         0 18px 30px rgba(214, 40, 41, 0.28);
+      border-color: #D62829;
     }
 
     .team-card:hover .avatar-pop {
       transform: translateY(-4px) scale(1.03);
     }
 
-    .avatar-pop {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* Small role icon that sits on the avatar ring */
+    /* Small role icon that sits on the ring */
     .role-badge {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      transform: translate(25%, 25%);
+      bottom: -4px;
+      right: -4px;
       width: 30px;
       height: 30px;
       border-radius: 9999px;
@@ -152,8 +172,21 @@
       font-size: 15px;
       border: 2px solid #ffffff;
       box-shadow: 0 8px 18px rgba(15, 23, 42, 0.5);
-      background: radial-gradient(circle at 30% 20%, #ffffff, #60a5fa);
       color: #0f172a;
+      z-index: 10;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #60a5fa);
+    }
+
+    .role-badge--pink {
+      background: radial-gradient(circle at 30% 20%, #ffffff, #fb7185);
+    }
+
+    .role-badge--green {
+      background: radial-gradient(circle at 30% 20%, #ffffff, #34d399);
+    }
+
+    .role-badge--amber {
+      background: radial-gradient(circle at 30% 20%, #ffffff, #f97316);
     }
 
     /* === Scroll reveal animations (upgraded) === */
@@ -203,6 +236,44 @@
       0%   { transform: translateY(0px); }
       50%  { transform: translateY(-8px); }
       100% { transform: translateY(0px); }
+    }
+
+    /* Scroll indicator in hero */
+    .scroll-indicator-track {
+      position: relative;
+      width: 2px;
+      height: 40px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(248, 250, 252, 0.35);
+    }
+
+    .scroll-indicator-dot {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      animation: scrollDot 1.2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDot {
+      0% { transform: translateY(-4px); opacity: 0; }
+      15% { opacity: 1; }
+      100% { transform: translateY(32px); opacity: 0; }
+    }
+
+    /* === Scroll progress bar === */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0;
+      z-index: 60;
+      background: linear-gradient(to right, #38bdf8, #6366f1, #ec4899, #f97316);
+      transform-origin: left;
     }
 
     /* === Back-to-top button (unique orbit style) === */
@@ -267,6 +338,7 @@
       align-items: center;
       justify-content: center;
       color: #e5e7eb;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .back-to-top-core svg {
@@ -298,6 +370,9 @@
 
 <body class="scroll-smooth">
 <div id="app" class="w-full">
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress"></div>
 
   <!-- Hero Section -->
   <section class="w-full gradient-blue-red text-white py-24 px-6 relative">
@@ -499,6 +574,16 @@
         Meet the Team 👥
         </button>
       </div>
+
+      <!-- Scroll indicator -->
+      <div class="mt-10 flex justify-center reveal reveal-delay-3">
+        <div class="flex flex-col items-center text-white/80 text-xs tracking-[0.18em] uppercase">
+          <span class="mb-2">Scroll to explore</span>
+          <div class="scroll-indicator-track">
+            <div class="scroll-indicator-dot"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -548,6 +633,7 @@
         Why We Built This
       </h2>
       <div class="grid md:grid-cols-2 gap-8">
+
         <!-- Current Problems -->
         <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8 hover-lift border-l-4 border-cambodia-red shadow-xl reveal reveal-left">
           <div class="flex items-center gap-3 mb-4">
@@ -677,6 +763,7 @@
     <div class="max-w-6xl mx-auto">
       <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Main Features</h2>
       <div class="grid md:grid-cols-3 gap-8">
+
         <!-- Admin/Cashier Card -->
         <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm reveal">
           <div class="text-5xl mb-4 text-center">👨‍💼</div>
@@ -720,6 +807,7 @@
     <div class="max-w-6xl mx-auto">
       <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12 reveal">Tracking Design</h2>
       <div class="grid md:grid-cols-2 gap-8">
+
         <!-- Status-Based Tracking -->
         <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-blue-100 reveal reveal-left">
           <div class="flex items-center gap-3 mb-4">
@@ -859,12 +947,15 @@
     </p>
 
     <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
       <!-- Sokheng -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal">
         <div class="flex items-start gap-4 mb-4">
-          <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
-            <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
-            <div class="role-badge bg-gradient-to-tr from-sky-400 to-blue-600">⚙️</div>
+          <div class="avatar-wrap">
+            <div class="avatar-pop avatar-ring-blue">
+              <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
+            </div>
+            <div class="role-badge">⚙️</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Hun Sokheng</h3>
@@ -882,9 +973,11 @@
       <!-- Koemsor -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-delay-1">
         <div class="flex items-start gap-4 mb-4">
-          <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
-            <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
-            <div class="role-badge bg-gradient-to-tr from-pink-400 to-red-500">🎨</div>
+          <div class="avatar-wrap">
+            <div class="avatar-pop avatar-ring-red">
+              <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
+            </div>
+            <div class="role-badge role-badge--pink">🎨</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Say Koemsor</h3>
@@ -902,9 +995,11 @@
       <!-- Bronith -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue reveal">
         <div class="flex items-start gap-4 mb-4">
-          <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
-            <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
-            <div class="role-badge bg-gradient-to-tr from-emerald-400 to-teal-600">🗄️</div>
+          <div class="avatar-wrap">
+            <div class="avatar-pop avatar-ring-blue">
+              <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
+            </div>
+            <div class="role-badge role-badge--green">🗄️</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Kouk Bronith</h3>
@@ -922,9 +1017,11 @@
       <!-- Chiva -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red reveal reveal-delay-1">
         <div class="flex items-start gap-4 mb-4">
-          <div class="relative avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
-            <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
-            <div class="role-badge bg-gradient-to-tr from-amber-300 to-orange-500">📑</div>
+          <div class="avatar-wrap">
+            <div class="avatar-pop avatar-ring-red">
+              <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
+            </div>
+            <div class="role-badge role-badge--amber">📑</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Chun Chiva</h3>
@@ -1079,18 +1176,19 @@
 
 </div>
 
-<!-- Scroll reveal + back-to-top script -->
+<!-- Scroll reveal + back-to-top + progress script -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Scroll reveal
     const revealElements = document.querySelectorAll('.reveal');
 
     const revealObserver = new IntersectionObserver(
-      (entries, obs) => {
+      (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('reveal-visible');
-            obs.unobserve(entry.target); // animate once
+          } else {
+            entry.target.classList.remove('reveal-visible');
           }
         });
       },
@@ -1101,12 +1199,18 @@
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Back-to-top button
+    // Back-to-top button + scroll progress
     const backToTopBtn = document.getElementById('back-to-top');
+    const progressBar = document.getElementById('scroll-progress');
     const showOffset = 280;
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > showOffset) {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+
+      if (scrollTop > showOffset) {
         backToTopBtn.classList.add('back-to-top-visible');
       } else {
         backToTopBtn.classList.remove('back-to-top-visible');
