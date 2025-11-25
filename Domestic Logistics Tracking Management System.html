@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domestic Logistics Tracking System - Cambodia</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Base box sizing */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /*Custom color utilities that match Cambodia flag theme */
+    .gradient-blue-red {
+      background: linear-gradient(135deg, #032E6B 0%, #6B0F47 50%, #D62829 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gradient-blue-red::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .gradient-light {
+      background: linear-gradient(180deg, #EEF2FF 0%, #FEFCE8 50%, #FEF2F2 100%);
+    }
+
+    .text-cambodia-blue { color: #032E6B; }
+    .text-cambodia-red  { color: #D62829; }
+
+    .bg-cambodia-blue { background-color: #032E6B; }
+    .bg-cambodia-red  { background-color: #D62829; }
+
+    .border-cambodia-blue { border-color: #032E6B; }
+    .border-cambodia-red  { border-color: #D62829; }
+
+    .hover-lift {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow:
+        0 20px 40px rgba(3, 46, 107, 0.15),
+        0 10px 20px rgba(214, 40, 41, 0.1);
+    }
+
+    .step-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(3, 46, 107, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #032E6B, #D62829);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .step-card:hover {
+      box-shadow:
+        0 12px 32px rgba(3, 46, 107, 0.12),
+        0 6px 16px rgba(214, 40, 41, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .step-card:hover::before {
+      opacity: 1;
+    }
+
+    .icon-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 32px;
+    }
+
+    .scroll-smooth {
+      scroll-behavior: smooth;
+    }
+  </style>
+
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="scroll-smooth">
+<div id="app" class="w-full">
+
+  <!-- Hero Section -->
+  <section class="w-full gradient-blue-red text-white py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <h1 id="main-title" class="text-5xl font-bold mb-4">
+          Domestic Logistics Tracking Management System – Cambodia
+        </h1>
+        <p id="subtitle" class="text-2xl mb-2">
+          Web-based shipment tracking with status updates and optional GPS.
+        </p>
+        <p id="khmer-subtitle" class="text-lg opacity-90 mb-6">
+          ប្រព័ន្ធតាមដានការដឹកជញ្ជូនក្នុងប្រទេស ប្រើស្ថានភាព និង GPS ជាជម្រើស
+        </p>
+        <p id="hero-description"
+           class="text-lg max-w-3xl mx-auto leading-relaxed">
+          This system helps customers track their packages between branches inside Cambodia. Branch staff create
+          shipments, drivers update status along the route, and customers check their shipment status online using a
+          simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network.
+        </p>
+        <p class="text-lg mt-4 font-semibold">BSc in IT – Final Year Project 2026</p>
+        <p class="text-md opacity-90">Western University</p>
+      </div>
+
+      <!-- Hero Visual -->
+      <div class="flex items-center justify-center gap-8 mt-12 flex-wrap">
+
+        <!-- Cambodia Flag -->
+        <div class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
+          <div class="w-32 h-24 rounded-xl shadow-2xl overflow-hidden border-2 border-white/30">
+            <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">
+            Origin
+          </p>
+        </div>
+
+        <!-- Arrow -->
+        <div class="text-5xl animate-pulse">→</div>
+
+        <!-- Truck with Package -->
+        <div class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
+          <div class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-2xl">
+            <svg width="100" height="70" viewBox="0 0 120 80">
+              <!-- Truck Body -->
+              <rect x="10" y="30" width="50" height="30" fill="#032E6B" rx="4" />
+              <rect x="60" y="35" width="40" height="25" fill="#D62829" rx="4" />
+              <!-- Windows -->
+              <rect x="65" y="40" width="15" height="12" fill="#ffffff" opacity="0.3" rx="2" />
+              <!-- Wheels -->
+              <circle cx="30" cy="65" r="8" fill="#1a1a1a" />
+              <circle cx="85" cy="65" r="8" fill="#1a1a1a" />
+              <circle cx="30" cy="65" r="4" fill="#4a4a4a" />
+              <circle cx="85" cy="65" r="4" fill="#4a4a4a" />
+              <!-- Package on truck -->
+              <rect x="20" y="18" width="20" height="15" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5" rx="2" />
+              <line x1="20" y1="25" x2="40" y2="25" stroke="#f59e0b" stroke-width="2" />
+              <line x1="30" y1="18" x2="30" y2="33" stroke="#f59e0b" stroke-width="2" />
+            </svg>
+          </div>
+          <p class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">
+            In Transit
+          </p>
+        </div>
+
+        <!-- Arrow -->
+        <div class="text-5xl animate-pulse">→</div>
+
+        <!-- Location Pin with Flag -->
+        <div class="flex flex-col items-center transform hover:scale-105 transition-transform duration-300">
+          <div class="relative">
+            <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-2xl flex items-center justify-center">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+            </div>
+            <div class="absolute -bottom-2 -right-2 w-10 h-7 rounded overflow-hidden shadow-lg border-2 border-white">
+              <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
+            </div>
+          </div>
+          <p class="text-sm mt-3 font-semibold bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">
+            Destination
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex gap-6 justify-center mt-12 flex-wrap">
+        <button onclick="scrollToSection('features')" class="bg-white text-cambodia-blue px-10 py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-2xl hover:shadow-white/20 hover:scale-105 backdrop-blur-sm">
+          View Features →
+        </button>
+        <button onclick="scrollToSection('our-team')" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-cambodia-blue transition-all duration-300 shadow-2xl hover:scale-105 backdrop-blur-sm">
+          Meet the Team 👥
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="w-full py-20 px-6 gradient-light">
+    <div class="max-w-6xl mx-auto">
+      <h2 id="about-title" class="text-4xl font-bold text-cambodia-blue text-center mb-8">
+        About the System
+      </h2>
+      <div class="max-w-4xl mx-auto space-y-4 text-lg text-gray-700">
+        <p>
+          This is a web-based management system designed for domestic branch-to-branch logistics operations inside Cambodia.
+          It provides a centralized platform for tracking shipments as they move between different provincial branches and cities.
+        </p>
+        <p>
+          The main focus is on transparency and easy tracking for all stakeholders: customers can see where their packages are,
+          drivers can update status on the go, and branch staff can coordinate shipments efficiently. This system was designed and
+          developed as our bachelor final project in Information Technology.
+        </p>
+
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl mt-8 border border-cambodia-blue/10">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="flex items-start gap-3">
+              <div class="text-3xl">📍</div>
+              <div>
+                <h3 class="font-semibold text-cambodia-red mb-1">Core Tracking: Status-Based Updates</h3>
+                <p class="text-gray-600">Real-time status changes as shipments move through the delivery pipeline.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="text-3xl">🛰️</div>
+              <div>
+                <h3 class="font-semibold text-cambodia-red mb-1">Extra Option: GPS Location</h3>
+                <p class="text-gray-600">Optional live or last-known GPS coordinates during transit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem & Motivation Section -->
+  <section id="features" class="w-full py-20 px-6 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 id="problem-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12">
+        Why We Built This
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Current Problems -->
+        <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-8 hover-lift border-l-4 border-cambodia-red shadow-xl">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">⚠️</div>
+            <h3 class="text-2xl font-bold text-cambodia-red">Current Problems</h3>
+          </div>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold">•</span> <span>Many local services use phone calls, Facebook, or Telegram for tracking.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold">•</span> <span>Customers keep asking “Where is my package now?”.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold">•</span> <span>No clear digital history of shipment status.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold">•</span> <span>Hard for branches in different provinces to coordinate drivers.</span></li>
+          </ul>
+        </div>
+
+        <!-- Our Solution -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 hover-lift border-l-4 border-cambodia-blue shadow-xl">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">✅</div>
+            <h3 class="text-2xl font-bold text-cambodia-blue">Our Solution</h3>
+          </div>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">•</span> <span>One central web system for branches, drivers, and customers.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">•</span> <span>Clear online tracking by code accessible anytime.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">•</span> <span>Stored history of all status updates with timestamps.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">•</span> <span>Optional GPS for enhanced visibility during transit.</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Flow -->
+  <section id="flow" class="w-full py-20 px-6 gradient-light">
+    <div class="max-w-7xl mx-auto">
+      <h2 id="flow-title" class="text-4xl font-bold text-cambodia-blue text-center mb-12">
+        How the Tracking Works
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="icon-circle bg-blue-100 text-cambodia-blue">📦</div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 1: Drop Off</h3>
+            <p class="text-gray-600 text-sm">Sender goes to origin branch and provides package and receiver information.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="icon-circle bg-red-100 text-cambodia-red">🎫</div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 2: Registration</h3>
+            <p class="text-gray-600 text-sm">Admin/Cashier creates shipment, system generates Tracking Code and link.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="icon-circle bg-blue-100 text-cambodia-blue">🏢</div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 3: At Origin</h3>
+            <p class="text-gray-600 text-sm">Shipment waits at origin branch with status “At Origin Branch”.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="icon-circle bg-red-100 text-cambodia-red">🚚</div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 4: Assignment</h3>
+            <p class="text-gray-600 text-sm">Admin assigns shipments to driver → status becomes “In Transit”.</p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card">
+          <div class="icon-circle bg-blue-100 text-cambodia-blue">📍</div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 5: Arrival</h3>
+            <p class="text-gray-600 text-sm">Driver travels to destination branch and updates “Arrived at Destination”.</p>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step-card">
+          <div class="icon-circle bg-red-100 text-cambodia-red">✅</div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg mb-2 text-cambodia-blue">Step 6: Delivery</h3>
+            <p class="text-gray-600 text-sm">
+              Receiver picks up package, staff marks “Delivered”, and customer sees full timeline online.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow mini visual -->
+      <div class="mt-12 flex items-center justify-center gap-4 flex-wrap">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-cambodia-blue text-white flex items-center justify-center font-bold text-sm">1</div>
+          <span class="text-gray-600">→</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-cambodia-red text-white flex items-center justify-center font-bold text-sm">2</div>
+          <span class="text-gray-600">→</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-cambodia-blue text-white flex items-center justify-center font-bold text-sm">3</div>
+          <span class="text-gray-600">→</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-cambodia-red text-white flex items-center justify-center font-bold text-sm">4</div>
+          <span class="text-gray-600">→</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-cambodia-blue text-white flex items-center justify-center font-bold text-sm">5</div>
+          <span class="text-gray-600">→</span>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-cambodia-red text-white flex items-center justify-center font-bold text-sm">6</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Features by Role -->
+  <section id="features-role" class="w-full py-20 px-6 bg-gradient-to-br from-white via-blue-50 to-red-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12">Main Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Admin/Cashier Card -->
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm">
+          <div class="text-5xl mb-4 text-center">👨‍💼</div>
+          <h3 class="text-2xl font-bold text-cambodia-blue text-center mb-4">For Admin/Cashier</h3>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">✓</span> <span>Create shipments with sender, receiver, branches, and package details.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">✓</span> <span>Generate tracking code/link for customers.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">✓</span> <span>Assign shipments to drivers.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">✓</span> <span>View shipments by status (Pending, In Transit, Delivered).</span></li>
+          </ul>
+        </div>
+
+        <!-- Drivers Card -->
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-red relative overflow-hidden backdrop-blur-sm">
+          <div class="text-5xl mb-4 text-center">🚚</div>
+          <h3 class="text-2xl font-bold text-cambodia-red text-center mb-4">For Drivers</h3>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold">✓</span> <span>Mobile-friendly list of assigned shipments.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold">✓</span> <span>Update status: Departed, Arrived, Delivered.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold">✓</span> <span>Optional: start/stop sharing GPS location.</span></li>
+          </ul>
+        </div>
+
+        <!-- Customers Card -->
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border-t-4 border-cambodia-blue relative overflow-hidden backdrop-blur-sm">
+          <div class="text-5xl mb-4 text-center">👥</div>
+          <h3 class="text-2xl font-bold text-cambodia-blue text-center mb-4">For Customers</h3>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">✓</span> <span>Public tracking page (no login required).</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">✓</span> <span>Enter tracking code to see current status and full event timeline.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold">✓</span> <span>If GPS enabled: see last-known location next to Cambodia flag or map.</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracking Design -->
+  <section id="tracking-design" class="w-full py-20 px-6 gradient-light">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12">Tracking Design</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Status-Based Tracking -->
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-blue-100">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">📋</div>
+            <h3 class="text-2xl font-bold text-cambodia-blue">Status-Based Tracking (Core)</h3>
+          </div>
+          <p class="text-gray-700 mb-4">
+            Shipments have events like At Origin, In Transit, Arrived at Destination, and Delivered.
+            Each event stores time, place, and who updated it.
+          </p>
+          <div class="bg-blue-50 rounded-lg p-4 space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-3 h-3 rounded-full bg-cambodia-blue mt-1"></div>
+              <div>
+                <p class="font-semibold text-cambodia-blue">At Origin Branch</p>
+                <p class="text-sm text-gray-600">Phnom Penh Hub • 8:00 AM</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-3 h-3 rounded-full bg-cambodia-red mt-1"></div>
+              <div>
+                <p class="font-semibold text-cambodia-red">In Transit</p>
+                <p class="text-sm text-gray-600">En route to Siem Reap • 9:30 AM</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-3 h-3 rounded-full bg-cambodia-blue mt-1"></div>
+              <div>
+                <p class="font-semibold text-cambodia-blue">Arrived at Destination</p>
+                <p class="text-sm text-gray-600">Siem Reap Branch • 2:45 PM</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-3 h-3 rounded-full bg-green-600 mt-1"></div>
+              <div>
+                <p class="font-semibold text-green-600">Delivered</p>
+                <p class="text-sm text-gray-600">Received by customer • 4:00 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional GPS Tracking -->
+        <div class="bg-white rounded-2xl p-8 shadow-2xl hover-lift border border-red-100">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🛰️</div>
+            <h3 class="text-2xl font-bold text-cambodia-red">Optional GPS Tracking</h3>
+          </div>
+          <p class="text-gray-700 mb-4">
+            Driver enables location sharing in the driver web app. The system stores the last-known latitude/longitude,
+            and the tracking page shows a pin over Cambodia next to the national flag.
+          </p>
+          <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 border border-red-100 shadow-inner">
+            <div class="relative bg-white rounded-xl p-6 shadow-lg">
+              <svg width="100%" height="180" viewBox="0 0 300 180">
+                <!-- Simplified Cambodia outline -->
+                <path d="M50,80 L100,60 L150,50 L200,60 L250,80 L240,110 L200,130 L150,140 L100,130 L60,110 Z"
+                      fill="#E8F4F8" stroke="#032E6B" stroke-width="2" opacity="0.6" />
+                <!-- GPS Pin -->
+                <g transform="translate(150, 95)">
+                  <path d="M0,-30 C-8,-30 -15,-23 -15,-15 C-15,0 0,20 0,20 C0,20 15,0 15,-15 C15,-23 8,-30 0,-30 Z"
+                        fill="#D62829" stroke="white" stroke-width="2" />
+                  <circle cx="0" cy="-15" r="5" fill="white" />
+                  <circle cx="0" cy="-15" r="8" fill="none" stroke="#D62829" stroke-width="1.5" opacity="0.5">
+                    <animate attributeName="r" from="8" to="20" dur="1.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" from="0.5" to="0" dur="1.5s" repeatCount="indefinite" />
+                  </circle>
+                </g>
+                <text x="150" y="165" text-anchor="middle" fill="#032E6B" font-size="13" font-weight="bold">
+                  Last Known Location
+                </text>
+              </svg>
+              <!-- Real Cambodia Flag Accent -->
+              <div class="absolute top-4 right-4 w-16 h-11 rounded-lg overflow-hidden shadow-xl border-2 border-white transform hover:scale-110 transition-transform">
+                <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Overview -->
+  <section id="technology" class="w-full py-16 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12">Technology Stack</h2>
+      <div class="bg-gradient-to-r from-blue-50 via-white to-red-50 rounded-lg p-8 shadow-lg">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-cambodia-blue mb-4 flex items-center gap-2">
+              <span>💻</span> Frontend Technologies
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-cambodia-blue">•</span> <span>HTML, CSS, JavaScript</span></li>
+              <li class="flex items-start gap-2"><span class="text-cambodia-blue">•</span> <span>Bootstrap for responsive design</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-cambodia-red mb-4 flex items-center gap-2">
+              <span>⚙️</span> Backend Technologies
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-cambodia-red">•</span> <span>Laravel / Node.js / Spring Boot / .NET (to be chosen)</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-cambodia-blue mb-4 flex items-center gap-2">
+              <span>🗄️</span> Database
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-cambodia-blue">•</span> <span>MySQL / MariaDB / PostgreSQL</span></li>
+              <li class="flex items-start gap-2"><span class="text-cambodia-blue">•</span> <span>Stores users, branches, shipments, tracking events, driver locations</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-cambodia-red mb-4 flex items-center gap-2">
+              <span>🗺️</span> GPS &amp; Maps
+            </h3>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-cambodia-red">•</span> <span>HTML5 Geolocation API</span></li>
+              <li class="flex items-start gap-2"><span class="text-cambodia-red">•</span> <span>Google Maps or Leaflet/OpenStreetMap</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Team Section -->
+  <section id="our-team" class="w-full py-16 px-6 gradient-light">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4">Our Team</h2>
+      <p class="text-center text-gray-600 mb-12 text-lg">
+        BSc in IT – Final Year Project 2026 • Western University
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+        <!-- Sokheng -->
+        <div class="bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white flex-shrink-0">
+              <!-- code arrows icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-cambodia-blue">Sokheng</h3>
+              <p class="text-cambodia-red font-semibold">Core System Developer</p>
+            </div>
+          </div>
+          <ul class="space-y-2 text-gray-700 ml-4">
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span> <span>Backend logic &amp; APIs.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span> <span>System architecture design.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span> <span>Integration between modules.</span></li>
+          </ul>
+        </div>
+
+        <!-- Koemsor -->
+        <div class="bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white flex-shrink-0">
+              <!-- monitor / layout icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="14" rx="2" />
+                <line x1="8" y1="17" x2="16" y2="17" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-cambodia-blue">Koemsor</h3>
+              <p class="text-cambodia-red font-semibold">UI/UX &amp; Frontend</p>
+            </div>
+          </div>
+          <ul class="space-y-2 text-gray-700 ml-4">
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span> <span>User interface and experience design.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span> <span>Frontend development for all roles.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span> <span>Responsive layouts for desktop &amp; mobile.</span></li>
+          </ul>
+        </div>
+
+        <!-- Bronith -->
+        <div class="bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white flex-shrink-0">
+              <!-- database icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-cambodia-blue">Bronith</h3>
+              <p class="text-cambodia-red font-semibold">Database &amp; Data</p>
+            </div>
+          </div>
+          <ul class="space-y-2 text-gray-700 ml-4">
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span> <span>Database schema &amp; ERD design.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span> <span>Data integrity and performance.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span> <span>Support for reports and queries.</span></li>
+          </ul>
+        </div>
+
+        <!-- Chiva -->
+        <div class="bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-16 h-16 rounded-lg bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white flex-shrink-0">
+              <!-- document icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-cambodia-blue">Chiva</h3>
+              <p class="text-cambodia-red font-semibold">Documentation &amp; Presentation</p>
+            </div>
+          </div>
+          <ul class="space-y-2 text-gray-700 ml-4">
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span> <span>Technical documentation &amp; user guides.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span> <span>Slide decks and project report.</span></li>
+            <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span> <span>Support for testing and demonstrations.</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Future Improvements -->
+  <section id="future" class="w-full py-16 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-12">Future Work</h2>
+      <div class="bg-gradient-to-br from-blue-50 to-red-50 rounded-lg p-8 shadow-lg">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="flex items-start gap-3">
+            <div class="text-3xl">📱</div>
+            <div>
+              <h3 class="font-bold text-cambodia-blue mb-1">Native Mobile Apps</h3>
+              <p class="text-gray-600">Android/iOS apps for drivers and customers with better performance.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="text-3xl">🔔</div>
+            <div>
+              <h3 class="font-bold text-cambodia-red mb-1">Notifications</h3>
+              <p class="text-gray-600">SMS or push notifications for important status changes.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="text-3xl">📡</div>
+            <div>
+              <h3 class="font-bold text-cambodia-blue mb-1">GPS Tracker Integration</h3>
+              <p class="text-gray-600">Integration with physical GPS trackers installed in trucks.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="text-3xl">📊</div>
+            <div>
+              <h3 class="font-bold text-cambodia-red mb-1">Analytics Dashboard</h3>
+              <p class="text-gray-600">Route optimization and business intelligence dashboard.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="text-3xl">🏠</div>
+            <div>
+              <h3 class="font-bold text-cambodia-blue mb-1">Door-to-Door Delivery</h3>
+              <p class="text-gray-600">Expand beyond branch-to-branch to include home delivery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-full bg-gray-900 text-white py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold mb-2">
+          Domestic Logistics Tracking Management System – Cambodia
+        </h3>
+        <p class="text-gray-400 mb-1">Western University • Department of Information Technology</p>
+        <p class="text-lg text-gray-300 mb-2">
+          គម្រោងបញ្ចប់ការសិក្សា បរិញ្ញាបត្រផ្នែកព័ត៌មានវិទ្យា
+        </p>
+        <p class="text-gray-400">Western University – Final Project 2026</p>
+      </div>
+      <div class="flex items-center justify-center gap-4 pt-6 border-t border-gray-700">
+        <div class="w-16 h-11 rounded-lg overflow-hidden shadow-xl border-2 border-gray-600 hover:scale-110 transition-transform">
+          <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover">
+        </div>
+        <span class="text-gray-300 font-medium">
+          Made with pride in Cambodia 🇰🇭
+        </span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const defaultConfig = {
+    main_title: "Domestic Logistics Tracking Management System – Cambodia",
+    subtitle: "Web-based shipment tracking with status updates and optional GPS.",
+    khmer_subtitle: "ប្រព័ន្ធតាមដានការដឹកជញ្ជូនក្នុងប្រទេស ប្រើស្ថានភាព និង GPS ជាជម្រើស",
+    hero_description: "This system helps customers track their packages between branches inside Cambodia. Branch staff create shipments, drivers update status along the route, and customers check their shipment status online using a simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network.",
+    about_title: "About the System",
+    problem_title: "Why We Built This",
+    flow_title: "How the Tracking Works"
+  };
+
+  async function onConfigChange(config) {
+    document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+    document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+    document.getElementById('khmer-subtitle').textContent = config.khmer_subtitle || defaultConfig.khmer_subtitle;
+    document.getElementById('hero-description').textContent = config.hero_description || defaultConfig.hero_description;
+    document.getElementById('about-title').textContent = config.about_title || defaultConfig.about_title;
+    document.getElementById('problem-title').textContent = config.problem_title || defaultConfig.problem_title;
+    document.getElementById('flow-title').textContent = config.flow_title || defaultConfig.flow_title;
+  }
+
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  if (window.elementSdk) {
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange,
+      mapToCapabilities: () => ({
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) =>
+        new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle],
+          ["khmer_subtitle", config.khmer_subtitle || defaultConfig.khmer_subtitle],
+          ["hero_description", config.hero_description || defaultConfig.hero_description],
+          ["about_title", config.about_title || defaultConfig.about_title],
+          ["problem_title", config.problem_title || defaultConfig.problem_title],
+          ["flow_title", config.flow_title || defaultConfig.flow_title]
+        ])
+    });
+  }
+</script>
+
+</body>
+</html>
