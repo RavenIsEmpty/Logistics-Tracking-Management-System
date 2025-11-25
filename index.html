@@ -111,31 +111,62 @@
       scroll-behavior: smooth;
     }
 
+    /* === OUR TEAM – avatar styling === */
     .team-card {
-  position: relative;
-  overflow: hidden;
-}
+      position: relative;
+      overflow: hidden;
+    }
 
-.avatar-ring-blue {
-  box-shadow:
-    0 0 0 6px rgba(3, 46, 107, 0.18),
-    0 18px 30px rgba(3, 46, 107, 0.28);
-}
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+    }
 
-.avatar-ring-red {
-  box-shadow:
-    0 0 0 6px rgba(214, 40, 41, 0.18),
-    0 18px 30px rgba(214, 40, 41, 0.28);
-}
+    .avatar-ring-blue {
+      box-shadow:
+        0 0 0 6px rgba(3, 46, 107, 0.18),
+        0 18px 30px rgba(3, 46, 107, 0.28);
+    }
 
-.team-card:hover .avatar-pop {
-  transform: translateY(-4px) scale(1.03);
-}
+    .avatar-ring-red {
+      box-shadow:
+        0 0 0 6px rgba(214, 40, 41, 0.18),
+        0 18px 30px rgba(214, 40, 41, 0.28);
+    }
 
-.avatar-pop {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
- 
+    .team-card:hover .avatar-pop {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .avatar-pop {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .avatar-badge {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.35);
+      background: #ffffff;
+    }
+
+    .avatar-badge-blue {
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, #1d4ed8 45%, #021b79 100%);
+      color: #ffffff;
+    }
+
+    .avatar-badge-red {
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ef4444 45%, #7f1d1d 100%);
+      color: #ffffff;
+    }
   </style>
 
   <style>@view-transition { navigation: auto; }</style>
@@ -712,8 +743,11 @@
       <!-- Sokheng -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
-            <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
+          <div class="avatar-wrapper w-24 h-24 md:w-28 md:h-28 flex-shrink-0">
+            <div class="avatar-pop w-full h-full rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue bg-white">
+              <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
+            </div>
+            <div class="avatar-badge avatar-badge-blue">⚙️</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Hun Sokheng</h3>
@@ -731,8 +765,11 @@
       <!-- Koemsor -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
-            <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
+          <div class="avatar-wrapper w-24 h-24 md:w-28 md:h-28 flex-shrink-0">
+            <div class="avatar-pop w-full h-full rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red bg-white">
+              <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
+            </div>
+            <div class="avatar-badge avatar-badge-red">🎨</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Say Koemsor</h3>
@@ -750,8 +787,11 @@
       <!-- Bronith -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
-            <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
+          <div class="avatar-wrapper w-24 h-24 md:w-28 md:h-28 flex-shrink-0">
+            <div class="avatar-pop w-full h-full rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue bg-white">
+              <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
+            </div>
+            <div class="avatar-badge avatar-badge-blue">🗄️</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Kouk Bronith</h3>
@@ -769,8 +809,11 @@
       <!-- Chiva -->
       <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red">
         <div class="flex items-start gap-4 mb-4">
-          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
-            <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
+          <div class="avatar-wrapper w-24 h-24 md:w-28 md:h-28 flex-shrink-0">
+            <div class="avatar-pop w-full h-full rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red bg-white">
+              <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
+            </div>
+            <div class="avatar-badge avatar-badge-red">📑</div>
           </div>
           <div>
             <h3 class="text-2xl font-bold text-cambodia-blue">Chun Chiva</h3>
