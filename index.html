@@ -110,6 +110,32 @@
     .scroll-smooth {
       scroll-behavior: smooth;
     }
+
+    .team-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-ring-blue {
+  box-shadow:
+    0 0 0 6px rgba(3, 46, 107, 0.18),
+    0 18px 30px rgba(3, 46, 107, 0.28);
+}
+
+.avatar-ring-red {
+  box-shadow:
+    0 0 0 6px rgba(214, 40, 41, 0.18),
+    0 18px 30px rgba(214, 40, 41, 0.28);
+}
+
+.team-card:hover .avatar-pop {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.avatar-pop {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ 
   </style>
 
   <style>@view-transition { navigation: auto; }</style>
@@ -674,242 +700,91 @@
   </section>
 
  <!-- Our Team Section -->
-<section id="our-team" class="w-full py-20 px-6 gradient-light">
+<section id="our-team" class="w-full py-16 px-6 gradient-light">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-3">Our Team</h2>
+    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4">Our Team</h2>
     <p class="text-center text-gray-600 mb-12 text-lg">
       BSc in IT – Final Year Project 2026 • Western University
     </p>
 
-    <div class="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
       <!-- Sokheng -->
-      <div
-        class="group bg-white rounded-2xl p-8 shadow-xl hover-lift border border-slate-100 relative overflow-hidden"
-      >
-        <!-- subtle gradient strip on the left -->
-        <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cambodia-blue to-sky-400"></div>
-
-        <div class="flex items-center gap-5 mb-4">
-          <!-- Avatar -->
-          <div class="relative">
-            <div
-              class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-cambodia-blue to-sky-400 p-[3px] shadow-xl"
-            >
-              <div
-                class="w-full h-full rounded-full overflow-hidden bg-slate-100"
-              >
-                <img
-                  src="asset/hun_sokheng.jpg"
-                  alt="Hun Sokheng"
-                  class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            </div>
-            <!-- tiny badge -->
-            <div
-              class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-cambodia-blue text-white text-xs flex items-center justify-center shadow-md"
-            >
-              💻
-            </div>
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
+            <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
           </div>
-
-          <!-- Text -->
           <div>
-            <h3 class="text-2xl font-extrabold text-cambodia-blue leading-snug">
-              Hun Sokheng
-            </h3>
-            <p class="text-cambodia-red font-semibold text-sm">
-              Core System Developer
-            </p>
-            <p class="text-xs text-gray-500 mt-1">
-              &lt;/&gt; Backend &amp; core logic
-            </p>
+            <h3 class="text-2xl font-bold text-cambodia-blue">Hun Sokheng</h3>
+            <p class="text-cambodia-red font-semibold">Core System Developer</p>
+            <p class="text-xs text-gray-500 mt-1">&lt;/&gt; Backend &amp; core logic</p>
           </div>
         </div>
-
-        <ul class="space-y-2 text-gray-700 ml-3 mt-2 text-sm">
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-blue font-bold mt-1">➤</span>
-            <span>Backend logic &amp; APIs.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-blue font-bold mt-1">➤</span>
-            <span>System architecture design.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-blue font-bold mt-1">➤</span>
-            <span>Integration between modules.</span>
-          </li>
+        <ul class="space-y-2 text-gray-700 ml-4">
+          <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span><span>Backend logic &amp; APIs.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span><span>System architecture design.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span><span>Integration between modules.</span></li>
         </ul>
       </div>
 
       <!-- Koemsor -->
-      <div
-        class="group bg-white rounded-2xl p-8 shadow-xl hover-lift border border-slate-100 relative overflow-hidden"
-      >
-        <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cambodia-red to-rose-400"></div>
-
-        <div class="flex items-center gap-5 mb-4">
-          <div class="relative">
-            <div
-              class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-cambodia-red to-rose-400 p-[3px] shadow-xl"
-            >
-              <div
-                class="w-full h-full rounded-full overflow-hidden bg-slate-100"
-              >
-                <img
-                  src="say_koemsor.jpg"
-                  alt="Say Koemsor"
-                  class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            </div>
-            <div
-              class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-cambodia-red text-white text-xs flex items-center justify-center shadow-md"
-            >
-              🎨
-            </div>
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
+            <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
           </div>
-
           <div>
-            <h3 class="text-2xl font-extrabold text-cambodia-blue leading-snug">
-              Say Koemsor
-            </h3>
-            <p class="text-cambodia-red font-semibold text-sm">
-              UI/UX &amp; Frontend
-            </p>
-            <p class="text-xs text-gray-500 mt-1">
-              🎨 Interface &amp; user flow
-            </p>
+            <h3 class="text-2xl font-bold text-cambodia-blue">Say Koemsor</h3>
+            <p class="text-cambodia-red font-semibold">UI/UX &amp; Frontend</p>
+            <p class="text-xs text-gray-500 mt-1">🎨 Interface &amp; user flow</p>
           </div>
         </div>
-
-        <ul class="space-y-2 text-gray-700 ml-3 mt-2 text-sm">
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-red font-bold mt-1">➤</span>
-            <span>User interface and experience design.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-red font-bold mt-1">➤</span>
-            <span>Frontend development for all roles.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-red font-bold mt-1">➤</span>
-            <span>Responsive layouts for desktop &amp; mobile.</span>
-          </li>
+        <ul class="space-y-2 text-gray-700 ml-4">
+          <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span><span>User interface and experience design.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span><span>Frontend development for all roles.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span><span>Responsive layouts for desktop &amp; mobile.</span></li>
         </ul>
       </div>
 
       <!-- Bronith -->
-      <div
-        class="group bg-white rounded-2xl p-8 shadow-xl hover-lift border border-slate-100 relative overflow-hidden"
-      >
-        <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cambodia-blue to-emerald-400"></div>
-
-        <div class="flex items-center gap-5 mb-4">
-          <div class="relative">
-            <div
-              class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-cambodia-blue to-emerald-400 p-[3px] shadow-xl"
-            >
-              <div
-                class="w-full h-full rounded-full overflow-hidden bg-slate-100"
-              >
-                <img
-                  src="kouk_bronith.jpg"
-                  alt="Kouk Bronith"
-                  class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            </div>
-            <div
-              class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center shadow-md"
-            >
-              🗄️
-            </div>
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white">
+            <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
           </div>
-
           <div>
-            <h3 class="text-2xl font-extrabold text-cambodia-blue leading-snug">
-              Kouk Bronith
-            </h3>
-            <p class="text-cambodia-red font-semibold text-sm">
-              Database &amp; Data
-            </p>
+            <h3 class="text-2xl font-bold text-cambodia-blue">Kouk Bronith</h3>
+            <p class="text-cambodia-red font-semibold">Database &amp; Data</p>
             <p class="text-xs text-gray-500 mt-1">🗄️ Data &amp; queries</p>
           </div>
         </div>
-
-        <ul class="space-y-2 text-gray-700 ml-3 mt-2 text-sm">
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-blue font-bold mt-1">➤</span>
-            <span>Database schema &amp; ERD design.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-blue font-bold mt-1">➤</span>
-            <span>Data integrity and performance.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-blue font-bold mt-1">➤</span>
-            <span>Support for reports and queries.</span>
-          </li>
+        <ul class="space-y-2 text-gray-700 ml-4">
+          <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span><span>Database schema &amp; ERD design.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span><span>Data integrity and performance.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-blue font-bold mt-1">→</span><span>Support for reports and queries.</span></li>
         </ul>
       </div>
 
       <!-- Chiva -->
-      <div
-        class="group bg-white rounded-2xl p-8 shadow-xl hover-lift border border-slate-100 relative overflow-hidden"
-      >
-        <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-cambodia-red to-amber-400"></div>
-
-        <div class="flex items-center gap-5 mb-4">
-          <div class="relative">
-            <div
-              class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-tr from-cambodia-red to-amber-400 p-[3px] shadow-xl"
-            >
-              <div
-                class="w-full h-full rounded-full overflow-hidden bg-slate-100"
-              >
-                <img
-                  src="asset/chun_chiva.jpg"
-                  alt="Chun Chiva"
-                  class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            </div>
-            <div
-              class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center shadow-md"
-            >
-              📑
-            </div>
+      <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white">
+            <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
           </div>
-
           <div>
-            <h3 class="text-2xl font-extrabold text-cambodia-blue leading-snug">
-              Chun Chiva
-            </h3>
-            <p class="text-cambodia-red font-semibold text-sm">
-              Documentation &amp; Presentation
-            </p>
+            <h3 class="text-2xl font-bold text-cambodia-blue">Chun Chiva</h3>
+            <p class="text-cambodia-red font-semibold">Documentation &amp; Presentation</p>
             <p class="text-xs text-gray-500 mt-1">📑 Slides &amp; report</p>
           </div>
         </div>
-
-        <ul class="space-y-2 text-gray-700 ml-3 mt-2 text-sm">
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-red font-bold mt-1">➤</span>
-            <span>Technical documentation &amp; user guides.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-red font-bold mt-1">➤</span>
-            <span>Slide decks and project report.</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-cambodia-red font-bold mt-1">➤</span>
-            <span>Support for testing and demonstrations.</span>
-          </li>
+        <ul class="space-y-2 text-gray-700 ml-4">
+          <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span><span>Technical documentation &amp; user guides.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span><span>Slide decks and project report.</span></li>
+          <li class="flex items-start gap-2"><span class="text-cambodia-red font-bold mt-1">→</span><span>Support for testing and demonstrations.</span></li>
         </ul>
       </div>
+
     </div>
   </div>
 </section>
