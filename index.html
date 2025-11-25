@@ -37,7 +37,11 @@
       pointer-events: none;
     }
 
-    /* Sticky header shadow */
+    /* Sticky header shadow / colors */
+    #site-header {
+      color: #0f172a;
+    }
+
     .header-blur {
       backdrop-filter: blur(14px);
       background-color: rgba(15, 23, 42, 0.72);
@@ -176,6 +180,8 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       z-index: 1;
+      /* important: allow emoji badge to float outside */
+      overflow: visible !important;
     }
 
     .team-card:hover .avatar-pop {
@@ -358,6 +364,10 @@
       color: #e5e7eb;
     }
 
+    body.dark-mode #site-header {
+      color: #e5e7eb;
+    }
+
     body.dark-mode .header-blur-light {
       background-color: rgba(15, 23, 42, 0.96);
     }
@@ -375,14 +385,16 @@
       mix-blend-mode: soft-light;
     }
 
-    body.dark-mode .gradient-light {
-      background: radial-gradient(circle at 0% 0%, #020617 0%, #020617 40%, #111827 100%);
+    /* Make all non-hero sections dark background for readability */
+    body.dark-mode section:not(.gradient-blue-red) {
+      background-color: #020617 !important;
     }
 
     body.dark-mode .bg-white {
       background-color: #020617 !important;
     }
 
+    /* Text color fixes in dark mode */
     body.dark-mode .text-gray-700,
     body.dark-mode .text-gray-600,
     body.dark-mode .text-gray-500 {
@@ -392,6 +404,13 @@
     body.dark-mode .text-gray-400,
     body.dark-mode .text-gray-300 {
       color: #cbd5f5 !important;
+    }
+
+    body.dark-mode .text-slate-900,
+    body.dark-mode .text-slate-800,
+    body.dark-mode .text-slate-700,
+    body.dark-mode .text-slate-600 {
+      color: #e5e7eb !important;
     }
 
     body.dark-mode .text-cambodia-blue,
@@ -444,6 +463,27 @@
       border-color: rgba(148, 163, 184, 0.5);
     }
 
+    /* Mobile tweaks for tracking input: avoid iOS zoom + better look */
+    #tracking-code-input {
+      font-size: 16px; /* important: prevent mobile zoom */
+      min-height: 40px;
+    }
+
+    #tracking-demo-btn {
+      font-size: 16px; /* avoid zoom on tap */
+      min-height: 40px;
+    }
+
+    @media (max-width: 640px) {
+      .tracking-bar-wrapper {
+        padding-inline: 0.25rem;
+      }
+      .tracking-bar-inner {
+        border-radius: 999px;
+        padding: 0.45rem 0.6rem;
+      }
+    }
+
     /* Respect prefers-reduced-motion: reduce */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -466,7 +506,7 @@
 <div id="scroll-progress"></div>
 
 <!-- Sticky Header / Nav -->
-<header id="site-header" class="fixed top-0 inset-x-0 z-50 header-blur-light text-sm text-white">
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 header-blur-light text-sm">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between h-14">
       <div class="flex items-center gap-2">
@@ -475,6 +515,7 @@
           DLTS Cambodia
         </span>
       </div>
+      <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-4 text-xs uppercase tracking-wide">
         <button onclick="scrollToSection('about')" class="hover:underline">About</button>
         <button onclick="scrollToSection('features')" class="hover:underline">Why</button>
@@ -483,8 +524,8 @@
         <button onclick="scrollToSection('presentation')" class="hover:underline">Presentation</button>
       </nav>
       <div class="flex items-center gap-2">
-        <!-- Language toggle -->
-        <button id="lang-toggle" class="pill-toggle hidden sm:inline-flex">
+        <!-- Language toggle: now visible also on mobile -->
+        <button id="lang-toggle" class="pill-toggle">
           <span class="pill-toggle-icon">🌐</span>
           <span id="lang-label">EN</span>
         </button>
@@ -494,6 +535,25 @@
           <span class="hidden sm:inline">Mode</span>
         </button>
       </div>
+    </div>
+
+    <!-- Mobile nav row -->
+    <div class="flex md:hidden items-center justify-center gap-2 pb-2 text-[11px] uppercase tracking-wide">
+      <button onclick="scrollToSection('about')" class="px-2 py-1 rounded-full bg-gray-100/80">
+        About
+      </button>
+      <button onclick="scrollToSection('features')" class="px-2 py-1 rounded-full bg-gray-100/80">
+        Why
+      </button>
+      <button onclick="scrollToSection('flow')" class="px-2 py-1 rounded-full bg-gray-100/80">
+        Flow
+      </button>
+      <button onclick="scrollToSection('our-team')" class="px-2 py-1 rounded-full bg-gray-100/80">
+        Team
+      </button>
+      <button onclick="scrollToSection('presentation')" class="px-2 py-1 rounded-full bg-gray-100/80">
+        Presentation
+      </button>
     </div>
   </div>
 </header>
@@ -540,28 +600,39 @@
         </p>
         <p
           id="khmer-subtitle"
-          class="text-lg opacity-90 mb-4"
+          class="text-lg opacity-90 mb-2"
           data-en="Designed for transparent branch-to-branch delivery inside Cambodia."
           data-kh="រចនាឡើងសម្រាប់ការដឹកជញ្ជូនរវាងសាខាក្នុងប្រទេសកម្ពុជា ដោយមានភាពថ្លៃថ្នូរ និងច្បាស់លាស់។"
         >
           ប្រព័ន្ធតាមដានការដឹកជញ្ជូនក្នុងប្រទេស ប្រើស្ថានភាព និង GPS ជាជម្រើស
         </p>
+        <!-- Hero description (for element config) -->
+        <p
+          id="hero-description"
+          class="text-base md:text-lg max-w-3xl mx-auto leading-relaxed opacity-95"
+        >
+          This system helps customers track their packages between branches inside Cambodia. Branch staff create
+          shipments, drivers update status along the route, and customers check their shipment status online using a
+          simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network.
+        </p>
 
         <!-- Tracking demo bar -->
-        <div class="max-w-xl mx-auto mt-6">
-          <div class="bg-white/10 backdrop-blur-md rounded-full px-3 py-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 border border-white/20 tilt-card">
+        <div class="max-w-xl mx-auto mt-6 tracking-bar-wrapper">
+          <div
+            class="tracking-bar-inner bg-white/10 backdrop-blur-md rounded-full px-3 py-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 border border-white/20 tilt-card"
+          >
             <div class="flex-1 flex items-center gap-2">
               <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/20 text-sm">🔍</span>
               <input
                 id="tracking-code-input"
                 type="text"
                 placeholder="DLTS-001234"
-                class="w-full bg-transparent outline-none placeholder:text-white/60 text-sm"
+                class="w-full bg-transparent outline-none placeholder:text-white/60 text-sm sm:text-base"
               />
             </div>
             <button
               id="tracking-demo-btn"
-              class="px-4 py-1.5 rounded-full bg-white text-cambodia-blue text-xs sm:text-sm font-semibold hover:bg-slate-100 transition"
+              class="px-4 py-1.5 rounded-full bg-white text-cambodia-blue text-sm sm:text-base font-semibold hover:bg-slate-100 transition"
             >
               Track Demo →
             </button>
@@ -1240,9 +1311,9 @@
         <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue tilt-card">
           <div class="flex items-start gap-4 mb-4">
             <div
-              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white"
+              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white flex items-center justify-center"
             >
-              <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
+              <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover rounded-full" />
               <div class="team-emoji-badge">💻</div>
             </div>
             <div>
@@ -1271,9 +1342,9 @@
         <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red tilt-card">
           <div class="flex items-start gap-4 mb-4">
             <div
-              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white"
+              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white flex items-center justify-center"
             >
-              <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
+              <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover rounded-full" />
               <div class="team-emoji-badge">🎨</div>
             </div>
             <div>
@@ -1302,9 +1373,9 @@
         <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-blue tilt-card">
           <div class="flex items-start gap-4 mb-4">
             <div
-              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white"
+              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-cambodia-blue avatar-ring-blue flex-shrink-0 bg-white flex items-center justify-center"
             >
-              <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
+              <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover rounded-full" />
               <div class="team-emoji-badge">🗄️</div>
             </div>
             <div>
@@ -1333,9 +1404,9 @@
         <div class="team-card bg-white rounded-xl p-8 shadow-xl hover-lift border-l-4 border-cambodia-red tilt-card">
           <div class="flex items-start gap-4 mb-4">
             <div
-              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white"
+              class="avatar-pop w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-cambodia-red avatar-ring-red flex-shrink-0 bg-white flex items-center justify-center"
             >
-              <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
+              <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover rounded-full" />
               <div class="team-emoji-badge">📑</div>
             </div>
             <div>
@@ -1509,20 +1580,21 @@
   };
 
   async function onConfigChange(config) {
-    document.getElementById("main-title").textContent =
-      config.main_title || defaultConfig.main_title;
-    document.getElementById("subtitle").textContent =
-      config.subtitle || defaultConfig.subtitle;
-    document.getElementById("khmer-subtitle").textContent =
-      config.khmer_subtitle || defaultConfig.khmer_subtitle;
-    document.getElementById("hero-description").textContent =
-      config.hero_description || defaultConfig.hero_description;
-    document.getElementById("about-title").textContent =
-      config.about_title || defaultConfig.about_title;
-    document.getElementById("problem-title").textContent =
-      config.problem_title || defaultConfig.problem_title;
-    document.getElementById("flow-title").textContent =
-      config.flow_title || defaultConfig.flow_title;
+    const elMain = document.getElementById("main-title");
+    const elSub = document.getElementById("subtitle");
+    const elKhSub = document.getElementById("khmer-subtitle");
+    const elHeroDesc = document.getElementById("hero-description");
+    const elAbout = document.getElementById("about-title");
+    const elProblem = document.getElementById("problem-title");
+    const elFlow = document.getElementById("flow-title");
+
+    if (elMain) elMain.textContent = config.main_title || defaultConfig.main_title;
+    if (elSub) elSub.textContent = config.subtitle || defaultConfig.subtitle;
+    if (elKhSub) elKhSub.textContent = config.khmer_subtitle || defaultConfig.khmer_subtitle;
+    if (elHeroDesc) elHeroDesc.textContent = config.hero_description || defaultConfig.hero_description;
+    if (elAbout) elAbout.textContent = config.about_title || defaultConfig.about_title;
+    if (elProblem) elProblem.textContent = config.problem_title || defaultConfig.problem_title;
+    if (elFlow) elFlow.textContent = config.flow_title || defaultConfig.flow_title;
   }
 
   function scrollToSection(sectionId) {
@@ -1610,7 +1682,6 @@
     if (!prefersReducedMotion) {
       const tiltCards = document.querySelectorAll(".tilt-card");
       tiltCards.forEach((card) => {
-        const rect = {};
         const handleMove = (e) => {
           const r = card.getBoundingClientRect();
           const x = e.clientX - r.left;
@@ -1669,6 +1740,8 @@
         const val = trackingInput.value.trim() || "DLTS-001234";
         trackingCodeLabel.textContent = `${val} • In Transit`;
         trackingCard.classList.add("show");
+        // blur input on mobile so keyboard closes and zoom resets
+        trackingInput.blur();
       });
     }
 
@@ -1688,14 +1761,22 @@
     if (simulateBtn && journeySteps.length) {
       simulateBtn.addEventListener("click", () => {
         clearJourney();
-        let delay = 0;
-        journeySteps.forEach((step, index) => {
-          const t1 = setTimeout(() => {
+        // Scroll the whole flow section into view first (for mobile)
+        const flowSection = document.getElementById("flow");
+        if (flowSection) {
+          flowSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        let delay = 200;
+        journeySteps.forEach((step) => {
+          const t = setTimeout(() => {
             journeySteps.forEach((s) => s.classList.remove("active-step"));
             step.classList.add("active-step");
+            // auto-scroll to the active step (center of screen) on mobile too
+            step.scrollIntoView({ behavior: "smooth", block: "center" });
           }, delay);
-          journeyTimeouts.push(t1);
-          delay += 600;
+          journeyTimeouts.push(t);
+          delay += 700;
         });
         const endTimeout = setTimeout(() => {
           journeySteps.forEach((s) => s.classList.remove("active-step"));
@@ -1746,7 +1827,6 @@
 
     let savedTheme = localStorage.getItem("dlts-theme");
     if (!savedTheme) {
-      // default: light mode
       savedTheme = "light";
     }
     applyTheme(savedTheme);
