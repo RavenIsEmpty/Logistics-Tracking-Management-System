@@ -675,50 +675,53 @@
   </section>
 
 <!-- Presentation / Demo Section -->
-  <section id="presentation" class="w-full py-16 px-6 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4">
-        Project Presentation
-      </h2>
-      <p class="text-center text-gray-600 mb-8 text-lg">
-        View our Western University final project presentation directly from Canva.
-      </p>
+<section id="presentation" class="w-full py-16 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-cambodia-blue text-center mb-4">
+      Project Presentation
+    </h2>
+    <p class="text-center text-gray-600 mb-8 text-lg">
+      View our Western University final project presentation directly.
+    </p>
 
-      <!-- Button to open Canva presentation in a new tab -->
-      <div class="flex justify-center mb-8">
-        <a
-          href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 bg-cambodia-blue text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition-all duration-300 hover:scale-105"
-        >
-          🎥 Open Canva Presentation
-        </a>
+    <!-- Button to open Canva presentation in a new tab -->
+    <div class="flex justify-center mb-10">
+      <a
+        href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 bg-cambodia-blue text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-900 transition-all duration-300 hover:scale-105"
+      >
+        🎥 Open Canva Presentation
+      </a>
+    </div>
+
+    <!-- Nice preview card instead of iframe (because Canva blocks embedding Canva) -->
+    <div class="max-w-4xl mx-auto bg-gray-50 rounded-2xl shadow-xl border border-gray-200 p-6 flex flex-col md:flex-row gap-6 items-center">
+      <div class="w-full md:w-1/2 rounded-xl overflow-hidden bg-gray-200 aspect-video flex items-center justify-center text-gray-400 text-sm">
+        <!-- You can replace this div with a screenshot image of your first slide -->
+        <span>Screenshot of presentation cover here</span>
       </div>
-
-      <!-- Optional: Embedded Canva presentation -->
-      <div class="max-w-4xl mx-auto bg-gray-100 rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-        <div class="bg-gray-900 text-gray-100 px-4 py-2 text-sm flex items-center justify-between">
-          <span>Embedded Presentation (Canva)</span>
-          <span class="text-xs text-gray-400">
-            Replace the iframe src with your Canva <strong>Embed</strong> link
-          </span>
-        </div>
-        <div class="w-full" style="aspect-ratio: 16 / 9;">
-          <!-- 1) In Canva, open your presentation
-               2) Click Share → More → Embed → copy the embed link
-               3) Paste that link into src="..." below -->
-          <iframe
-            src="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
-            frameborder="0"
-            allowfullscreen
-            loading="lazy"
-            class="w-full h-full"
-          ></iframe>
-        </div>
+      <div class="w-full md:w-1/2 space-y-3">
+        <h3 class="text-2xl font-bold text-cambodia-blue">
+          Domestic Logistics Tracking System – Cambodia
+        </h3>
+        <p class="text-gray-600">
+          This Canva presentation explains our system idea, objectives, system design, and demo flow for the final defense.
+        </p>
+        <ul class="text-gray-600 text-sm list-disc list-inside space-y-1">
+          <li>Problem &amp; motivation</li>
+          <li>System features &amp; tracking flow</li>
+          <li>Technology stack &amp; architecture</li>
+          <li>Team roles &amp; future work</li>
+        </ul>
+        <p class="text-xs text-gray-400">
+          Note: Canva does not allow embedding Canva inside Canva, so the presentation is opened in a new tab.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
   
   <!-- Future Improvements -->
   <section id="future" class="w-full py-16 px-6 bg-white">
