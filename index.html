@@ -1777,17 +1777,21 @@
         });
       }
 
-      /* Reveal on scroll (fade-in once) + neon activation */
+            /* Reveal on scroll (fade-in once) */
       const revealEls = document.querySelectorAll(".reveal-on-scroll");
+
+      // 🔥 Neon: always on (desktop + mobile, light + dark)
+      // Every element with .neon-on-scroll will glow automatically
+      document.querySelectorAll(".neon-on-scroll").forEach((el) => {
+        el.classList.add("neon-active");
+      });
+
       if ("IntersectionObserver" in window && revealEls.length) {
         const revealObserver = new IntersectionObserver(
           (entries, observer) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("reveal-visible");
-                // Activate neon breathing glow for children when visible
-                const neonTargets = entry.target.querySelectorAll(".neon-on-scroll");
-                neonTargets.forEach((t) => t.classList.add("neon-active"));
                 observer.unobserve(entry.target);
               }
             });
@@ -1798,8 +1802,6 @@
       } else {
         revealEls.forEach((el) => {
           el.classList.add("reveal-visible");
-          const neonTargets = el.querySelectorAll(".neon-on-scroll");
-          neonTargets.forEach((t) => t.classList.add("neon-active"));
         });
       }
 
