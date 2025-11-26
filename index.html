@@ -263,6 +263,110 @@
       }
     }
 
+    /* ========= LIQUID GLASS UTILITIES ========= */
+    .glass-card {
+      position: relative;
+      border-radius: 1rem;
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.20),
+        rgba(148, 163, 184, 0.10)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.45),
+        0 0 0 1px rgba(148, 163, 184, 0.7);
+      transition:
+        transform 0.22s ease-out,
+        box-shadow 0.22s ease-out,
+        background-color 0.22s ease-out;
+    }
+
+    .dark .glass-card {
+      background: radial-gradient(circle at 0% 0%,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.80)
+      );
+      border-color: rgba(148, 163, 184, 0.75);
+      box-shadow:
+        0 22px 55px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(15, 23, 42, 0.95);
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(
+        from 210deg,
+        rgba(3, 46, 107, 0.0),
+        rgba(3, 46, 107, 0.7),
+        rgba(214, 40, 41, 0.8),
+        rgba(251, 191, 36, 0.9),
+        rgba(3, 46, 107, 0.0)
+      );
+      opacity: 0;
+      filter: blur(18px);
+      pointer-events: none;
+      transition: opacity 0.30s ease-out, transform 0.30s ease-out;
+      z-index: -1;
+    }
+
+    .dark .glass-card::before {
+      mix-blend-mode: soft-light;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 26px 60px rgba(15, 23, 42, 0.65),
+        0 0 0 1px rgba(248, 250, 252, 0.9);
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    .glass-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg,
+        rgba(248, 250, 252, 0.20),
+        rgba(148, 163, 184, 0.16)
+      );
+      border: 1px solid rgba(248, 250, 252, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.45),
+        0 0 0 1px rgba(148, 163, 184, 0.7);
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        background-color 0.18s ease-out;
+    }
+
+    .dark .glass-button {
+      background: radial-gradient(circle at 30% 0%,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.80)
+      );
+      border-color: rgba(148, 163, 184, 0.8);
+    }
+
+    .glass-button:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.65),
+        0 0 0 1px rgba(248, 250, 252, 0.95);
+    }
+
     /* Journey steps highlight */
     .journey-step {
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
@@ -285,6 +389,23 @@
 
     .dark .journey-step.active-step {
       background-color: rgba(15, 23, 42, 0.96);
+    }
+
+    /* Dark mode backlight on hover for main cards */
+    .dark .journey-step:hover,
+    .dark .team-card:hover,
+    .dark .glass-card:hover {
+      background-color: rgba(15, 23, 42, 0.98);
+      box-shadow:
+        0 0 0 1px rgba(251, 191, 36, 0.65),
+        0 0 32px rgba(37, 99, 235, 0.85);
+    }
+
+    .dark .rounded-2xl:hover {
+      background-color: rgba(15, 23, 42, 0.96);
+      box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.35),
+        0 0 26px rgba(15, 118, 255, 0.55);
     }
 
     /* Team card avatar + emoji badge */
@@ -330,6 +451,22 @@
     .avatar-img-shell {
       position: relative;
       z-index: 1;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.5);
+    }
+
+    /* Ring-color glow for team avatars */
+    .avatar-img-shell.ring-cambodia-blue {
+      box-shadow:
+        0 0 0 3px rgba(3, 46, 107, 0.95),
+        0 0 30px rgba(3, 46, 107, 0.9),
+        0 18px 40px rgba(15, 23, 42, 0.75);
+    }
+
+    .avatar-img-shell.ring-cambodia-red {
+      box-shadow:
+        0 0 0 3px rgba(214, 40, 41, 0.95),
+        0 0 30px rgba(214, 40, 41, 0.9),
+        0 18px 40px rgba(15, 23, 42, 0.75);
     }
 
     .team-emoji-badge {
@@ -590,7 +727,7 @@
             id="hero-description"
             class="text-sm sm:text-base md:text-[0.98rem] text-slate-100/90 max-w-xl leading-relaxed"
             data-en="This system helps customers track their packages between branches inside Cambodia. Branch staff create shipments, drivers update status along the route, and customers check their shipment status online using a simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network."
-            data-kh="ប្រព័ន្ធនេះជួយអតិថិជនតាមដានកញ្ចប់របស់ខ្លួនរវាងសាខានានាក្នុងប្រទេសកម្ពុជា។ បុគ្គលិកសាខាបង្កើតការដឹកជញ្ជូន អ្នកបើកបរធ្វើបច្ចុប្បន្នភាពស្ថានភាពក្នុងអំឡុងដំណើរ ហើយអតិថិជនអាចពិនិត្យស្ថានភាពកញ្ចប់តាមអ៊ិនធര്ណិតដោយប្រើលេខតាមដានសាមញ្ញ។ រចនាឡើងសម្រាប់ភាពថ្លែងច្បាស់ និងងាយស្រួលប្រើសម្រាប់ប្រព័ន្ធដឹកជញ្ជូនក្នុងប្រទេសកម្ពុជា។"
+            data-kh="ប្រព័ន្ធនេះជួយអតិថិជនតាមដានកញ្ចប់របស់ខ្លួនរវាងសាខានានាក្នុងប្រទេសកម្ពុជា។ បុគ្គលិកសាខាបង្កើតការដឹកជញ្ជូន អ្នកបើកបរធ្វើបច្ចុប្បន្នភាពស្ថានភាពក្នុងអំឡុងដំណើរ ហើយអតិថិជនអាចពិនិត្យស្ថានភាពកញ្ចប់តាមអ៊ិនធរណិតដោយប្រើលេខតាមដានសាមញ្ញ។ រចនាឡើងសម្រាប់ភាពថ្លែងច្បាស់ និងងាយស្រួលប្រើសម្រាប់ប្រព័ន្ធដឹកជញ្ជូនក្នុងប្រទេសកម្ពុជា។"
           >
             This system helps customers track their packages between branches inside Cambodia. Branch staff create
             shipments, drivers update status along the route, and customers check their shipment status online using a
@@ -600,14 +737,14 @@
           <div class="flex flex-wrap gap-3 pt-2">
             <button
               data-simulate-journey
-              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 hover:-translate-y-[1px] hover:shadow-xl transition"
+              class="glass-button inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold transition"
             >
               <span>▶</span>
               <span>Simulate Journey</span>
             </button>
             <button
               data-scroll-target="features"
-              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 hover:-translate-y-[1px] transition"
+              class="glass-button inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition"
             >
               View Features
               <span>→</span>
@@ -622,7 +759,7 @@
 
         <!-- Right: tracking demo card -->
         <div class="reveal-on-scroll">
-          <div class="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6 float-soft">
+          <div class="glass-card rounded-2xl p-5 sm:p-6 float-soft">
             <div class="flex items-center justify-between gap-3 mb-4">
               <div>
                 <p class="text-xs uppercase tracking-[0.18em] text-slate-100/70">Demo Tracking</p>
@@ -648,7 +785,7 @@
                 />
                 <button
                   id="tracking-demo-btn"
-                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 hover:-translate-y-[1px] hover:shadow-xl transition"
+                  class="glass-button inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold transition"
                 >
                   Track Demo
                 </button>
@@ -717,7 +854,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover:-translate-y-1 hover:shadow-xl transition">
+        <div class="glass-card rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover:-translate-y-1 hover:shadow-xl transition">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Branch-to-Branch Focus
           </h3>
@@ -727,7 +864,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover:-translate-y-1 hover:shadow-xl transition">
+        <div class="glass-card rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover:-translate-y-1 hover:shadow-xl transition">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Clear Roles &amp; Responsibilities
           </h3>
@@ -739,7 +876,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto mt-8 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <div class="glass-card rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="grid sm:grid-cols-2 gap-5">
             <div class="flex items-start gap-3">
               <span class="text-3xl">📍</span>
@@ -789,7 +926,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Problems -->
-        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <div class="glass-card rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">⚠️</span>
             <h3 class="text-xl font-bold text-cambodia-red">
@@ -817,7 +954,7 @@
         </div>
 
         <!-- Solution -->
-        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <div class="glass-card rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">✅</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -861,7 +998,7 @@
         </h2>
         <button
           data-simulate-journey
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 hover:-translate-y-[1px] hover:shadow-xl transition">
+          class="glass-button inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold transition">
           <span>▶</span>
           <span>Simulate Journey</span>
         </button>
@@ -870,7 +1007,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
         <!-- Step 1 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
+          class="journey-step glass-card rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="1"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -886,7 +1023,7 @@
 
         <!-- Step 2 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
+          class="journey-step glass-card rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="2"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -902,7 +1039,7 @@
 
         <!-- Step 3 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
+          class="journey-step glass-card rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="3"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -918,7 +1055,7 @@
 
         <!-- Step 4 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
+          class="journey-step glass-card rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="4"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -934,7 +1071,7 @@
 
         <!-- Step 5 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
+          class="journey-step glass-card rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="5"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -950,7 +1087,7 @@
 
         <!-- Step 6 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
+          class="journey-step glass-card rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="6"
         >
           <div class="w-12 h-12 rounded-full bg-green-100 text-emerald-700 flex items-center justify-center mb-3">
@@ -1046,7 +1183,7 @@
 
       <div class="grid md:grid-cols-3 gap-8 reveal-on-scroll">
         <!-- Admin/Cashier -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <article class="glass-card rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="text-4xl text-center mb-3">👨‍💼</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Admin / Cashier
@@ -1072,7 +1209,7 @@
         </article>
 
         <!-- Driver -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <article class="glass-card rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="text-4xl text-center mb-3">🚚</div>
           <h3 class="text-xl font-bold text-cambodia-red text-center mb-4">
             Drivers
@@ -1094,7 +1231,7 @@
         </article>
 
         <!-- Customers -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <article class="glass-card rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="text-4xl text-center mb-3">👥</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Customers
@@ -1133,7 +1270,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Status-based -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <article class="glass-card rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">📋</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -1177,7 +1314,7 @@
         </article>
 
         <!-- GPS -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
+        <article class="glass-card rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">🛰️</span>
             <h3 class="text-xl font-bold text-cambodia-red dark:text-amber-200">
@@ -1250,7 +1387,7 @@
         </div>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
+      <div class="glass-card rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-lg font-bold text-cambodia-blue dark:text-amber-200 mb-3 flex items-center gap-2">
@@ -1335,7 +1472,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal-on-scroll">
         <!-- Hun Sokheng -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
+        <article class="team-card glass-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap avatar-glow float-soft-slow">
               <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1366,7 +1503,7 @@
         </article>
 
         <!-- Say Koemsor -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
+        <article class="team-card glass-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap avatar-glow float-soft-slow">
               <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1397,7 +1534,7 @@
         </article>
 
         <!-- Kouk Bronith -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
+        <article class="team-card glass-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap avatar-glow float-soft-slow">
               <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1428,7 +1565,7 @@
         </article>
 
         <!-- Chun Chiva -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
+        <article class="team-card glass-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap avatar-glow float-soft-slow">
               <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1482,13 +1619,13 @@
           href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 hover:-translate-y-[1px] hover:shadow-2xl transition"
+          class="glass-button inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold transition"
         >
           🎥 Open Canva Presentation
         </a>
       </div>
 
-      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll">
+      <div class="glass-card max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll">
         <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-md bg-slate-200 aspect-video">
           <img
             src="presentation_cover.jpg"
@@ -1531,7 +1668,7 @@
         </h2>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
+      <div class="glass-card rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="flex items-start gap-3">
             <span class="text-3xl">📱</span>
@@ -1674,7 +1811,7 @@
         borderables: [],
         fontEditable: undefined,
         fontSizeable: undefined
-      }),
+      })),
       mapToEditPanelValues: (config) =>
         new Map([
           ["main_title", config.main_title || defaultConfig.main_title],
