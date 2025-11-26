@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> 
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
@@ -87,17 +87,6 @@
       mix-blend-mode: soft-light;
     }
 
-    /* FIX: Khmer title / subtitle crowding */
-    #main-title {
-      line-height: 1.3;
-      word-break: break-word;
-    }
-    @media (min-width: 1024px) {
-      #main-title {
-        line-height: 1.25;
-      }
-    }
-
     /* Reveal on scroll */
     .reveal-on-scroll {
       opacity: 0;
@@ -170,6 +159,13 @@
       opacity: 1;
       transform: translateY(0) scale(1);
       pointer-events: auto;
+    }
+
+    /* Hide rocket on small screens to avoid overlap */
+    @media (max-width: 768px) {
+      #back-to-top {
+        display: none;
+      }
     }
 
     #back-to-top span {
@@ -276,71 +272,6 @@
       opacity: 0.8;
     }
 
-    /* Hover / interaction improvements */
-    .hover-lift {
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
-    }
-    .hover-lift:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.45);
-    }
-
-    .nav-pill {
-      position: relative;
-      overflow: hidden;
-    }
-    .nav-pill::after {
-      content: "";
-      position: absolute;
-      left: 18%;
-      right: 18%;
-      bottom: 0.05rem;
-      height: 2px;
-      background: linear-gradient(90deg, #032E6B, #D62829);
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.2s ease-out;
-    }
-    .nav-pill:hover::after {
-      transform: scaleX(1);
-    }
-
-    /* Always-on slow floating animation */
-    @keyframes float-slow {
-      0%   { transform: translateY(0); }
-      50%  { transform: translateY(-6px); }
-      100% { transform: translateY(0); }
-    }
-    .hero-floating {
-      animation: float-slow 9s ease-in-out infinite;
-    }
-
-    /* Mini timeline mobile improvements */
-    .mini-timeline {
-      -webkit-overflow-scrolling: touch;
-    }
-    @media (max-width: 640px) {
-      .mini-timeline {
-        flex-wrap: wrap;
-        row-gap: 0.35rem;
-        column-gap: 0.6rem;
-        justify-content: center;
-      }
-      .mini-timeline-arrow {
-        display: none;
-      }
-      .mini-timeline-step {
-        font-size: 0.68rem;
-      }
-    }
-
-    /* Hide back-to-top on small screens */
-    @media (max-width: 640px) {
-      #back-to-top {
-        display: none !important;
-      }
-    }
-
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -371,19 +302,19 @@
 
         <!-- Desktop nav -->
         <nav class="hidden md:flex items-center gap-4 text-xs uppercase tracking-wide">
-          <button data-scroll-target="about" class="nav-pill px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="about" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             About
           </button>
-          <button data-scroll-target="features" class="nav-pill px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="features" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Why
           </button>
-          <button data-scroll-target="flow" class="nav-pill px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="flow" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Flow
           </button>
-          <button data-scroll-target="our-team" class="nav-pill px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="our-team" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Team
           </button>
-          <button data-scroll-target="presentation" class="nav-pill px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="presentation" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Presentation
           </button>
         </nav>
@@ -411,19 +342,19 @@
 
       <!-- Mobile nav row -->
       <div class="md:hidden flex items-center gap-2 pb-2 text-[11px] uppercase tracking-wide overflow-x-auto no-scrollbar">
-        <button data-scroll-target="about" class="nav-pill flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="about" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           About
         </button>
-        <button data-scroll-target="features" class="nav-pill flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="features" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Why
         </button>
-        <button data-scroll-target="flow" class="nav-pill flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="flow" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Flow
         </button>
-        <button data-scroll-target="our-team" class="nav-pill flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="our-team" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Team
         </button>
-        <button data-scroll-target="presentation" class="nav-pill flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="presentation" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Presentation
         </button>
       </div>
@@ -460,12 +391,19 @@
         <div class="space-y-4 reveal-on-scroll">
           <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest bg-white/10 rounded-full px-3 py-1 border border-white/20">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Domestic Logistics • Cambodia 🇰🇭</span>
+            <span
+              data-en="Domestic Logistics • Cambodia 🇰🇭"
+              data-kh="ការដឹកជញ្ជូនក្នុងប្រទេស • កម្ពុជា 🇰🇭"
+            >
+              Domestic Logistics • Cambodia 🇰🇭
+            </span>
           </p>
 
           <h1
             id="main-title"
-            class="text-3xl sm:text-4xl md:text-5xl font-bold"
+            class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
+            data-en="Domestic Logistics Tracking Management System – Cambodia"
+            data-kh="ប្រព័ន្ធគ្រប់គ្រងតាមដានដឹកជញ្ជូនក្នុងប្រទេស – កម្ពុជា"
           >
             Domestic Logistics Tracking Management System – Cambodia
           </h1>
@@ -487,6 +425,8 @@
           <p
             id="hero-description"
             class="text-sm sm:text-base text-slate-100/90 max-w-xl leading-relaxed"
+            data-en="This system helps customers track their packages between branches inside Cambodia. Branch staff create shipments, drivers update status along the route, and customers check their shipment status online using a simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network."
+            data-kh="ប្រព័ន្ធនេះជួយអតិថិជនតាមដានកញ្ចប់របស់ខ្លួនរវាងសាខានានាក្នុងប្រទេសកម្ពុជា។ បុគ្គលិកសាខាបង្កើតការដឹកជញ្ជូន អ្នកបើកបរធ្វើបច្ចុប្បន្នភាពស្ថានភាពក្នុងអំឡុងដំណើរ ហើយអតិថិជនអាចពិនិត្យស្ថានភាពកញ្ចប់តាមអ៊ិនធര്ណិតដោយប្រើលេខតាមដានសាមញ្ញ។ រចនាឡើងសម្រាប់ភាពថ្លែងច្បាស់ និងងាយស្រួលប្រើសម្រាប់ប្រព័ន្ធដឹកជញ្ជូនក្នុងប្រទេសកម្ពុជា។"
           >
             This system helps customers track their packages between branches inside Cambodia. Branch staff create
             shipments, drivers update status along the route, and customers check their shipment status online using a
@@ -496,14 +436,14 @@
           <div class="flex flex-wrap gap-3 pt-2">
             <button
               data-simulate-journey
-              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 transition hover:-translate-y-0.5 hover:shadow-2xl"
+              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 transition"
             >
               <span>▶</span>
               <span>Simulate Journey</span>
             </button>
             <button
               data-scroll-target="features"
-              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 transition hover:-translate-y-0.5 hover:shadow-2xl"
+              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 transition"
             >
               View Features
               <span>→</span>
@@ -518,7 +458,7 @@
 
         <!-- Right: tracking demo card -->
         <div class="reveal-on-scroll">
-          <div class="hero-floating hover-lift rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6">
+          <div class="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6">
             <div class="flex items-center justify-between gap-3 mb-4">
               <div>
                 <p class="text-xs uppercase tracking-[0.18em] text-slate-100/70">Demo Tracking</p>
@@ -544,7 +484,7 @@
                 />
                 <button
                   id="tracking-demo-btn"
-                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 transition hover:-translate-y-0.5 hover:shadow-2xl"
+                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 transition"
                 >
                   Track Demo
                 </button>
@@ -601,6 +541,8 @@
         <h2
           id="about-title"
           class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-6"
+          data-en="About the System"
+          data-kh="អំពីប្រព័ន្ធ"
         >
           About the System
         </h2>
@@ -611,7 +553,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover-lift">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Branch-to-Branch Focus
           </h3>
@@ -621,7 +563,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover-lift">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Clear Roles &amp; Responsibilities
           </h3>
@@ -633,7 +575,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto mt-8 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7 hover-lift">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7">
           <div class="grid sm:grid-cols-2 gap-5">
             <div class="flex items-start gap-3">
               <span class="text-3xl">📍</span>
@@ -674,6 +616,8 @@
         <h2
           id="problem-title"
           class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-10"
+          data-en="Why We Built This"
+          data-kh="ហេតុអ្វីបានជា​យើងបង្កើតប្រព័ន្ធនេះ"
         >
           Why We Built This
         </h2>
@@ -681,7 +625,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Problems -->
-        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover-lift">
+        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">⚠️</span>
             <h3 class="text-xl font-bold text-cambodia-red">
@@ -709,7 +653,7 @@
         </div>
 
         <!-- Solution -->
-        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover-lift">
+        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">✅</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -746,12 +690,14 @@
         <h2
           id="flow-title"
           class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300"
+          data-en="How the Tracking Works"
+          data-kh="របៀបដំណើរការតាមដាន"
         >
           How the Tracking Works
         </h2>
         <button
           data-simulate-journey
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 transition hover:-translate-y-0.5 hover:shadow-2xl"
+          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 transition"
         >
           <span>▶</span>
           <span>Simulate Journey</span>
@@ -761,7 +707,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
         <!-- Step 1 -->
         <article
-          class="journey-step hover-lift rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="1"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -777,7 +723,7 @@
 
         <!-- Step 2 -->
         <article
-          class="journey-step hover-lift rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="2"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -793,7 +739,7 @@
 
         <!-- Step 3 -->
         <article
-          class="journey-step hover-lift rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="3"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -809,7 +755,7 @@
 
         <!-- Step 4 -->
         <article
-          class="journey-step hover-lift rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="4"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -825,7 +771,7 @@
 
         <!-- Step 5 -->
         <article
-          class="journey-step hover-lift rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="5"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -841,7 +787,7 @@
 
         <!-- Step 6 -->
         <article
-          class="journey-step hover-lift rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="6"
         >
           <div class="w-12 h-12 rounded-full bg-green-100 text-emerald-700 flex items-center justify-center mb-3">
@@ -857,33 +803,33 @@
       </div>
 
       <!-- Mini timeline -->
-      <div class="mt-10 mini-timeline flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300 reveal-on-scroll">
-        <span class="mini-timeline-step flex items-center gap-1">
+      <div class="mt-10 flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300 reveal-on-scroll">
+        <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
           Drop Off
         </span>
-        <span class="mini-timeline-arrow">→</span>
-        <span class="mini-timeline-step flex items-center gap-1">
+        <span>→</span>
+        <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">2</span>
           Registration
         </span>
-        <span class="mini-timeline-arrow">→</span>
-        <span class="mini-timeline-step flex items-center gap-1">
+        <span>→</span>
+        <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">3</span>
           At Origin
         </span>
-        <span class="mini-timeline-arrow">→</span>
-        <span class="mini-timeline-step flex items-center gap-1">
+        <span>→</span>
+        <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">4</span>
           Assignment
         </span>
-        <span class="mini-timeline-arrow">→</span>
-        <span class="mini-timeline-step flex items-center gap-1">
+        <span>→</span>
+        <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">5</span>
           Arrival
         </span>
-        <span class="mini-timeline-arrow">→</span>
-        <span class="mini-timeline-step flex items-center gap-1">
+        <span>→</span>
+        <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px]">6</span>
           Delivered
         </span>
@@ -895,14 +841,18 @@
   <section id="features-role" class="py-16 sm:py-20 bg-gradient-to-br from-white via-blue-50 to-red-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="reveal-on-scroll">
-        <h2 class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-10">
+        <h2
+          class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-10"
+          data-en="Main Features by Role"
+          data-kh="មុខងារសំខាន់ៗតាមតួនាទី"
+        >
           Main Features by Role
         </h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8 reveal-on-scroll">
         <!-- Admin/Cashier -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="text-4xl text-center mb-3">👨‍💼</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Admin / Cashier
@@ -928,7 +878,7 @@
         </article>
 
         <!-- Driver -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="text-4xl text-center mb-3">🚚</div>
           <h3 class="text-xl font-bold text-cambodia-red text-center mb-4">
             Drivers
@@ -950,7 +900,7 @@
         </article>
 
         <!-- Customers -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="text-4xl text-center mb-3">👥</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Customers
@@ -978,14 +928,18 @@
   <section id="tracking-design" class="py-16 sm:py-20 bg-gradient-to-b from-slate-50 via-slate-50 to-blue-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="reveal-on-scroll">
-        <h2 class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-10">
+        <h2
+          class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-10"
+          data-en="Tracking Design"
+          data-kh="រចនាបទទម្រង់ការតាមដាន"
+        >
           Tracking Design
         </h2>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Status-based -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">📋</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -1029,7 +983,7 @@
         </article>
 
         <!-- GPS -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">🛰️</span>
             <h3 class="text-xl font-bold text-cambodia-red dark:text-amber-200">
@@ -1081,7 +1035,11 @@
   <section id="technology" class="py-16 sm:py-20 bg-white dark:bg-slate-950">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="reveal-on-scroll">
-        <h2 class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-8">
+        <h2
+          class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-8"
+          data-en="Technology Stack"
+          data-kh="បច្ចេកវិទ្យាដែលប្រើប្រាស់"
+        >
           Technology Stack
         </h2>
       </div>
@@ -1098,7 +1056,7 @@
         </div>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll hover-lift">
+      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-lg font-bold text-cambodia-blue dark:text-amber-200 mb-3 flex items-center gap-2">
@@ -1169,7 +1127,11 @@
   <section id="our-team" class="py-16 sm:py-20 bg-gradient-to-b from-slate-50 via-slate-100 to-slate-200 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="reveal-on-scroll">
-        <h2 class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-3">
+        <h2
+          class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-3"
+          data-en="Our Team"
+          data-kh="ក្រុមការងាររបស់យើង"
+        >
           Our Team
         </h2>
         <p class="text-center text-slate-600 dark:text-slate-300 text-sm sm:text-base mb-10">
@@ -1179,7 +1141,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal-on-scroll">
         <!-- Hun Sokheng -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
               <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1210,7 +1172,7 @@
         </article>
 
         <!-- Say Koemsor -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
               <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1241,7 +1203,7 @@
         </article>
 
         <!-- Kouk Bronith -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
               <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1272,7 +1234,7 @@
         </article>
 
         <!-- Chun Chiva -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
               <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
@@ -1309,7 +1271,11 @@
   <section id="presentation" class="py-16 sm:py-20 bg-white dark:bg-slate-950">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="reveal-on-scroll">
-        <h2 class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-3">
+        <h2
+          class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-3"
+          data-en="Project Presentation &amp; Demo"
+          data-kh="ការបង្ហាញគម្រោង និងការបង្ហាញដំណើរការ"
+        >
           Project Presentation &amp; Demo
         </h2>
         <p class="text-center text-slate-600 dark:text-slate-300 text-sm sm:text-base mb-8">
@@ -1322,13 +1288,13 @@
           href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 transition hover:-translate-y-0.5 hover:shadow-2xl"
+          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 transition"
         >
           🎥 Open Canva Presentation
         </a>
       </div>
 
-      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll hover-lift">
+      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll">
         <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-md bg-slate-200 aspect-video">
           <img
             src="presentation_cover.jpg"
@@ -1362,12 +1328,16 @@
   <section id="future" class="py-16 sm:py-20 bg-gradient-to-b from-slate-50 via-slate-100 to-slate-200 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="reveal-on-scroll">
-        <h2 class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-10">
+        <h2
+          class="text-3xl sm:text-4xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-10"
+          data-en="Future Work"
+          data-kh="ការអភិវឌ្ឍបន្ថែមអនាគត"
+        >
           Future Work
         </h2>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll hover-lift">
+      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="flex items-start gap-3">
             <span class="text-3xl">📱</span>
@@ -1472,13 +1442,33 @@
     const elProblem = document.getElementById("problem-title");
     const elFlow = document.getElementById("flow-title");
 
-    if (elMain) elMain.textContent = config.main_title || defaultConfig.main_title;
+    if (elMain) {
+      const en = config.main_title || defaultConfig.main_title;
+      elMain.textContent = en;
+      elMain.setAttribute("data-en", en);
+    }
     if (elSub) elSub.textContent = config.subtitle || defaultConfig.subtitle;
     if (elKhSub) elKhSub.textContent = config.khmer_subtitle || defaultConfig.khmer_subtitle;
-    if (elHeroDesc) elHeroDesc.textContent = config.hero_description || defaultConfig.hero_description;
-    if (elAbout) elAbout.textContent = config.about_title || defaultConfig.about_title;
-    if (elProblem) elProblem.textContent = config.problem_title || defaultConfig.problem_title;
-    if (elFlow) elFlow.textContent = config.flow_title || defaultConfig.flow_title;
+    if (elHeroDesc) {
+      const enHero = config.hero_description || defaultConfig.hero_description;
+      elHeroDesc.textContent = enHero;
+      elHeroDesc.setAttribute("data-en", enHero);
+    }
+    if (elAbout) {
+      const enAbout = config.about_title || defaultConfig.about_title;
+      elAbout.textContent = enAbout;
+      elAbout.setAttribute("data-en", enAbout);
+    }
+    if (elProblem) {
+      const enProblem = config.problem_title || defaultConfig.problem_title;
+      elProblem.textContent = enProblem;
+      elProblem.setAttribute("data-en", enProblem);
+    }
+    if (elFlow) {
+      const enFlow = config.flow_title || defaultConfig.flow_title;
+      elFlow.textContent = enFlow;
+      elFlow.setAttribute("data-en", enFlow);
+    }
   }
 
   if (window.elementSdk) {
@@ -1490,7 +1480,7 @@
         borderables: [],
         fontEditable: undefined,
         fontSizeable: undefined
-      })),
+      }),
       mapToEditPanelValues: (config) =>
         new Map([
           ["main_title", config.main_title || defaultConfig.main_title],
@@ -1547,9 +1537,11 @@
         backToTopBtn.classList.remove("show");
       }
     });
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
 
     /* Reveal on scroll (animate in + out) */
     const revealEls = document.querySelectorAll(".reveal-on-scroll");
@@ -1586,7 +1578,7 @@
     );
     sections.forEach((sec) => sectionObserver.observe(sec));
 
-    dots.forEach((dot) => {
+    dots.forEach((dot) => { 
       dot.addEventListener("click", () => {
         const target = dot.getAttribute("data-dot-target");
         if (target) scrollToId(target);
