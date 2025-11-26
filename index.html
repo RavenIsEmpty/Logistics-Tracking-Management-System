@@ -132,7 +132,7 @@
     /* Back to top button */
     #back-to-top {
       position: fixed;
-      bottom: 1.75rem;
+      bottom: 2.5rem;
       right: 1.75rem;
       width: 3rem;
       height: 3rem;
@@ -196,7 +196,56 @@
       background-color: rgba(15, 23, 42, 0.96);
     }
 
-    /* Team card avatar + emoji badge */
+    /* Reusable card hover */
+    .card-hover {
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 16px 40px rgba(15, 23, 42, 0.15),
+        0 8px 20px rgba(15, 23, 42, 0.20);
+    }
+
+    /* CTA hover */
+    .btn-cta {
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease, color 0.22s ease;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.35);
+    }
+
+    /* Nav link micro interaction */
+    .nav-link {
+      position: relative;
+      transition: color 0.22s ease, transform 0.22s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #032E6B, #D62829);
+      transition: width 0.22s ease;
+    }
+
+    .nav-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Team card avatar + emoji badge + glow */
     .team-card {
       position: relative;
     }
@@ -204,6 +253,31 @@
     .avatar-wrap {
       position: relative;
       display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-glow {
+      position: absolute;
+      inset: -10%;
+      border-radius: 999px;
+      background: conic-gradient(
+        from 0deg,
+        rgba(3, 46, 107, 0.1),
+        rgba(214, 40, 41, 0.3),
+        rgba(250, 204, 21, 0.35),
+        rgba(3, 46, 107, 0.4),
+        rgba(214, 40, 41, 0.4)
+      );
+      filter: blur(12px);
+      opacity: 0.9;
+      z-index: 0;
+      animation: spin-glow 16s linear infinite;
+    }
+
+    .avatar-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .team-emoji-badge {
@@ -222,6 +296,25 @@
         0 12px 28px rgba(15, 23, 42, 0.6),
         0 0 0 2px rgba(15, 23, 42, 0.5);
       z-index: 10;
+    }
+
+    /* Floating animations */
+    @keyframes float-soft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes spin-glow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .floating-card {
+      animation: float-soft 7s ease-in-out infinite;
+    }
+
+    .avatar-float {
+      animation: float-soft 8s ease-in-out infinite;
     }
 
     /* Hide scrollbars on small nav row */
@@ -302,19 +395,19 @@
 
         <!-- Desktop nav -->
         <nav class="hidden md:flex items-center gap-4 text-xs uppercase tracking-wide">
-          <button data-scroll-target="about" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="about" class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             About
           </button>
-          <button data-scroll-target="features" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="features" class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Why
           </button>
-          <button data-scroll-target="flow" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="flow" class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Flow
           </button>
-          <button data-scroll-target="our-team" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="our-team" class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Team
           </button>
-          <button data-scroll-target="presentation" class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
+          <button data-scroll-target="presentation" class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red">
             Presentation
           </button>
         </nav>
@@ -342,19 +435,19 @@
 
       <!-- Mobile nav row -->
       <div class="md:hidden flex items-center gap-2 pb-2 text-[11px] uppercase tracking-wide overflow-x-auto no-scrollbar">
-        <button data-scroll-target="about" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="about" class="nav-link flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           About
         </button>
-        <button data-scroll-target="features" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="features" class="nav-link flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Why
         </button>
-        <button data-scroll-target="flow" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="flow" class="nav-link flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Flow
         </button>
-        <button data-scroll-target="our-team" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="our-team" class="nav-link flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Team
         </button>
-        <button data-scroll-target="presentation" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
+        <button data-scroll-target="presentation" class="nav-link flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Presentation
         </button>
       </div>
@@ -388,7 +481,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <!-- Left: text -->
-        <div class="space-y-4 reveal-on-scroll">
+        <div class="space-y-5 md:space-y-6 reveal-on-scroll">
           <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest bg-white/10 rounded-full px-3 py-1 border border-white/20">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span
@@ -401,7 +494,7 @@
 
           <h1
             id="main-title"
-            class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
+            class="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug md:leading-tight max-w-xl sm:max-w-2xl"
             data-en="Domestic Logistics Tracking Management System – Cambodia"
             data-kh="ប្រព័ន្ធគ្រប់គ្រងតាមដានដឹកជញ្ជូនក្នុងប្រទេស – កម្ពុជា"
           >
@@ -436,14 +529,14 @@
           <div class="flex flex-wrap gap-3 pt-2">
             <button
               data-simulate-journey
-              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 transition"
+              class="btn-cta inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100"
             >
               <span>▶</span>
               <span>Simulate Journey</span>
             </button>
             <button
               data-scroll-target="features"
-              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 transition"
+              class="btn-cta inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10"
             >
               View Features
               <span>→</span>
@@ -458,7 +551,7 @@
 
         <!-- Right: tracking demo card -->
         <div class="reveal-on-scroll">
-          <div class="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6">
+          <div class="floating-card rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6">
             <div class="flex items-center justify-between gap-3 mb-4">
               <div>
                 <p class="text-xs uppercase tracking-[0.18em] text-slate-100/70">Demo Tracking</p>
@@ -484,7 +577,7 @@
                 />
                 <button
                   id="tracking-demo-btn"
-                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 transition"
+                  class="btn-cta inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700"
                 >
                   Track Demo
                 </button>
@@ -553,7 +646,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6">
+        <div class="card-hover rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Branch-to-Branch Focus
           </h3>
@@ -563,7 +656,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6">
+        <div class="card-hover rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Clear Roles &amp; Responsibilities
           </h3>
@@ -575,7 +668,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto mt-8 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7">
+        <div class="card-hover rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7">
           <div class="grid sm:grid-cols-2 gap-5">
             <div class="flex items-start gap-3">
               <span class="text-3xl">📍</span>
@@ -625,7 +718,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Problems -->
-        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
+        <div class="card-hover rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">⚠️</span>
             <h3 class="text-xl font-bold text-cambodia-red">
@@ -653,7 +746,7 @@
         </div>
 
         <!-- Solution -->
-        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
+        <div class="card-hover rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">✅</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -697,7 +790,7 @@
         </h2>
         <button
           data-simulate-journey
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 transition"
+          class="btn-cta inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900"
         >
           <span>▶</span>
           <span>Simulate Journey</span>
@@ -802,8 +895,8 @@
         </article>
       </div>
 
-      <!-- Mini timeline -->
-      <div class="mt-10 flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300 reveal-on-scroll">
+      <!-- Mini timeline: desktop -->
+      <div class="mt-10 hidden md:flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300 reveal-on-scroll">
         <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
           Drop Off
@@ -834,6 +927,41 @@
           Delivered
         </span>
       </div>
+
+      <!-- Mini timeline: mobile -->
+      <div class="mt-8 md:hidden overflow-x-auto no-scrollbar reveal-on-scroll">
+        <div class="flex items-center gap-4 text-xs text-slate-600 dark:text-slate-300 min-w-max">
+          <div class="flex flex-col items-center gap-1">
+            <span class="w-7 h-7 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
+            <span>Drop Off</span>
+          </div>
+          <span>→</span>
+          <div class="flex flex-col items-center gap-1">
+            <span class="w-7 h-7 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">2</span>
+            <span>Registration</span>
+          </div>
+          <span>→</span>
+          <div class="flex flex-col items-center gap-1">
+            <span class="w-7 h-7 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">3</span>
+            <span>At Origin</span>
+          </div>
+          <span>→</span>
+          <div class="flex flex-col items-center gap-1">
+            <span class="w-7 h-7 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">4</span>
+            <span>Assignment</span>
+          </div>
+          <span>→</span>
+          <div class="flex flex-col items-center gap-1">
+            <span class="w-7 h-7 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">5</span>
+            <span>Arrival</span>
+          </div>
+          <span>→</span>
+          <div class="flex flex-col items-center gap-1">
+            <span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px]">6</span>
+            <span>Delivered</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -852,7 +980,7 @@
 
       <div class="grid md:grid-cols-3 gap-8 reveal-on-scroll">
         <!-- Admin/Cashier -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
+        <article class="card-hover rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="text-4xl text-center mb-3">👨‍💼</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Admin / Cashier
@@ -878,7 +1006,7 @@
         </article>
 
         <!-- Driver -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7">
+        <article class="card-hover rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="text-4xl text-center mb-3">🚚</div>
           <h3 class="text-xl font-bold text-cambodia-red text-center mb-4">
             Drivers
@@ -900,7 +1028,7 @@
         </article>
 
         <!-- Customers -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
+        <article class="card-hover rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="text-4xl text-center mb-3">👥</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Customers
@@ -939,7 +1067,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Status-based -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7">
+        <article class="card-hover rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">📋</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -983,7 +1111,7 @@
         </article>
 
         <!-- GPS -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7">
+        <article class="card-hover rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">🛰️</span>
             <h3 class="text-xl font-bold text-cambodia-red dark:text-amber-200">
@@ -1056,7 +1184,7 @@
         </div>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
+      <div class="card-hover rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-lg font-bold text-cambodia-blue dark:text-amber-200 mb-3 flex items-center gap-2">
@@ -1141,10 +1269,11 @@
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal-on-scroll">
         <!-- Hun Sokheng -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
+        <article class="team-card card-hover rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
-              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <div class="avatar-glow"></div>
+              <div class="avatar-inner avatar-float w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">💻</div>
@@ -1172,10 +1301,11 @@
         </article>
 
         <!-- Say Koemsor -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
+        <article class="team-card card-hover rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
-              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <div class="avatar-glow"></div>
+              <div class="avatar-inner avatar-float w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">🎨</div>
@@ -1203,10 +1333,11 @@
         </article>
 
         <!-- Kouk Bronith -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
+        <article class="team-card card-hover rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
-              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <div class="avatar-glow"></div>
+              <div class="avatar-inner avatar-float w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">🗄️</div>
@@ -1234,10 +1365,11 @@
         </article>
 
         <!-- Chun Chiva -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
+        <article class="team-card card-hover rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
             <div class="avatar-wrap">
-              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+              <div class="avatar-glow"></div>
+              <div class="avatar-inner avatar-float w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">📑</div>
@@ -1288,13 +1420,13 @@
           href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 transition"
+          class="btn-cta inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900"
         >
           🎥 Open Canva Presentation
         </a>
       </div>
 
-      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll">
+      <div class="card-hover max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll">
         <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-md bg-slate-200 aspect-video">
           <img
             src="presentation_cover.jpg"
@@ -1337,7 +1469,7 @@
         </h2>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
+      <div class="card-hover rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="flex items-start gap-3">
             <span class="text-3xl">📱</span>
@@ -1480,7 +1612,7 @@
         borderables: [],
         fontEditable: undefined,
         fontSizeable: undefined
-      }),
+      })),
       mapToEditPanelValues: (config) =>
         new Map([
           ["main_title", config.main_title || defaultConfig.main_title],
@@ -1499,6 +1631,7 @@
    * ------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
     const htmlEl = document.documentElement;
+    const flowSection = document.getElementById("flow");
 
     /* Scroll progress */
     const progressBar = document.getElementById("scroll-progress");
@@ -1543,15 +1676,14 @@
       });
     }
 
-    /* Reveal on scroll (animate in + out) */
+    /* Reveal on scroll (fade in once and stay) */
     const revealEls = document.querySelectorAll(".reveal-on-scroll");
     const revealObserver = new IntersectionObserver(
-      (entries) => {
+      (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("reveal-visible");
-          } else {
-            entry.target.classList.remove("reveal-visible");
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -1663,10 +1795,11 @@
       journeySteps.forEach((step) => step.classList.remove("active-step"));
     }
 
-    function startJourneySimulation() {
+    function startJourneySimulation(options = {}) {
+      const { scrollToFlow = true, scrollSteps = true } = options;
       clearJourneyHighlight();
-      const flowSection = document.getElementById("flow");
-      if (flowSection) {
+
+      if (scrollToFlow && flowSection) {
         flowSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
@@ -1675,7 +1808,9 @@
         const t = setTimeout(() => {
           journeySteps.forEach((s) => s.classList.remove("active-step"));
           step.classList.add("active-step");
-          step.scrollIntoView({ behavior: "smooth", block: "center" });
+          if (scrollSteps) {
+            step.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
         }, delay);
         journeyTimeouts.push(t);
         delay += 700;
@@ -1693,6 +1828,24 @@
         startJourneySimulation();
       });
     });
+
+    /* Journey auto-simulation when flow section first appears */
+    let journeyAutoPlayed = false;
+    if (flowSection) {
+      const flowObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !journeyAutoPlayed) {
+              journeyAutoPlayed = true;
+              startJourneySimulation({ scrollToFlow: false, scrollSteps: false });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+      flowObserver.observe(flowSection);
+    }
 
     /* Language toggle (simple EN / KH for elements that want it) */
     const langToggle = document.getElementById("lang-toggle");
