@@ -29,109 +29,6 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
     }
 
-    /* Brand pill */
-    .brand-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.98), rgba(241,245,249,0.98));
-      border: 1px solid rgba(148, 163, 184, 0.9);
-      box-shadow:
-        0 10px 25px rgba(15, 23, 42, 0.12),
-        0 0 0 1px rgba(148, 163, 184, 0.7);
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease;
-    }
-
-    .dark .brand-pill {
-      background:
-        radial-gradient(circle at 0% 0%, rgba(15,23,42,0.98), rgba(15,23,42,0.98));
-      border-color: rgba(37, 99, 235, 0.95);
-      box-shadow:
-        0 16px 32px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(30, 64, 175, 0.85);
-    }
-
-    .brand-pill:hover {
-      transform: translateY(-1px) scale(1.02);
-      box-shadow:
-        0 18px 36px rgba(15, 23, 42, 0.25),
-        0 0 0 1px rgba(30, 64, 175, 0.95);
-    }
-
-    .brand-pill-icon {
-      font-size: 1.1rem;
-    }
-
-    .brand-pill-text {
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      color: #020617;
-    }
-
-    .dark .brand-pill-text {
-      color: #e5e7eb;
-    }
-
-    @media (min-width: 768px) {
-      .brand-pill-text {
-        font-size: 0.82rem;
-      }
-    }
-
-    /* Nav links */
-    .nav-link {
-      position: relative;
-      padding-inline: 0.45rem;
-      padding-block: 0.2rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      transition:
-        color 0.2s ease,
-        transform 0.18s ease;
-    }
-
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 12%;
-      right: 12%;
-      bottom: -0.18rem;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #032E6B, #D62829, #fbbf24);
-      transform: scaleX(0);
-      transform-origin: center;
-      opacity: 0;
-      transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
-    }
-
-    .nav-link:hover {
-      transform: translateY(-1px);
-      color: #D62829;
-    }
-
-    .dark .nav-link:hover {
-      color: #facc15;
-    }
-
-    .nav-link:hover::after,
-    .nav-link-active::after {
-      transform: scaleX(1);
-      opacity: 1;
-    }
-
     /* Scroll progress bar */
     #scroll-progress {
       position: fixed;
@@ -190,38 +87,6 @@
       mix-blend-mode: soft-light;
     }
 
-    /* Hero main title spacing / Khmer-friendly line-height */
-    #main-title {
-      margin-top: 0.45rem;
-      margin-bottom: 0.85rem;
-      font-size: clamp(2rem, 3.8vw, 3.2rem);
-      line-height: 1.25;
-      letter-spacing: -0.01em;
-    }
-
-    @media (max-width: 640px) {
-      #main-title {
-        font-size: clamp(1.8rem, 7vw, 2.4rem);
-        line-height: 1.32;
-      }
-    }
-
-    html.lang-kh #main-title {
-      font-size: clamp(1.7rem, 5.6vw, 2.6rem);
-      line-height: 1.5;
-      letter-spacing: 0;
-    }
-
-    #subtitle {
-      margin-top: 0.2rem;
-      margin-bottom: 0.3rem;
-    }
-
-    #khmer-subtitle {
-      margin-top: 0.15rem;
-      margin-bottom: 0.5rem;
-    }
-
     /* Reveal on scroll */
     .reveal-on-scroll {
       opacity: 0;
@@ -264,11 +129,92 @@
       transform: scale(1.4);
     }
 
+    /* Brand pill */
+    .brand-pill {
+      position: relative;
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(248, 250, 252, 0.96);
+      box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.20),
+        0 0 0 1px rgba(148, 163, 184, 0.55);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+    }
+
+    .dark .brand-pill {
+      background: rgba(15, 23, 42, 0.96);
+      box-shadow:
+        0 10px 34px rgba(15, 23, 42, 0.75),
+        0 0 0 1px rgba(51, 65, 85, 0.85);
+    }
+
+    .brand-pill::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: inherit;
+      background: conic-gradient(
+        from 180deg,
+        rgba(3, 46, 107, 0.0),
+        rgba(3, 46, 107, 0.6),
+        rgba(214, 40, 41, 0.7),
+        rgba(251, 191, 36, 0.75),
+        rgba(3, 46, 107, 0.0)
+      );
+      filter: blur(12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      z-index: -1;
+    }
+
+    .brand-pill:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 16px 40px rgba(15, 23, 42, 0.45),
+        0 0 0 1px rgba(148, 163, 184, 0.85);
+    }
+
+    .brand-pill:hover::before {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    /* Nav hover underline glow */
+    .nav-link {
+      position: relative;
+      padding-bottom: 0.45rem;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0.15rem;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #032E6B, #D62829, #fbbf24);
+      box-shadow: 0 0 12px rgba(148, 163, 184, 0.9);
+      opacity: 0;
+      transition: width 0.22s ease-out, opacity 0.22s ease-out;
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      width: 70%;
+      opacity: 1;
+    }
+
     /* Back to top button */
     #back-to-top {
       position: fixed;
-      bottom: 1.75rem;
-      right: 1.75rem;
+      bottom: 1.25rem;
+      right: 1.25rem;
       width: 3rem;
       height: 3rem;
       border-radius: 999px;
@@ -296,19 +242,6 @@
       pointer-events: auto;
     }
 
-    /* Smaller / safer placement on mobile */
-    @media (max-width: 768px) {
-      #back-to-top {
-        width: 2.5rem;
-        height: 2.5rem;
-        bottom: 0.9rem;
-        right: 0.9rem;
-        box-shadow:
-          0 12px 28px rgba(15, 23, 42, 0.6),
-          0 0 0 1px rgba(148, 163, 184, 0.7);
-      }
-    }
-
     #back-to-top span {
       display: inline-block;
       animation: rocket-bounce 1.1s ease-in-out infinite;
@@ -319,25 +252,26 @@
       50% { transform: translateY(-5px); }
     }
 
-    /* Soft floating animation for hero card / avatars */
-    @keyframes float-soft {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0); }
-    }
-
-    .hero-float {
-      animation: float-soft 9s ease-in-out infinite;
-    }
-
-    .team-avatar-float {
-      animation: float-soft 11s ease-in-out infinite;
-      animation-delay: var(--avatar-delay, 0s);
+    /* Make mobile back-to-top a bit smaller and higher */
+    @media (max-width: 768px) {
+      #back-to-top {
+        width: 2.6rem;
+        height: 2.6rem;
+        bottom: 1.9rem;
+        right: 1.1rem;
+        font-size: 1.2rem;
+      }
     }
 
     /* Journey steps highlight */
     .journey-step {
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .journey-step:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.18);
     }
 
     .journey-step.active-step {
@@ -346,45 +280,24 @@
         0 16px 40px rgba(3, 46, 107, 0.18),
         0 8px 22px rgba(15, 23, 42, 0.35);
       border-color: rgba(212, 175, 55, 0.8);
-      background-color: rgba(248, 250, 252, 0.95);
+      background-color: rgba(248, 250, 252, 0.96);
     }
 
     .dark .journey-step.active-step {
       background-color: rgba(15, 23, 42, 0.96);
     }
 
-    /* Card hover lift (features, tracking, team, etc.) */
-    .card-hover-lift {
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-    }
-
-    .card-hover-lift:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 18px 36px rgba(15, 23, 42, 0.18),
-        0 8px 20px rgba(15, 23, 42, 0.35);
-    }
-
-    /* Soft button lift */
-    .btn-soft-lift {
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
-    }
-
-    .btn-soft-lift:hover {
-      transform: translateY(-1px) scale(1.02);
-      box-shadow:
-        0 14px 30px rgba(15, 23, 42, 0.22);
-    }
-
-    .btn-soft-lift:active {
-      transform: translateY(0) scale(0.98);
-      box-shadow:
-        0 8px 18px rgba(15, 23, 42, 0.25);
-    }
-
     /* Team card avatar + emoji badge */
     .team-card {
       position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 18px 46px rgba(15, 23, 42, 0.35);
+      border-color: rgba(212, 175, 55, 0.7);
     }
 
     .avatar-wrap {
@@ -394,26 +307,27 @@
       justify-content: center;
     }
 
-    .avatar-glow {
+    .avatar-glow::before {
+      content: "";
       position: absolute;
-      inset: -12px;
+      inset: -7px;
       border-radius: 999px;
-      background:
-        conic-gradient(
-          from 220deg,
-          rgba(3, 46, 107, 0),
-          rgba(3, 46, 107, 0.3),
-          rgba(214, 40, 41, 0.45),
-          rgba(251, 191, 36, 0.4),
-          rgba(3, 46, 107, 0.45)
-        );
+      background: conic-gradient(
+        from 0deg,
+        rgba(3, 46, 107, 0.2),
+        rgba(214, 40, 41, 0.35),
+        rgba(251, 191, 36, 0.4),
+        rgba(3, 46, 107, 0.25),
+        rgba(3, 46, 107, 0.2)
+      );
       filter: blur(14px);
-      opacity: 0.9;
-      pointer-events: none;
+      opacity: 0.85;
       z-index: 0;
+      pointer-events: none;
+      animation: avatar-glow-spin 16s linear infinite;
     }
 
-    .avatar-photo {
+    .avatar-img-shell {
       position: relative;
       z-index: 1;
     }
@@ -436,7 +350,12 @@
       z-index: 10;
     }
 
-    /* Hide scrollbars on small nav row / chips */
+    @keyframes avatar-glow-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Hide scrollbars on small nav row */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -484,6 +403,25 @@
       opacity: 0.8;
     }
 
+    /* Gentle floating animations */
+    @keyframes float-soft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes float-soft-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .float-soft {
+      animation: float-soft 9s ease-in-out infinite;
+    }
+
+    .float-soft-slow {
+      animation: float-soft-slow 14s ease-in-out infinite;
+    }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -504,29 +442,36 @@
   <div class="header-blur bg-white/80 dark:bg-slate-950/80">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-14">
-        <!-- Logo / brand -->
-        <div class="brand-pill">
-          <span class="brand-pill-icon">📦</span>
-          <span class="brand-pill-text">
-            DLTS Cambodia
-          </span>
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+          <div class="brand-pill">
+            <span class="text-xl">📦</span>
+            <span class="font-semibold tracking-tight text-[11px] sm:text-xs md:text-sm uppercase">
+              DLTS Cambodia
+            </span>
+          </div>
         </div>
 
         <!-- Desktop nav -->
-        <nav class="hidden md:flex items-center gap-4 text-xs uppercase tracking-wide">
-          <button data-scroll-target="about" class="nav-link text-slate-700 dark:text-slate-100">
+        <nav class="hidden md:flex items-center gap-4 text-[11px] uppercase tracking-[0.22em]">
+          <button data-scroll-target="about"
+                  class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors">
             About
           </button>
-          <button data-scroll-target="features" class="nav-link text-slate-700 dark:text-slate-100">
+          <button data-scroll-target="features"
+                  class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors">
             Why
           </button>
-          <button data-scroll-target="flow" class="nav-link text-slate-700 dark:text-slate-100">
+          <button data-scroll-target="flow"
+                  class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors">
             Flow
           </button>
-          <button data-scroll-target="our-team" class="nav-link text-slate-700 dark:text-slate-100">
+          <button data-scroll-target="our-team"
+                  class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors">
             Team
           </button>
-          <button data-scroll-target="presentation" class="nav-link text-slate-700 dark:text-slate-100">
+          <button data-scroll-target="presentation"
+                  class="nav-link px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors">
             Presentation
           </button>
         </nav>
@@ -536,7 +481,7 @@
           <!-- Language toggle -->
           <button
             id="lang-toggle"
-            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 btn-soft-lift">
+            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 hover:shadow-md hover:-translate-y-[1px] transition">
             <span class="text-xs">🌐</span>
             <span id="lang-label">EN</span>
           </button>
@@ -544,7 +489,7 @@
           <!-- Theme toggle -->
           <button
             id="theme-toggle"
-            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 btn-soft-lift"
+            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 hover:shadow-md hover:-translate-y-[1px] transition"
             aria-label="Toggle dark mode">
             <span id="theme-toggle-icon" class="text-xs">🌙</span>
             <span class="hidden sm:inline">Mode</span>
@@ -554,19 +499,24 @@
 
       <!-- Mobile nav row -->
       <div class="md:hidden flex items-center gap-2 pb-2 text-[11px] uppercase tracking-wide overflow-x-auto no-scrollbar">
-        <button data-scroll-target="about" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
+        <button data-scroll-target="about"
+                class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           About
         </button>
-        <button data-scroll-target="features" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
+        <button data-scroll-target="features"
+                class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Why
         </button>
-        <button data-scroll-target="flow" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
+        <button data-scroll-target="flow"
+                class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Flow
         </button>
-        <button data-scroll-target="our-team" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
+        <button data-scroll-target="our-team"
+                class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Team
         </button>
-        <button data-scroll-target="presentation" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
+        <button data-scroll-target="presentation"
+                class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100">
           Presentation
         </button>
       </div>
@@ -600,7 +550,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <!-- Left: text -->
-        <div class="space-y-4 reveal-on-scroll">
+        <div class="space-y-4 sm:space-y-5 lg:space-y-6 reveal-on-scroll">
           <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest bg-white/10 rounded-full px-3 py-1 border border-white/20">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span
@@ -613,32 +563,34 @@
 
           <h1
             id="main-title"
-            class="font-extrabold leading-tight"
+            class="max-w-3xl text-[1.9rem] sm:text-[2.35rem] md:text-[2.7rem] lg:text-[3rem] xl:text-[3.2rem] font-bold leading-[1.35] sm:leading-[1.3] lg:leading-[1.25] tracking-tight"
             data-en="Domestic Logistics Tracking Management System – Cambodia"
             data-kh="ប្រព័ន្ធគ្រប់គ្រងតាមដានដឹកជញ្ជូនក្នុងប្រទេស – កម្ពុជា"
           >
             Domestic Logistics Tracking Management System – Cambodia
           </h1>
 
-          <p
-            id="subtitle"
-            class="text-base sm:text-lg md:text-xl text-slate-100/90"
-          >
-            Web-based shipment tracking with status updates and optional GPS.
-          </p>
+          <div class="space-y-2 sm:space-y-2.5">
+            <p
+              id="subtitle"
+              class="text-sm sm:text-base md:text-lg text-slate-100/90"
+            >
+              Web-based shipment tracking with status updates and optional GPS.
+            </p>
 
-          <p
-            id="khmer-subtitle"
-            class="text-base sm:text-lg text-slate-100/90"
-          >
-            ប្រព័ន្ធតាមដានការដឹកជញ្ជូនក្នុងប្រទេស ប្រើស្ថានភាព និង GPS ជាជម្រើស
-          </p>
+            <p
+              id="khmer-subtitle"
+              class="text-sm sm:text-base md:text-lg text-slate-100/90"
+            >
+              ប្រព័ន្ធតាមដានការដឹកជញ្ជូនក្នុងប្រទេស ប្រើស្ថានភាព និង GPS ជាជម្រើស
+            </p>
+          </div>
 
           <p
             id="hero-description"
-            class="text-sm sm:text-base text-slate-100/90 max-w-xl leading-relaxed"
+            class="text-sm sm:text-base md:text-[0.98rem] text-slate-100/90 max-w-xl leading-relaxed"
             data-en="This system helps customers track their packages between branches inside Cambodia. Branch staff create shipments, drivers update status along the route, and customers check their shipment status online using a simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network."
-            data-kh="ប្រព័ន្ធនេះជួយអតិថិជនតាមដានកញ្ចប់របស់ខ្លួនរវាងសាខានានាក្នុងប្រទេសកម្ពុជា។ បុគ្គលិកសាខាបង្កើតការដឹកជញ្ជូន អ្នកបើកបរធ្វើបច្ចុប្បន្នភាពស្ថានភាពក្នុងអំឡុងដំណើរ ហើយអតិថិជនអាចពិនិត្យស្ថានភាពកញ្ចប់តាមអ៊ិនធរណេទដោយប្រើលេខតាមដានសាមញ្ញ។ រចនាឡើងសម្រាប់ភាពថ្លែងច្បាស់ និងងាយស្រួលប្រើសម្រាប់ប្រព័ន្ធដឹកជញ្ជូនក្នុងប្រទេសកម្ពុជា។"
+            data-kh="ប្រព័ន្ធនេះជួយអតិថិជនតាមដានកញ្ចប់របស់ខ្លួនរវាងសាខានានាក្នុងប្រទេសកម្ពុជា។ បុគ្គលិកសាខាបង្កើតការដឹកជញ្ជូន អ្នកបើកបរធ្វើបច្ចុប្បន្នភាពស្ថានភាពក្នុងអំឡុងដំណើរ ហើយអតិថិជនអាចពិនិត្យស្ថានភាពកញ្ចប់តាមអ៊ិនធര്ណិតដោយប្រើលេខតាមដានសាមញ្ញ។ រចនាឡើងសម្រាប់ភាពថ្លែងច្បាស់ និងងាយស្រួលប្រើសម្រាប់ប្រព័ន្ធដឹកជញ្ជូនក្នុងប្រទេសកម្ពុជា។"
           >
             This system helps customers track their packages between branches inside Cambodia. Branch staff create
             shipments, drivers update status along the route, and customers check their shipment status online using a
@@ -648,14 +600,14 @@
           <div class="flex flex-wrap gap-3 pt-2">
             <button
               data-simulate-journey
-              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 btn-soft-lift"
+              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 hover:-translate-y-[1px] hover:shadow-xl transition"
             >
               <span>▶</span>
               <span>Simulate Journey</span>
             </button>
             <button
               data-scroll-target="features"
-              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 btn-soft-lift"
+              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 hover:-translate-y-[1px] transition"
             >
               View Features
               <span>→</span>
@@ -670,7 +622,7 @@
 
         <!-- Right: tracking demo card -->
         <div class="reveal-on-scroll">
-          <div class="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6 hero-float">
+          <div class="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6 float-soft">
             <div class="flex items-center justify-between gap-3 mb-4">
               <div>
                 <p class="text-xs uppercase tracking-[0.18em] text-slate-100/70">Demo Tracking</p>
@@ -696,7 +648,7 @@
                 />
                 <button
                   id="tracking-demo-btn"
-                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 btn-soft-lift"
+                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 hover:-translate-y-[1px] hover:shadow-xl transition"
                 >
                   Track Demo
                 </button>
@@ -765,7 +717,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 card-hover-lift">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover:-translate-y-1 hover:shadow-xl transition">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Branch-to-Branch Focus
           </h3>
@@ -775,7 +727,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 card-hover-lift">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 hover:-translate-y-1 hover:shadow-xl transition">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Clear Roles &amp; Responsibilities
           </h3>
@@ -787,7 +739,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto mt-8 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7 card-hover-lift">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="grid sm:grid-cols-2 gap-5">
             <div class="flex items-start gap-3">
               <span class="text-3xl">📍</span>
@@ -837,7 +789,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Problems -->
-        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
+        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">⚠️</span>
             <h3 class="text-xl font-bold text-cambodia-red">
@@ -865,7 +817,7 @@
         </div>
 
         <!-- Solution -->
-        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
+        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">✅</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -909,8 +861,7 @@
         </h2>
         <button
           data-simulate-journey
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 btn-soft-lift"
-        >
+          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 hover:-translate-y-[1px] hover:shadow-xl transition">
           <span>▶</span>
           <span>Simulate Journey</span>
         </button>
@@ -919,7 +870,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
         <!-- Step 1 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="1"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -935,7 +886,7 @@
 
         <!-- Step 2 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="2"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -951,7 +902,7 @@
 
         <!-- Step 3 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="3"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -967,7 +918,7 @@
 
         <!-- Step 4 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="4"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -983,7 +934,7 @@
 
         <!-- Step 5 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="5"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -999,7 +950,7 @@
 
         <!-- Step 6 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm p-5 flex flex-col items-center text-center"
           data-step="6"
         >
           <div class="w-12 h-12 rounded-full bg-green-100 text-emerald-700 flex items-center justify-center mb-3">
@@ -1014,69 +965,66 @@
         </article>
       </div>
 
-      <!-- Mini timeline desktop -->
-      <div class="mt-10 hidden sm:flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300 reveal-on-scroll">
-        <span class="flex items-center gap-1">
-          <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
-          Drop Off
-        </span>
-        <span>→</span>
-        <span class="flex items-center gap-1">
-          <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">2</span>
-          Registration
-        </span>
-        <span>→</span>
-        <span class="flex items-center gap-1">
-          <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">3</span>
-          At Origin
-        </span>
-        <span>→</span>
-        <span class="flex items-center gap-1">
-          <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">4</span>
-          Assignment
-        </span>
-        <span>→</span>
-        <span class="flex items-center gap-1">
-          <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">5</span>
-          Arrival
-        </span>
-        <span>→</span>
-        <span class="flex items-center gap-1">
-          <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px]">6</span>
-          Delivered
-        </span>
-      </div>
-
-      <!-- Mini timeline mobile as scrollable chips -->
-      <div class="mt-8 sm:hidden reveal-on-scroll">
-        <div class="flex items-center justify-between mb-2 text-[11px] text-slate-500 dark:text-slate-400">
-          <span>Journey steps</span>
-          <span class="italic">Swipe →</span>
+      <!-- Mini timeline -->
+      <div class="mt-10 reveal-on-scroll">
+        <!-- Desktop horizontal row -->
+        <div class="hidden md:flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300">
+          <span class="flex items-center gap-1">
+            <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
+            Drop Off
+          </span>
+          <span>→</span>
+          <span class="flex items-center gap-1">
+            <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">2</span>
+            Registration
+          </span>
+          <span>→</span>
+          <span class="flex items-center gap-1">
+            <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">3</span>
+            At Origin
+          </span>
+          <span>→</span>
+          <span class="flex items-center gap-1">
+            <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">4</span>
+            Assignment
+          </span>
+          <span>→</span>
+          <span class="flex items-center gap-1">
+            <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">5</span>
+            Arrival
+          </span>
+          <span>→</span>
+          <span class="flex items-center gap-1">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px]">6</span>
+            Delivered
+          </span>
         </div>
-        <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
-          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-blue">1</span>
-            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Drop Off</span>
+
+        <!-- Mobile vertical chips -->
+        <div class="md:hidden max-w-xs mx-auto space-y-2 text-xs text-slate-700 dark:text-slate-200">
+          <div class="flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 shadow-sm px-3 py-1.5">
+            <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
+            <span>Drop Off</span>
           </div>
-          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-red">2</span>
-            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Registration</span>
+          <div class="flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 shadow-sm px-3 py-1.5">
+            <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">2</span>
+            <span>Registration</span>
           </div>
-          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-blue">3</span>
-            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">At Origin</span>
+          <div class="flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 shadow-sm px-3 py-1.5">
+            <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">3</span>
+            <span>At Origin</span>
           </div>
-          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-red">4</span>
-            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Assignment</span>
+          <div class="flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 shadow-sm px-3 py-1.5">
+            <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">4</span>
+            <span>Assignment</span>
           </div>
-          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-blue">5</span>
-            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Arrival</span>
+          <div class="flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 shadow-sm px-3 py-1.5">
+            <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">5</span>
+            <span>Arrival</span>
           </div>
-          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-emerald-600">6</span>
-            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Delivered</span>
+          <div class="flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 shadow-sm px-3 py-1.5">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px]">6</span>
+            <span>Delivered</span>
           </div>
         </div>
       </div>
@@ -1098,7 +1046,7 @@
 
       <div class="grid md:grid-cols-3 gap-8 reveal-on-scroll">
         <!-- Admin/Cashier -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="text-4xl text-center mb-3">👨‍💼</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Admin / Cashier
@@ -1124,7 +1072,7 @@
         </article>
 
         <!-- Driver -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="text-4xl text-center mb-3">🚚</div>
           <h3 class="text-xl font-bold text-cambodia-red text-center mb-4">
             Drivers
@@ -1146,7 +1094,7 @@
         </article>
 
         <!-- Customers -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="text-4xl text-center mb-3">👥</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Customers
@@ -1185,7 +1133,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Status-based -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">📋</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -1229,7 +1177,7 @@
         </article>
 
         <!-- GPS -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 hover:-translate-y-1 hover:shadow-2xl transition">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">🛰️</span>
             <h3 class="text-xl font-bold text-cambodia-red dark:text-amber-200">
@@ -1241,7 +1189,7 @@
             displays it next to the shipment status, with a simple pin over a Cambodia outline.
           </p>
           <div class="rounded-2xl bg-gradient-to-br from-red-50 to-amber-50 dark:from-slate-900 dark:via-slate-900 dark:to-amber-900/30 p-5 border border-red-100 dark:border-slate-700">
-            <div class="relative rounded-xl bg-white dark:bg-slate-900 shadow-lg p-4">
+            <div class="relative rounded-xl bg-white dark:bg-slate-900 shadow-lg p-4 float-soft-slow">
               <svg width="100%" height="180" viewBox="0 0 300 180">
                 <path
                   d="M50,80 L100,60 L150,50 L200,60 L250,80 L240,110 L200,130 L150,140 L100,130 L60,110 Z"
@@ -1302,7 +1250,7 @@
         </div>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll card-hover-lift">
+      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-lg font-bold text-cambodia-blue dark:text-amber-200 mb-3 flex items-center gap-2">
@@ -1387,11 +1335,10 @@
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal-on-scroll">
         <!-- Hun Sokheng -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 0s;">
-              <div class="avatar-glow"></div>
-              <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+            <div class="avatar-wrap avatar-glow float-soft-slow">
+              <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">💻</div>
@@ -1419,11 +1366,10 @@
         </article>
 
         <!-- Say Koemsor -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 0.6s;">
-              <div class="avatar-glow"></div>
-              <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+            <div class="avatar-wrap avatar-glow float-soft-slow">
+              <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">🎨</div>
@@ -1451,11 +1397,10 @@
         </article>
 
         <!-- Kouk Bronith -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 1.2s;">
-              <div class="avatar-glow"></div>
-              <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+            <div class="avatar-wrap avatar-glow float-soft-slow">
+              <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">🗄️</div>
@@ -1483,11 +1428,10 @@
         </article>
 
         <!-- Chun Chiva -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 1.8s;">
-              <div class="avatar-glow"></div>
-              <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
+            <div class="avatar-wrap avatar-glow float-soft-slow">
+              <div class="avatar-img-shell w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
               </div>
               <div class="team-emoji-badge">📑</div>
@@ -1538,13 +1482,13 @@
           href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 btn-soft-lift"
+          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 hover:-translate-y-[1px] hover:shadow-2xl transition"
         >
           🎥 Open Canva Presentation
         </a>
       </div>
 
-      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll card-hover-lift">
+      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll">
         <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-md bg-slate-200 aspect-video">
           <img
             src="presentation_cover.jpg"
@@ -1587,7 +1531,7 @@
         </h2>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll card-hover-lift">
+      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="flex items-start gap-3">
             <span class="text-3xl">📱</span>
@@ -1656,7 +1600,7 @@
           Final Year Project 2026
         </p>
       </div>
-      <div class="flex items-center justify-center gap-4 pt-6 border-t border-slate-700">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 border-t border-slate-700">
         <div class="w-16 h-10 rounded-lg overflow-hidden border border-slate-600 shadow-md">
           <img src="https://flagcdn.com/w320/kh.png" alt="Cambodia Flag" class="w-full h-full object-cover" />
         </div>
@@ -1748,281 +1692,278 @@
    * Page interactions
    * ------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
-    const htmlEl = document.documentElement;
+    try {
+      const htmlEl = document.documentElement;
 
-    /* Scroll progress */
-    const progressBar = document.getElementById("scroll-progress");
-    const updateScrollProgress = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.setProperty("--scroll-progress", progress.toFixed(1) + "%");
-    };
-    window.addEventListener("scroll", updateScrollProgress);
-    updateScrollProgress();
+      /* Scroll progress */
+      const progressBar = document.getElementById("scroll-progress");
+      const updateScrollProgress = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        if (progressBar) {
+          progressBar.style.setProperty("--scroll-progress", progress.toFixed(1) + "%");
+        }
+      };
+      window.addEventListener("scroll", updateScrollProgress);
+      updateScrollProgress();
 
-    /* Smooth scroll helper */
-    function scrollToId(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      /* Smooth scroll helper */
+      function scrollToId(id) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }
-    }
 
-    /* data-scroll-target elements */
-    document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const target = btn.getAttribute("data-scroll-target");
-        if (target) scrollToId(target);
-      });
-    });
-
-    /* Back to top */
-    const backToTopBtn = document.getElementById("back-to-top");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 400) {
-        backToTopBtn.classList.add("show");
-      } else {
-        backToTopBtn.classList.remove("show");
-      }
-    });
-    if (backToTopBtn) {
-      backToTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    }
-
-    /* Reveal on scroll (fade in once and stay visible) */
-    const revealEls = document.querySelectorAll(".reveal-on-scroll");
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            observer.unobserve(entry.target);
-          }
+      /* data-scroll-target elements */
+      document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = btn.getAttribute("data-scroll-target");
+          if (target) scrollToId(target);
         });
-      },
-      { threshold: 0.18 }
-    );
-    revealEls.forEach((el) => revealObserver.observe(el));
-
-    /* Side dots scroll spy + nav active state */
-    const dots = document.querySelectorAll(".scroll-dot");
-    const sections = document.querySelectorAll("section[id]");
-    const navButtons = document.querySelectorAll("header [data-scroll-target]");
-
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-
-            dots.forEach((dot) => {
-              dot.classList.toggle("scroll-dot-active", dot.getAttribute("data-dot-target") === id);
-            });
-
-            navButtons.forEach((btn) => {
-              btn.classList.toggle("nav-link-active", btn.getAttribute("data-scroll-target") === id);
-            });
-          }
-        });
-      },
-      { threshold: 0.45 }
-    );
-    sections.forEach((sec) => sectionObserver.observe(sec));
-
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        const target = dot.getAttribute("data-dot-target");
-        if (target) scrollToId(target);
       });
-    });
 
-    /* Tracking demo */
-    const trackingInput = document.getElementById("tracking-code-input");
-    const trackingBtn = document.getElementById("tracking-demo-btn");
-    const trackingCard = document.getElementById("tracking-result-card");
-    const trackingText = document.getElementById("tracking-result-text");
-    const trackingSub = document.getElementById("tracking-result-sub");
-    const trackingDot = document.getElementById("tracking-status-dot");
-    const trackingLabel = document.getElementById("tracking-status-label");
+      /* Back to top */
+      const backToTopBtn = document.getElementById("back-to-top");
+      window.addEventListener("scroll", () => {
+        if (!backToTopBtn) return;
+        if (window.scrollY > 400) {
+          backToTopBtn.classList.add("show");
+        } else {
+          backToTopBtn.classList.remove("show");
+        }
+      });
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
 
-    function simulateTracking() {
-      const raw = (trackingInput.value || "").trim() || "DLTS-001234";
-      trackingInput.value = raw;
-
-      const lastChar = raw.replace(/\D/g, "").slice(-1) || "4";
-      let status = "In Transit";
-      let sub = "Status: In Transit • Updated just now";
-      let color = "bg-amber-400";
-
-      if (["0", "1", "2"].includes(lastChar)) {
-        status = "At Origin Branch";
-        sub = "Status: At Origin Branch • Waiting to depart";
-        color = "bg-blue-400";
-      } else if (["3", "4"].includes(lastChar)) {
-        status = "In Transit";
-        sub = "Status: In Transit • Between branches";
-        color = "bg-amber-400";
-      } else if (["5", "6", "7"].includes(lastChar)) {
-        status = "Arrived at Destination";
-        sub = "Status: Arrived at Destination Branch • Ready for pickup";
-        color = "bg-emerald-400";
+      /* Reveal on scroll (fade-in once) */
+      const revealEls = document.querySelectorAll(".reveal-on-scroll");
+      if ("IntersectionObserver" in window && revealEls.length) {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("reveal-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.18 }
+        );
+        revealEls.forEach((el) => revealObserver.observe(el));
       } else {
-        status = "Delivered";
-        sub = "Status: Delivered • Package collected by receiver";
-        color = "bg-emerald-500";
+        revealEls.forEach((el) => el.classList.add("reveal-visible"));
       }
 
-      if (trackingText) {
-        trackingText.textContent = `${raw} • ${status}`;
+      /* Side dots scroll spy */
+      const dots = document.querySelectorAll(".scroll-dot");
+      const sections = document.querySelectorAll("section[id]");
+      if ("IntersectionObserver" in window && dots.length && sections.length) {
+        const sectionObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = entry.target.id;
+                dots.forEach((dot) => {
+                  dot.classList.toggle("scroll-dot-active", dot.getAttribute("data-dot-target") === id);
+                });
+              }
+            });
+          },
+          { threshold: 0.45 }
+        );
+        sections.forEach((sec) => sectionObserver.observe(sec));
       }
-      if (trackingSub) {
-        trackingSub.textContent = sub;
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const target = dot.getAttribute("data-dot-target");
+          if (target) scrollToId(target);
+        });
+      });
+
+      /* Tracking demo */
+      const trackingInput = document.getElementById("tracking-code-input");
+      const trackingBtn = document.getElementById("tracking-demo-btn");
+      const trackingCard = document.getElementById("tracking-result-card");
+      const trackingText = document.getElementById("tracking-result-text");
+      const trackingSub = document.getElementById("tracking-result-sub");
+      const trackingDot = document.getElementById("tracking-status-dot");
+      const trackingLabel = document.getElementById("tracking-status-label");
+
+      function simulateTracking() {
+        if (!trackingInput) return;
+        const raw = (trackingInput.value || "").trim() || "DLTS-001234";
+        trackingInput.value = raw;
+
+        const lastChar = raw.replace(/\D/g, "").slice(-1) || "4";
+        let status = "In Transit";
+        let sub = "Status: In Transit • Updated just now";
+        let color = "bg-amber-400";
+
+        if (["0", "1", "2"].includes(lastChar)) {
+          status = "At Origin Branch";
+          sub = "Status: At Origin Branch • Waiting to depart";
+          color = "bg-blue-400";
+        } else if (["3", "4"].includes(lastChar)) {
+          status = "In Transit";
+          sub = "Status: In Transit • Between branches";
+          color = "bg-amber-400";
+        } else if (["5", "6", "7"].includes(lastChar)) {
+          status = "Arrived at Destination";
+          sub = "Status: Arrived at Destination Branch • Ready for pickup";
+          color = "bg-emerald-400";
+        } else {
+          status = "Delivered";
+          sub = "Status: Delivered • Package collected by receiver";
+          color = "bg-emerald-500";
+        }
+
+        if (trackingText) trackingText.textContent = `${raw} • ${status}`;
+        if (trackingSub) trackingSub.textContent = sub;
+        if (trackingLabel) trackingLabel.textContent = status;
+        if (trackingDot) {
+          trackingDot.className = "w-2 h-2 rounded-full animate-pulse " + color;
+        }
+        if (trackingCard && !trackingCard.classList.contains("tracking-result-visible")) {
+          trackingCard.classList.add("tracking-result-visible");
+        }
+        trackingInput.blur();
       }
-      if (trackingLabel) {
-        trackingLabel.textContent = status;
+
+      if (trackingBtn && trackingInput) {
+        trackingBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          simulateTracking();
+        });
       }
-      if (trackingDot) {
-        trackingDot.className = "w-2 h-2 rounded-full animate-pulse " + color;
-      }
-      if (trackingCard && !trackingCard.classList.contains("tracking-result-visible")) {
+      if (trackingCard) {
         trackingCard.classList.add("tracking-result-visible");
       }
 
-      trackingInput.blur();
-    }
+      /* Journey simulation */
+      const journeySteps = Array.from(document.querySelectorAll(".journey-step"));
+      const journeyButtons = document.querySelectorAll("[data-simulate-journey]");
+      let journeyTimeouts = [];
 
-    if (trackingBtn && trackingInput) {
-      trackingBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        simulateTracking();
-      });
-    }
-    if (trackingCard) {
-      trackingCard.classList.add("tracking-result-visible");
-    }
+      function clearJourneyHighlight() {
+        journeyTimeouts.forEach((t) => clearTimeout(t));
+        journeyTimeouts = [];
+        journeySteps.forEach((step) => step.classList.remove("active-step"));
+      }
 
-    /* Journey simulation */
-    const journeySteps = Array.from(document.querySelectorAll(".journey-step"));
-    const journeyButtons = document.querySelectorAll("[data-simulate-journey]");
-    let journeyTimeouts = [];
-    let journeyPlayedOnce = false;
-
-    function clearJourneyHighlight() {
-      journeyTimeouts.forEach((t) => clearTimeout(t));
-      journeyTimeouts = [];
-      journeySteps.forEach((step) => step.classList.remove("active-step"));
-    }
-
-    function startJourneySimulation(scrollIntoViewFirst = true) {
-      clearJourneyHighlight();
-      if (scrollIntoViewFirst) {
+      function startJourneySimulation() {
+        if (!journeySteps.length) return;
+        clearJourneyHighlight();
         const flowSection = document.getElementById("flow");
         if (flowSection) {
           flowSection.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-      }
 
-      let delay = 250;
-      journeySteps.forEach((step) => {
-        const t = setTimeout(() => {
+        let delay = 250;
+        journeySteps.forEach((step) => {
+          const t = setTimeout(() => {
+            journeySteps.forEach((s) => s.classList.remove("active-step"));
+            step.classList.add("active-step");
+          }, delay);
+          journeyTimeouts.push(t);
+          delay += 700;
+        });
+
+        const endTimeout = setTimeout(() => {
           journeySteps.forEach((s) => s.classList.remove("active-step"));
-          step.classList.add("active-step");
-          step.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, delay);
-        journeyTimeouts.push(t);
-        delay += 700;
-      });
-
-      const endTimeout = setTimeout(() => {
-        journeySteps.forEach((s) => s.classList.remove("active-step"));
-      }, delay + 900);
-      journeyTimeouts.push(endTimeout);
-    }
-
-    journeyButtons.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        startJourneySimulation(true);
-      });
-    });
-
-    /* Auto-play journey once when Flow section first enters view */
-    const flowSection = document.getElementById("flow");
-    if (flowSection && typeof IntersectionObserver !== "undefined") {
-      const flowObserver = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && !journeyPlayedOnce) {
-              journeyPlayedOnce = true;
-              startJourneySimulation(false);
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.4 }
-      );
-      flowObserver.observe(flowSection);
-    }
-
-    /* Language toggle (simple EN / KH) */
-    const langToggle = document.getElementById("lang-toggle");
-    const langLabel = document.getElementById("lang-label");
-
-    function applyLanguage(lang) {
-      document.querySelectorAll("[data-en][data-kh]").forEach((el) => {
-        const text = lang === "kh" ? el.getAttribute("data-kh") : el.getAttribute("data-en");
-        if (text) el.textContent = text;
-      });
-      if (langLabel) {
-        langLabel.textContent = lang === "kh" ? "ខ្មែរ" : "EN";
+        }, delay + 900);
+        journeyTimeouts.push(endTimeout);
       }
-      localStorage.setItem("dlts-lang", lang);
 
-      // adjust HTML lang + class for Khmer typography
-      htmlEl.setAttribute("lang", lang === "kh" ? "km" : "en");
-      htmlEl.classList.toggle("lang-kh", lang === "kh");
-    }
-
-    const storedLang = localStorage.getItem("dlts-lang") || "en";
-    applyLanguage(storedLang);
-    let currentLang = storedLang;
-
-    if (langToggle) {
-      langToggle.addEventListener("click", () => {
-        currentLang = currentLang === "en" ? "kh" : "en";
-        applyLanguage(currentLang);
+      journeyButtons.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          startJourneySimulation();
+        });
       });
-    }
 
-    /* Dark / Light theme toggle using Tailwind's darkMode: 'class' */
-    const themeToggle = document.getElementById("theme-toggle");
-    const themeIcon = document.getElementById("theme-toggle-icon");
-
-    function applyTheme(theme) {
-      if (theme === "dark") {
-        htmlEl.classList.add("dark");
-        if (themeIcon) themeIcon.textContent = "☀️";
-      } else {
-        htmlEl.classList.remove("dark");
-        if (themeIcon) themeIcon.textContent = "🌙";
+      /* Auto-run journey when flow first enters view */
+      const flowSection = document.getElementById("flow");
+      if ("IntersectionObserver" in window && flowSection && journeySteps.length) {
+        let hasAutoRun = false;
+        const flowObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !hasAutoRun) {
+                hasAutoRun = true;
+                startJourneySimulation();
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+        flowObserver.observe(flowSection);
       }
-      localStorage.setItem("dlts-theme", theme);
-    }
 
-    let savedTheme = localStorage.getItem("dlts-theme");
-    if (!savedTheme) {
-      savedTheme = "light";
-    }
-    applyTheme(savedTheme);
+      /* Language toggle */
+      const langToggle = document.getElementById("lang-toggle");
+      const langLabel = document.getElementById("lang-label");
 
-    if (themeToggle) {
-      themeToggle.addEventListener("click", () => {
-        savedTheme = savedTheme === "dark" ? "light" : "dark";
-        applyTheme(savedTheme);
+      function applyLanguage(lang) {
+        document.querySelectorAll("[data-en][data-kh]").forEach((el) => {
+          const text = lang === "kh" ? el.getAttribute("data-kh") : el.getAttribute("data-en");
+          if (text) el.textContent = text;
+        });
+        if (langLabel) {
+          langLabel.textContent = lang === "kh" ? "ខ្មែរ" : "EN";
+        }
+        localStorage.setItem("dlts-lang", lang);
+      }
+
+      const storedLang = localStorage.getItem("dlts-lang") || "en";
+      applyLanguage(storedLang);
+      let currentLang = storedLang;
+
+      if (langToggle) {
+        langToggle.addEventListener("click", () => {
+          currentLang = currentLang === "en" ? "kh" : "en";
+          applyLanguage(currentLang);
+        });
+      }
+
+      /* Dark / Light theme toggle using Tailwind's darkMode: 'class' */
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-toggle-icon");
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          htmlEl.classList.add("dark");
+          if (themeIcon) themeIcon.textContent = "☀️";
+        } else {
+          htmlEl.classList.remove("dark");
+          if (themeIcon) themeIcon.textContent = "🌙";
+        }
+        localStorage.setItem("dlts-theme", theme);
+      }
+
+      let savedTheme = localStorage.getItem("dlts-theme");
+      if (!savedTheme) {
+        savedTheme = "light";
+      }
+      applyTheme(savedTheme);
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          savedTheme = savedTheme === "dark" ? "light" : "dark";
+          applyTheme(savedTheme);
+        });
+      }
+    } catch (err) {
+      console.error("DLTS page init error:", err);
+      // Fallback: make sure content is visible even if JS fails
+      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+        el.classList.add("reveal-visible");
       });
     }
   });
