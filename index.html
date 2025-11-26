@@ -29,6 +29,109 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
     }
 
+    /* Brand pill */
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.98), rgba(241,245,249,0.98));
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.12),
+        0 0 0 1px rgba(148, 163, 184, 0.7);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .dark .brand-pill {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(15,23,42,0.98), rgba(15,23,42,0.98));
+      border-color: rgba(37, 99, 235, 0.95);
+      box-shadow:
+        0 16px 32px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(30, 64, 175, 0.85);
+    }
+
+    .brand-pill:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 18px 36px rgba(15, 23, 42, 0.25),
+        0 0 0 1px rgba(30, 64, 175, 0.95);
+    }
+
+    .brand-pill-icon {
+      font-size: 1.1rem;
+    }
+
+    .brand-pill-text {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: #020617;
+    }
+
+    .dark .brand-pill-text {
+      color: #e5e7eb;
+    }
+
+    @media (min-width: 768px) {
+      .brand-pill-text {
+        font-size: 0.82rem;
+      }
+    }
+
+    /* Nav links */
+    .nav-link {
+      position: relative;
+      padding-inline: 0.45rem;
+      padding-block: 0.2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition:
+        color 0.2s ease,
+        transform 0.18s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      bottom: -0.18rem;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #032E6B, #D62829, #fbbf24);
+      transform: scaleX(0);
+      transform-origin: center;
+      opacity: 0;
+      transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .nav-link:hover {
+      transform: translateY(-1px);
+      color: #D62829;
+    }
+
+    .dark .nav-link:hover {
+      color: #facc15;
+    }
+
+    .nav-link:hover::after,
+    .nav-link-active::after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
     /* Scroll progress bar */
     #scroll-progress {
       position: fixed;
@@ -87,22 +190,36 @@
       mix-blend-mode: soft-light;
     }
 
-    /* HERO title & subtitle: responsive + breathable */
+    /* Hero main title spacing / Khmer-friendly line-height */
     #main-title {
-      font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3.2rem);
-      line-height: 1.2;
+      margin-top: 0.45rem;
+      margin-bottom: 0.85rem;
+      font-size: clamp(2rem, 3.8vw, 3.2rem);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
     }
 
-    #subtitle,
-    #khmer-subtitle {
-      line-height: 1.5;
-    }
-
-    @media (min-width: 768px) {
-      #subtitle,
-      #khmer-subtitle {
-        line-height: 1.6;
+    @media (max-width: 640px) {
+      #main-title {
+        font-size: clamp(1.8rem, 7vw, 2.4rem);
+        line-height: 1.32;
       }
+    }
+
+    html.lang-kh #main-title {
+      font-size: clamp(1.7rem, 5.6vw, 2.6rem);
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    #subtitle {
+      margin-top: 0.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    #khmer-subtitle {
+      margin-top: 0.15rem;
+      margin-bottom: 0.5rem;
     }
 
     /* Reveal on scroll */
@@ -150,8 +267,8 @@
     /* Back to top button */
     #back-to-top {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1.75rem;
+      right: 1.75rem;
       width: 3rem;
       height: 3rem;
       border-radius: 999px;
@@ -179,16 +296,16 @@
       pointer-events: auto;
     }
 
-    #back-to-top:hover {
-      box-shadow:
-        0 24px 50px rgba(15, 23, 42, 0.75),
-        0 0 0 1px rgba(248, 250, 252, 0.8);
-    }
-
-    /* Hide rocket on small screens to avoid overlap */
+    /* Smaller / safer placement on mobile */
     @media (max-width: 768px) {
       #back-to-top {
-        display: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        bottom: 0.9rem;
+        right: 0.9rem;
+        box-shadow:
+          0 12px 28px rgba(15, 23, 42, 0.6),
+          0 0 0 1px rgba(148, 163, 184, 0.7);
       }
     }
 
@@ -200,6 +317,22 @@
     @keyframes rocket-bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
+    }
+
+    /* Soft floating animation for hero card / avatars */
+    @keyframes float-soft {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .hero-float {
+      animation: float-soft 9s ease-in-out infinite;
+    }
+
+    .team-avatar-float {
+      animation: float-soft 11s ease-in-out infinite;
+      animation-delay: var(--avatar-delay, 0s);
     }
 
     /* Journey steps highlight */
@@ -220,6 +353,35 @@
       background-color: rgba(15, 23, 42, 0.96);
     }
 
+    /* Card hover lift (features, tracking, team, etc.) */
+    .card-hover-lift {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .card-hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 18px 36px rgba(15, 23, 42, 0.18),
+        0 8px 20px rgba(15, 23, 42, 0.35);
+    }
+
+    /* Soft button lift */
+    .btn-soft-lift {
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn-soft-lift:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.22);
+    }
+
+    .btn-soft-lift:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow:
+        0 8px 18px rgba(15, 23, 42, 0.25);
+    }
+
     /* Team card avatar + emoji badge */
     .team-card {
       position: relative;
@@ -232,21 +394,22 @@
       justify-content: center;
     }
 
-    /* GLOW behind avatar */
     .avatar-glow {
       position: absolute;
-      inset: -10px;
+      inset: -12px;
       border-radius: 999px;
       background:
         conic-gradient(
-          from 0deg,
-          rgba(3, 46, 107, 0.4),
-          rgba(214, 40, 41, 0.7),
-          rgba(212, 175, 55, 0.6),
-          rgba(3, 46, 107, 0.4)
+          from 220deg,
+          rgba(3, 46, 107, 0),
+          rgba(3, 46, 107, 0.3),
+          rgba(214, 40, 41, 0.45),
+          rgba(251, 191, 36, 0.4),
+          rgba(3, 46, 107, 0.45)
         );
       filter: blur(14px);
       opacity: 0.9;
+      pointer-events: none;
       z-index: 0;
     }
 
@@ -273,7 +436,7 @@
       z-index: 10;
     }
 
-    /* Hide scrollbars on small nav row */
+    /* Hide scrollbars on small nav row / chips */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -321,25 +484,6 @@
       opacity: 0.8;
     }
 
-    /* ALWAYS-PLAYING animations (soft) */
-    @keyframes float-soft {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    .float-soft {
-      animation: float-soft 7s ease-in-out infinite;
-    }
-
-    @keyframes float-avatar {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    .float-avatar {
-      animation: float-avatar 8s ease-in-out infinite;
-    }
-
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -360,44 +504,29 @@
   <div class="header-blur bg-white/80 dark:bg-slate-950/80">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-14">
-        <!-- Logo -->
-        <div class="flex items-center gap-2">
-          <span class="text-xl">📦</span>
-          <span class="font-semibold tracking-tight text-xs sm:text-sm md:text-base">
+        <!-- Logo / brand -->
+        <div class="brand-pill">
+          <span class="brand-pill-icon">📦</span>
+          <span class="brand-pill-text">
             DLTS Cambodia
           </span>
         </div>
 
         <!-- Desktop nav -->
         <nav class="hidden md:flex items-center gap-4 text-xs uppercase tracking-wide">
-          <button
-            data-scroll-target="about"
-            class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors duration-150 transform hover:-translate-y-0.5"
-          >
+          <button data-scroll-target="about" class="nav-link text-slate-700 dark:text-slate-100">
             About
           </button>
-          <button
-            data-scroll-target="features"
-            class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors duration-150 transform hover:-translate-y-0.5"
-          >
+          <button data-scroll-target="features" class="nav-link text-slate-700 dark:text-slate-100">
             Why
           </button>
-          <button
-            data-scroll-target="flow"
-            class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors duration-150 transform hover:-translate-y-0.5"
-          >
+          <button data-scroll-target="flow" class="nav-link text-slate-700 dark:text-slate-100">
             Flow
           </button>
-          <button
-            data-scroll-target="our-team"
-            class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors duration-150 transform hover:-translate-y-0.5"
-          >
+          <button data-scroll-target="our-team" class="nav-link text-slate-700 dark:text-slate-100">
             Team
           </button>
-          <button
-            data-scroll-target="presentation"
-            class="px-2 py-1 text-slate-700 dark:text-slate-100 hover:text-cambodia-red dark:hover:text-cambodia-red transition-colors duration-150 transform hover:-translate-y-0.5"
-          >
+          <button data-scroll-target="presentation" class="nav-link text-slate-700 dark:text-slate-100">
             Presentation
           </button>
         </nav>
@@ -407,8 +536,7 @@
           <!-- Language toggle -->
           <button
             id="lang-toggle"
-            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 transition-colors duration-150 hover:border-cambodia-blue hover:text-cambodia-blue"
-          >
+            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 btn-soft-lift">
             <span class="text-xs">🌐</span>
             <span id="lang-label">EN</span>
           </button>
@@ -416,9 +544,8 @@
           <!-- Theme toggle -->
           <button
             id="theme-toggle"
-            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 transition-colors duration-150 hover:border-cambodia-blue hover:text-cambodia-blue"
-            aria-label="Toggle dark mode"
-          >
+            class="inline-flex items-center gap-1.5 rounded-full border border-slate-300/80 dark:border-slate-600/80 bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-100 btn-soft-lift"
+            aria-label="Toggle dark mode">
             <span id="theme-toggle-icon" class="text-xs">🌙</span>
             <span class="hidden sm:inline">Mode</span>
           </button>
@@ -427,34 +554,19 @@
 
       <!-- Mobile nav row -->
       <div class="md:hidden flex items-center gap-2 pb-2 text-[11px] uppercase tracking-wide overflow-x-auto no-scrollbar">
-        <button
-          data-scroll-target="about"
-          class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 transition-transform duration-150 hover:-translate-y-0.5"
-        >
+        <button data-scroll-target="about" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
           About
         </button>
-        <button
-          data-scroll-target="features"
-          class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 transition-transform duration-150 hover:-translate-y-0.5"
-        >
+        <button data-scroll-target="features" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
           Why
         </button>
-        <button
-          data-scroll-target="flow"
-          class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 transition-transform duration-150 hover:-translate-y-0.5"
-        >
+        <button data-scroll-target="flow" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
           Flow
         </button>
-        <button
-          data-scroll-target="our-team"
-          class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 transition-transform duration-150 hover:-translate-y-0.5"
-        >
+        <button data-scroll-target="our-team" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
           Team
         </button>
-        <button
-          data-scroll-target="presentation"
-          class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 transition-transform duration-150 hover:-translate-y-0.5"
-        >
+        <button data-scroll-target="presentation" class="flex-shrink-0 px-3 py-1 rounded-full bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100 btn-soft-lift">
           Presentation
         </button>
       </div>
@@ -488,7 +600,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <!-- Left: text -->
-        <div class="space-y-5 sm:space-y-6 reveal-on-scroll">
+        <div class="space-y-4 reveal-on-scroll">
           <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest bg-white/10 rounded-full px-3 py-1 border border-white/20">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span
@@ -501,7 +613,7 @@
 
           <h1
             id="main-title"
-            class="font-bold leading-tight"
+            class="font-extrabold leading-tight"
             data-en="Domestic Logistics Tracking Management System – Cambodia"
             data-kh="ប្រព័ន្ធគ្រប់គ្រងតាមដានដឹកជញ្ជូនក្នុងប្រទេស – កម្ពុជា"
           >
@@ -526,7 +638,7 @@
             id="hero-description"
             class="text-sm sm:text-base text-slate-100/90 max-w-xl leading-relaxed"
             data-en="This system helps customers track their packages between branches inside Cambodia. Branch staff create shipments, drivers update status along the route, and customers check their shipment status online using a simple tracking code. Designed for transparency and ease of use across Cambodia's domestic logistics network."
-            data-kh="ប្រព័ន្ធនេះជួយអតិថិជនតាមដានកញ្ចប់របស់ខ្លួនរវាងសាខានានាក្នុងប្រទេសកម្ពុជា។ បុគ្គលិកសាខាបង្កើតការដឹកជញ្ជូន អ្នកបើកបរធ្វើបច្ចុប្បន្នភាពស្ថានភាពក្នុងអំឡុងដំណើរ ហើយអតិថិជនអាចពិនិត្យស្ថានភាពកញ្ចប់តាមអ៊ិនធര്ណិតដោយប្រើលេខតាមដានសាមញ្ញ។ រចនាឡើងសម្រាប់ភាពថ្លែងច្បាស់ និងងាយស្រួលប្រើសម្រាប់ប្រព័ន្ធដឹកជញ្ជូនក្នុងប្រទេសកម្ពុជា។"
+            data-kh="ប្រព័ន្ធនេះជួយអតិថិជនតាមដានកញ្ចប់របស់ខ្លួនរវាងសាខានានាក្នុងប្រទេសកម្ពុជា។ បុគ្គលិកសាខាបង្កើតការដឹកជញ្ជូន អ្នកបើកបរធ្វើបច្ចុប្បន្នភាពស្ថានភាពក្នុងអំឡុងដំណើរ ហើយអតិថិជនអាចពិនិត្យស្ថានភាពកញ្ចប់តាមអ៊ិនធរណេទដោយប្រើលេខតាមដានសាមញ្ញ។ រចនាឡើងសម្រាប់ភាពថ្លែងច្បាស់ និងងាយស្រួលប្រើសម្រាប់ប្រព័ន្ធដឹកជញ្ជូនក្នុងប្រទេសកម្ពុជា។"
           >
             This system helps customers track their packages between branches inside Cambodia. Branch staff create
             shipments, drivers update status along the route, and customers check their shipment status online using a
@@ -536,14 +648,14 @@
           <div class="flex flex-wrap gap-3 pt-2">
             <button
               data-simulate-journey
-              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 transition-transform transition-colors duration-200 hover:-translate-y-0.5 hover:shadow-2xl"
+              class="inline-flex items-center gap-2 rounded-full bg-white text-cambodia-blue px-5 py-2.5 text-sm font-semibold shadow-lg shadow-slate-900/40 hover:bg-slate-100 btn-soft-lift"
             >
               <span>▶</span>
               <span>Simulate Journey</span>
             </button>
             <button
               data-scroll-target="features"
-              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 transition-transform transition-colors duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+              class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/5 px-5 py-2.5 text-sm font-semibold hover:bg-white/10 btn-soft-lift"
             >
               View Features
               <span>→</span>
@@ -558,7 +670,7 @@
 
         <!-- Right: tracking demo card -->
         <div class="reveal-on-scroll">
-          <div class="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6 float-soft">
+          <div class="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-5 sm:p-6 hero-float">
             <div class="flex items-center justify-between gap-3 mb-4">
               <div>
                 <p class="text-xs uppercase tracking-[0.18em] text-slate-100/70">Demo Tracking</p>
@@ -584,7 +696,7 @@
                 />
                 <button
                   id="tracking-demo-btn"
-                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 transition-transform transition-colors duration-200 hover:-translate-y-0.5 hover:shadow-xl"
+                  class="inline-flex justify-center items-center rounded-xl bg-cambodia-red text-white px-4 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-red-700 btn-soft-lift"
                 >
                   Track Demo
                 </button>
@@ -653,7 +765,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 card-hover-lift">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Branch-to-Branch Focus
           </h3>
@@ -663,7 +775,7 @@
           </p>
         </div>
 
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg border border-slate-200/80 dark:border-slate-800/80 p-6 card-hover-lift">
           <h3 class="text-lg font-semibold text-cambodia-blue dark:text-amber-200 mb-2">
             Clear Roles &amp; Responsibilities
           </h3>
@@ -675,7 +787,7 @@
       </div>
 
       <div class="max-w-4xl mx-auto mt-8 reveal-on-scroll">
-        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-xl">
+        <div class="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cambodia-blue/20 dark:border-cambodia-blue/40 shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="grid sm:grid-cols-2 gap-5">
             <div class="flex items-start gap-3">
               <span class="text-3xl">📍</span>
@@ -725,7 +837,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Problems -->
-        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <div class="rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-amber-900/20 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">⚠️</span>
             <h3 class="text-xl font-bold text-cambodia-red">
@@ -753,7 +865,7 @@
         </div>
 
         <!-- Solution -->
-        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-blue-900/30 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-center gap-3 mb-4">
             <span class="text-3xl">✅</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -797,7 +909,7 @@
         </h2>
         <button
           data-simulate-journey
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 transition-transform transition-colors duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-4 py-2 text-xs sm:text-sm font-semibold shadow-md hover:bg-blue-900 btn-soft-lift"
         >
           <span>▶</span>
           <span>Simulate Journey</span>
@@ -807,7 +919,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
         <!-- Step 1 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-xl p-5 flex flex-col items-center text-center transition-transform duration-200 ease-out hover:-translate-y-1"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="1"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -823,7 +935,7 @@
 
         <!-- Step 2 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-xl p-5 flex flex-col items-center text-center transition-transform duration-200 ease-out hover:-translate-y-1"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="2"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -839,7 +951,7 @@
 
         <!-- Step 3 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-xl p-5 flex flex-col items-center text-center transition-transform duration-200 ease-out hover:-translate-y-1"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="3"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -855,7 +967,7 @@
 
         <!-- Step 4 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-xl p-5 flex flex-col items-center text-center transition-transform duration-200 ease-out hover:-translate-y-1"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="4"
         >
           <div class="w-12 h-12 rounded-full bg-red-100 text-cambodia-red flex items-center justify-center mb-3">
@@ -871,7 +983,7 @@
 
         <!-- Step 5 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-xl p-5 flex flex-col items-center text-center transition-transform duration-200 ease-out hover:-translate-y-1"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="5"
         >
           <div class="w-12 h-12 rounded-full bg-blue-100 text-cambodia-blue flex items-center justify-center mb-3">
@@ -887,7 +999,7 @@
 
         <!-- Step 6 -->
         <article
-          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-xl p-5 flex flex-col items-center text-center transition-transform duration-200 ease-out hover:-translate-y-1"
+          class="journey-step rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-lg p-5 flex flex-col items-center text-center"
           data-step="6"
         >
           <div class="w-12 h-12 rounded-full bg-green-100 text-emerald-700 flex items-center justify-center mb-3">
@@ -902,36 +1014,8 @@
         </article>
       </div>
 
-      <!-- Mini timeline: MOBILE (vertical version) -->
-      <ul class="mt-10 space-y-2 text-xs text-slate-600 dark:text-slate-300 md:hidden reveal-on-scroll">
-        <li class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
-          <span>Drop Off</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">2</span>
-          <span>Registration</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">3</span>
-          <span>At Origin</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-cambodia-red text-white flex items-center justify-center text-[11px]">4</span>
-          <span>Assignment</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">5</span>
-          <span>Arrival</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px]">6</span>
-          <span>Delivered</span>
-        </li>
-      </ul>
-
-      <!-- Mini timeline: DESKTOP (existing row) -->
-      <div class="mt-10 hidden md:flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300 reveal-on-scroll">
+      <!-- Mini timeline desktop -->
+      <div class="mt-10 hidden sm:flex items-center justify-center gap-3 text-xs text-slate-600 dark:text-slate-300 reveal-on-scroll">
         <span class="flex items-center gap-1">
           <span class="w-6 h-6 rounded-full bg-cambodia-blue text-white flex items-center justify-center text-[11px]">1</span>
           Drop Off
@@ -962,6 +1046,40 @@
           Delivered
         </span>
       </div>
+
+      <!-- Mini timeline mobile as scrollable chips -->
+      <div class="mt-8 sm:hidden reveal-on-scroll">
+        <div class="flex items-center justify-between mb-2 text-[11px] text-slate-500 dark:text-slate-400">
+          <span>Journey steps</span>
+          <span class="italic">Swipe →</span>
+        </div>
+        <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-blue">1</span>
+            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Drop Off</span>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-red">2</span>
+            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Registration</span>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-blue">3</span>
+            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">At Origin</span>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-red">4</span>
+            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Assignment</span>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-cambodia-blue">5</span>
+            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Arrival</span>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+            <span class="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold text-white bg-emerald-600">6</span>
+            <span class="text-[11px] font-medium text-slate-700 dark:text-slate-200">Delivered</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -980,7 +1098,7 @@
 
       <div class="grid md:grid-cols-3 gap-8 reveal-on-scroll">
         <!-- Admin/Cashier -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="text-4xl text-center mb-3">👨‍💼</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Admin / Cashier
@@ -1006,7 +1124,7 @@
         </article>
 
         <!-- Driver -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="text-4xl text-center mb-3">🚚</div>
           <h3 class="text-xl font-bold text-cambodia-red text-center mb-4">
             Drivers
@@ -1028,7 +1146,7 @@
         </article>
 
         <!-- Customers -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border-t-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="text-4xl text-center mb-3">👥</div>
           <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-4">
             Customers
@@ -1067,7 +1185,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 reveal-on-scroll">
         <!-- Status-based -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-blue-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">📋</span>
             <h3 class="text-xl font-bold text-cambodia-blue dark:text-amber-200">
@@ -1111,7 +1229,7 @@
         </article>
 
         <!-- GPS -->
-        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-red-100 dark:border-slate-700 shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-3xl">🛰️</span>
             <h3 class="text-xl font-bold text-cambodia-red dark:text-amber-200">
@@ -1184,7 +1302,7 @@
         </div>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+      <div class="rounded-2xl bg-gradient-to-r from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll card-hover-lift">
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-lg font-bold text-cambodia-blue dark:text-amber-200 mb-3 flex items-center gap-2">
@@ -1269,9 +1387,9 @@
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal-on-scroll">
         <!-- Hun Sokheng -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap float-avatar">
+            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 0s;">
               <div class="avatar-glow"></div>
               <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="asset/hun_sokheng.jpg" alt="Hun Sokheng" class="w-full h-full object-cover" />
@@ -1301,9 +1419,9 @@
         </article>
 
         <!-- Say Koemsor -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap float-avatar">
+            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 0.6s;">
               <div class="avatar-glow"></div>
               <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="say_koemsor.jpg" alt="Say Koemsor" class="w-full h-full object-cover" />
@@ -1333,9 +1451,9 @@
         </article>
 
         <!-- Kouk Bronith -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-blue shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap float-avatar">
+            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 1.2s;">
               <div class="avatar-glow"></div>
               <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-blue shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="kouk_bronith.jpg" alt="Kouk Bronith" class="w-full h-full object-cover" />
@@ -1365,9 +1483,9 @@
         </article>
 
         <!-- Chun Chiva -->
-        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+        <article class="team-card rounded-2xl bg-white dark:bg-slate-900 border-l-4 border-cambodia-red shadow-xl p-6 sm:p-7 card-hover-lift">
           <div class="flex items-start gap-4 mb-4">
-            <div class="avatar-wrap float-avatar">
+            <div class="avatar-wrap team-avatar-float" style="--avatar-delay: 1.8s;">
               <div class="avatar-glow"></div>
               <div class="avatar-photo w-24 h-24 sm:w-28 sm:h-28 rounded-full ring-4 ring-cambodia-red shadow-xl overflow-hidden bg-slate-100 flex-shrink-0">
                 <img src="asset/chun_chiva.jpg" alt="Chun Chiva" class="w-full h-full object-cover" />
@@ -1420,13 +1538,13 @@
           href="https://www.canva.com/design/DAG5qhQZA68/OA1b2SAshhRj330O1y8hJA/view"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 transition-transform transition-colors duration-200 hover:-translate-y-0.5 hover:shadow-2xl"
+          class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-7 py-3 text-sm sm:text-base font-semibold shadow-lg hover:bg-blue-900 btn-soft-lift"
         >
           🎥 Open Canva Presentation
         </a>
       </div>
 
-      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7 flex flex-col md:flex-row gap-6 items-center reveal-on-scroll card-hover-lift">
         <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-md bg-slate-200 aspect-video">
           <img
             src="presentation_cover.jpg"
@@ -1469,7 +1587,7 @@
         </h2>
       </div>
 
-      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl">
+      <div class="rounded-2xl bg-gradient-to-br from-blue-50 via-white to-red-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7 reveal-on-scroll card-hover-lift">
         <div class="grid md:grid-cols-2 gap-6">
           <div class="flex items-start gap-3">
             <span class="text-3xl">📱</span>
@@ -1522,7 +1640,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-100 py-10 md:pb-16">
+  <footer class="bg-slate-900 text-slate-100 py-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-6">
         <h3 class="text-xl sm:text-2xl font-bold mb-2">
@@ -1612,7 +1730,7 @@
         borderables: [],
         fontEditable: undefined,
         fontSizeable: undefined
-      }),
+      })),
       mapToEditPanelValues: (config) =>
         new Map([
           ["main_title", config.main_title || defaultConfig.main_title],
@@ -1663,7 +1781,7 @@
     /* Back to top */
     const backToTopBtn = document.getElementById("back-to-top");
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 450) {
+      if (window.scrollY > 400) {
         backToTopBtn.classList.add("show");
       } else {
         backToTopBtn.classList.remove("show");
@@ -1675,7 +1793,7 @@
       });
     }
 
-    /* Reveal on scroll (fade in ONCE) */
+    /* Reveal on scroll (fade in once and stay visible) */
     const revealEls = document.querySelectorAll(".reveal-on-scroll");
     const revealObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -1690,17 +1808,23 @@
     );
     revealEls.forEach((el) => revealObserver.observe(el));
 
-    /* Side dots scroll spy */
+    /* Side dots scroll spy + nav active state */
     const dots = document.querySelectorAll(".scroll-dot");
     const sections = document.querySelectorAll("section[id]");
+    const navButtons = document.querySelectorAll("header [data-scroll-target]");
 
     const sectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const id = entry.target.id;
+
             dots.forEach((dot) => {
               dot.classList.toggle("scroll-dot-active", dot.getAttribute("data-dot-target") === id);
+            });
+
+            navButtons.forEach((btn) => {
+              btn.classList.toggle("nav-link-active", btn.getAttribute("data-scroll-target") === id);
             });
           }
         });
@@ -1768,7 +1892,6 @@
         trackingCard.classList.add("tracking-result-visible");
       }
 
-      // Close keyboard & reset zoom on mobile
       trackingInput.blur();
     }
 
@@ -1778,7 +1901,6 @@
         simulateTracking();
       });
     }
-    // Show initial card with default text
     if (trackingCard) {
       trackingCard.classList.add("tracking-result-visible");
     }
@@ -1787,6 +1909,7 @@
     const journeySteps = Array.from(document.querySelectorAll(".journey-step"));
     const journeyButtons = document.querySelectorAll("[data-simulate-journey]");
     let journeyTimeouts = [];
+    let journeyPlayedOnce = false;
 
     function clearJourneyHighlight() {
       journeyTimeouts.forEach((t) => clearTimeout(t));
@@ -1794,12 +1917,9 @@
       journeySteps.forEach((step) => step.classList.remove("active-step"));
     }
 
-    function startJourneySimulation(options = {}) {
-      const { auto = false } = options;
+    function startJourneySimulation(scrollIntoViewFirst = true) {
       clearJourneyHighlight();
-
-      // Only scroll when user clicks the simulate button, not on auto trigger
-      if (!auto) {
+      if (scrollIntoViewFirst) {
         const flowSection = document.getElementById("flow");
         if (flowSection) {
           flowSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1811,9 +1931,7 @@
         const t = setTimeout(() => {
           journeySteps.forEach((s) => s.classList.remove("active-step"));
           step.classList.add("active-step");
-          if (!auto) {
-            step.scrollIntoView({ behavior: "smooth", block: "center" });
-          }
+          step.scrollIntoView({ behavior: "smooth", block: "center" });
         }, delay);
         journeyTimeouts.push(t);
         delay += 700;
@@ -1828,28 +1946,29 @@
     journeyButtons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        startJourneySimulation();
+        startJourneySimulation(true);
       });
     });
 
-    // Auto-simulate journey once when flow section enters view
+    /* Auto-play journey once when Flow section first enters view */
     const flowSection = document.getElementById("flow");
-    if (flowSection && journeySteps.length) {
+    if (flowSection && typeof IntersectionObserver !== "undefined") {
       const flowObserver = new IntersectionObserver(
         (entries, observer) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              startJourneySimulation({ auto: true });
+            if (entry.isIntersecting && !journeyPlayedOnce) {
+              journeyPlayedOnce = true;
+              startJourneySimulation(false);
               observer.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.5 }
+        { threshold: 0.4 }
       );
       flowObserver.observe(flowSection);
     }
 
-    /* Language toggle (simple EN / KH for elements that want it) */
+    /* Language toggle (simple EN / KH) */
     const langToggle = document.getElementById("lang-toggle");
     const langLabel = document.getElementById("lang-label");
 
@@ -1862,6 +1981,10 @@
         langLabel.textContent = lang === "kh" ? "ខ្មែរ" : "EN";
       }
       localStorage.setItem("dlts-lang", lang);
+
+      // adjust HTML lang + class for Khmer typography
+      htmlEl.setAttribute("lang", lang === "kh" ? "km" : "en");
+      htmlEl.classList.toggle("lang-kh", lang === "kh");
     }
 
     const storedLang = localStorage.getItem("dlts-lang") || "en";
@@ -1892,7 +2015,6 @@
 
     let savedTheme = localStorage.getItem("dlts-theme");
     if (!savedTheme) {
-      // default light
       savedTheme = "light";
     }
     applyTheme(savedTheme);
