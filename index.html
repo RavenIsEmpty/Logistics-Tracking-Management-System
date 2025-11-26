@@ -87,7 +87,6 @@
       mix-blend-mode: soft-light;
     }
 
-    /* Reveal on scroll */
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(18px);
@@ -98,6 +97,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+
 
     /* Side dot navigation */
     .scroll-dots {
@@ -1676,13 +1676,14 @@
       });
     }
 
-    /* Reveal on scroll (fade in once and stay) */
+        /* Reveal on scroll (fade in once and keep visible) */
     const revealEls = document.querySelectorAll(".reveal-on-scroll");
     const revealObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("reveal-visible");
+            // reveal only once
             observer.unobserve(entry.target);
           }
         });
