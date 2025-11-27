@@ -183,6 +183,19 @@
       transform: scale(1.04);
     }
 
+    /* Always-glowing version of the brand pill (DLTS Cambodia logo) */
+.brand-pill.brand-pill-always-glow {
+  transform: translateY(-1px);
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.45),
+    0 0 0 1px rgba(148, 163, 184, 0.85);
+}
+
+.brand-pill.brand-pill-always-glow::before {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
     /* Nav hover underline glow */
     .nav-link {
       position: relative;
@@ -480,9 +493,9 @@
       <div class="flex items-center justify-between h-14">
         <!-- Logo -->
         <div class="flex items-center gap-2">
-          <div class="brand-pill">
+          <div class="brand-pill brand-pill-always-glow">
             <span class="text-xl">📦</span>
-            <span class="font-semibold tracking-tight text-[11px] sm:text-xs md:text-sm uppercase">
+              <span class="font-semibold tracking-tight text-[11px] sm:text-xs md:text-sm uppercase">
               DLTS Cambodia
             </span>
           </div>
