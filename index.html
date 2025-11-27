@@ -1913,10 +1913,11 @@
         trackingCard.classList.add("tracking-result-visible");
       }
 
-      /* Journey simulation */
+            /* Journey simulation */
       const journeySteps = Array.from(document.querySelectorAll(".journey-step"));
       const journeyButtons = document.querySelectorAll("[data-simulate-journey]");
       let journeyTimeouts = [];
+      let journeyHasAutoPlayed = false;
 
       function clearJourneyHighlight() {
         journeyTimeouts.forEach((t) => clearTimeout(t));
@@ -1931,6 +1932,7 @@
         const isMobile = window.innerWidth < 768;
         const flowSection = document.getElementById("flow");
 
+        // Scroll to the flow section first (for both desktop + mobile)
         if (flowSection) {
           flowSection.scrollIntoView({
             behavior: "smooth",
@@ -1944,7 +1946,7 @@
             journeySteps.forEach((s) => s.classList.remove("active-step"));
             step.classList.add("active-step");
 
-            // On mobile, keep the current step in view so user can follow easily
+            // On mobile, keep the current step in view for better following
             if (isMobile) {
               step.scrollIntoView({ behavior: "smooth", block: "center" });
             }
@@ -1959,6 +1961,7 @@
         journeyTimeouts.push(endTimeout);
       }
 
+      // Buttons: still allow manual simulation any time
       journeyButtons.forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -1966,7 +1969,24 @@
         });
       });
 
-      /* NOTE: auto-play for journey was removed per requirement */
+      // 🔁 Auto-play ONCE when #flow section first comes into view
+      const flowSection = document.getElementById("flow");
+      if ("IntersectionObserver" in window && flowSection) {
+        const flowObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !journeyHasAutoPlayed) {
+                journeyHasAutoPlayed = true;
+                startJourneySimulation();
+                observer.unobserve(flowSection);
+              }
+            });
+          },
+          { threshold: 0.35 }
+        );
+
+        flowObserver.observe(flowSection);
+      }
 
       /* Language toggle */
       const langToggle = document.getElementById("lang-toggle");
