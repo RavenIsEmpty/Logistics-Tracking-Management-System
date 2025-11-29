@@ -831,6 +831,40 @@
     </div>
   </section>
 
+  <!-- Current Implementation / Status -->
+  <section id="implementation" class="py-10 sm:py-14 bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto reveal-on-scroll">
+        <div class="neon-on-scroll rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/80 dark:border-slate-700 shadow-xl p-6 sm:p-7">
+          <h2 class="text-2xl sm:text-3xl font-bold text-cambodia-blue dark:text-amber-300 text-center mb-2">
+            Current Implementation / Status
+          </h2>
+          <p class="text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-4">
+            Current Implementation (Dec 2025)
+          </p>
+          <ul class="space-y-2 text-sm sm:text-base text-slate-700 dark:text-slate-200">
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5">✅</span>
+              <span>Core backend API (create shipment, list shipments, track by tracking code, add tracking events).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5">✅</span>
+              <span>Connected to PostgreSQL database (<code>dlts_cambodia</code>).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5">✅</span>
+              <span>Simple demo UI for Admin / Driver / Customer (HTML + TailwindCSS + Vanilla JS, calling the ASP.NET Core API).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5">🔄</span>
+              <span>Next: authentication &amp; roles, better UI per role, optional map view, cloud deployment.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Why We Built This -->
   <section id="features" class="py-16 sm:py-20 bg-gradient-to-br from-slate-50 via-white to-red-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
@@ -1296,14 +1330,14 @@
         </h2>
       </div>
 
-      <!-- Planned implementation pill (no Leaflet here) -->
+      <!-- Current implementation pill -->
       <div class="flex justify-center mb-8 reveal-on-scroll">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900 border border-blue-100 dark:border-slate-700 text-xs sm:text-sm text-cambodia-blue dark:text-amber-100 shadow-sm">
           <div class="relative w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400 ping-dot"></div>
           <span class="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400"></span>
           <span>
-            Planned implementation:
-            <span class="font-semibold">Spring Boot + PostgreSQL</span>
+            Current implementation:
+            <span class="font-semibold">ASP.NET Core 8 Web API + EF Core + PostgreSQL</span>
           </span>
         </div>
       </div>
@@ -1312,42 +1346,42 @@
         <div class="grid md:grid-cols-2 gap-8">
           <div>
             <h3 class="text-lg font-bold text-cambodia-blue dark:text-amber-200 mb-3 flex items-center gap-2">
-              <span>💻</span> Frontend
+              <span>💻</span> Frontend (Demo UI)
             </h3>
             <ul class="space-y-2 text-sm sm:text-base text-slate-700 dark:text-slate-200">
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-blue mt-0.5">•</span>
-                <span>HTML, TailwindCSS for responsive layouts and modern components.</span>
+                <span>HTML and TailwindCSS for a responsive demo UI for Admin, Driver and Customer roles.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-blue mt-0.5">•</span>
-                <span>Vanilla JavaScript for tracking simulation, scroll animations and UX logic.</span>
+                <span>Vanilla JavaScript for calling the ASP.NET Core APIs, tracking simulation, scroll animations and UX logic.</span>
               </li>
             </ul>
           </div>
           <div>
             <h3 class="text-lg font-bold text-cambodia-red dark:text-amber-200 mb-3 flex items-center gap-2">
-              <span>⚙️</span> Backend (Planned)
+              <span>⚙️</span> Backend API (ASP.NET Core 8)
             </h3>
             <ul class="space-y-2 text-sm sm:text-base text-slate-700 dark:text-slate-200">
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-red mt-0.5">•</span>
-                <span>REST APIs using Spring Boot or a similar enterprise framework.</span>
+                <span>ASP.NET Core 8 Web API with Entity Framework Core for business logic and data access.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-red mt-0.5">•</span>
-                <span>Endpoints for shipments, branches, tracking events and driver locations.</span>
+                <span>RESTful endpoints for shipments, branches, tracking codes and tracking events.</span>
               </li>
             </ul>
           </div>
           <div>
             <h3 class="text-lg font-bold text-cambodia-blue dark:text-amber-200 mb-3 flex items-center gap-2">
-              <span>🗄️</span> Database
+              <span>🗄️</span> Database (PostgreSQL)
             </h3>
             <ul class="space-y-2 text-sm sm:text-base text-slate-700 dark:text-slate-200">
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-blue mt-0.5">•</span>
-                <span>Relational database such as PostgreSQL or MySQL.</span>
+                <span>PostgreSQL database (<code>dlts_cambodia</code>) for relational data storage.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-blue mt-0.5">•</span>
@@ -1357,16 +1391,20 @@
           </div>
           <div>
             <h3 class="text-lg font-bold text-cambodia-red dark:text-amber-200 mb-3 flex items-center gap-2">
-              <span>🗺️</span> Mapping &amp; Location
+              <span>🛠️</span> Tools &amp; Development
             </h3>
             <ul class="space-y-2 text-sm sm:text-base text-slate-700 dark:text-slate-200">
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-red mt-0.5">•</span>
-                <span>Browser geolocation API for driver location capture.</span>
+                <span>Visual Studio 2022 for backend development and debugging.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-cambodia-red mt-0.5">•</span>
-                <span>Integration with a map provider (e.g., Google Maps or OpenStreetMap) for visualization.</span>
+                <span>pgAdmin for managing PostgreSQL databases and inspecting data.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-cambodia-red mt-0.5">•</span>
+                <span>Git &amp; GitHub for source control, collaboration and GitHub Pages demo hosting.</span>
               </li>
             </ul>
           </div>
@@ -1573,6 +1611,33 @@
           </p>
         </div>
       </div>
+
+      <!-- Source Code (GitHub) -->
+      <div class="mt-10 reveal-on-scroll">
+        <div class="neon-on-scroll max-w-3xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-6 sm:p-7">
+          <h3 class="text-xl sm:text-2xl font-bold text-cambodia-blue dark:text-amber-200 text-center mb-3">
+            Source Code (GitHub)
+          </h3>
+          <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 text-center mb-4">
+            The project is implemented with ASP.NET Core 8 Web API, Entity Framework Core, PostgreSQL and a simple HTML/Tailwind/JavaScript demo UI.
+          </p>
+          <div class="flex justify-center mb-4">
+            <a
+              href="https://github.com/<my-username>/domestic-logistics-tracking-system"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full bg-cambodia-blue text-white px-6 py-2.5 text-sm sm:text-base font-semibold shadow-md hover:bg-blue-900 hover:-translate-y-[1px] hover:shadow-xl transition"
+            >
+              🔗 View GitHub Repository
+            </a>
+          </div>
+          <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 list-disc list-inside space-y-1.5">
+            <li>Backend ASP.NET Core Web API project.</li>
+            <li>Demo UI in the <code>/docs</code> folder (used for GitHub Pages deployment).</li>
+            <li><code>README.md</code> with setup and run instructions.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1732,7 +1797,7 @@
         borderables: [],
         fontEditable: undefined,
         fontSizeable: undefined
-      }),
+      })),
       mapToEditPanelValues: (config) =>
         new Map([
           ["main_title", config.main_title || defaultConfig.main_title],
@@ -1799,11 +1864,10 @@
         });
       }
 
-            /* Reveal on scroll (fade-in once) */
+      /* Reveal on scroll (fade-in once) */
       const revealEls = document.querySelectorAll(".reveal-on-scroll");
 
-      // 🔥 Neon: always on (desktop + mobile, light + dark)
-      // Every element with .neon-on-scroll will glow automatically
+      // Neon always on
       document.querySelectorAll(".neon-on-scroll").forEach((el) => {
         el.classList.add("neon-active");
       });
@@ -1912,7 +1976,7 @@
         trackingCard.classList.add("tracking-result-visible");
       }
 
-            /* Journey simulation */
+      /* Journey simulation */
       const journeySteps = Array.from(document.querySelectorAll(".journey-step"));
       const journeyButtons = document.querySelectorAll("[data-simulate-journey]");
       let journeyTimeouts = [];
@@ -1931,7 +1995,6 @@
         const isMobile = window.innerWidth < 768;
         const flowSection = document.getElementById("flow");
 
-        // Scroll to the flow section first (for both desktop + mobile)
         if (flowSection) {
           flowSection.scrollIntoView({
             behavior: "smooth",
@@ -1945,7 +2008,6 @@
             journeySteps.forEach((s) => s.classList.remove("active-step"));
             step.classList.add("active-step");
 
-            // On mobile, keep the current step in view for better following
             if (isMobile) {
               step.scrollIntoView({ behavior: "smooth", block: "center" });
             }
@@ -1960,7 +2022,6 @@
         journeyTimeouts.push(endTimeout);
       }
 
-      // Buttons: still allow manual simulation any time
       journeyButtons.forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -1968,7 +2029,6 @@
         });
       });
 
-      // 🔁 Auto-play ONCE when #flow section first comes into view
       const flowSection = document.getElementById("flow");
       if ("IntersectionObserver" in window && flowSection) {
         const flowObserver = new IntersectionObserver(
@@ -2013,7 +2073,7 @@
         });
       }
 
-      /* Dark / Light theme toggle using Tailwind's darkMode: 'class' */
+      /* Dark / Light theme toggle */
       const themeToggle = document.getElementById("theme-toggle");
       const themeIcon = document.getElementById("theme-toggle-icon");
 
@@ -2042,7 +2102,6 @@
       }
     } catch (err) {
       console.error("DLTS page init error:", err);
-      // Fallback: make sure content is visible even if JS fails
       document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
         el.classList.add("reveal-visible");
       });
