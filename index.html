@@ -279,29 +279,100 @@
       }
     }
 
-    /* Journey steps highlight */
-    .journey-step {
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-    }
+    /* Journey steps highlight – normal cards, strong active step */
+.journey-step {
+  position: relative;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    opacity 0.25s ease,
+    filter 0.25s ease;
+}
 
-    .journey-step:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 10px 30px rgba(15, 23, 42, 0.18);
-    }
+.journey-step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
 
-    .journey-step.active-step {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow:
-        0 16px 40px rgba(3, 46, 107, 0.18),
-        0 8px 22px rgba(15, 23, 42, 0.35);
-      border-color: rgba(212, 175, 55, 0.8);
-      background-color: rgba(248, 250, 252, 0.96);
-    }
+/* base glow shells (hidden when not active) */
+.journey-step::before,
+.journey-step::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+}
 
-    .dark .journey-step.active-step {
-      background-color: rgba(15, 23, 42, 0.96);
-    }
+/* active step – main focus */
+.journey-step.active-step {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow:
+    0 20px 60px rgba(3, 46, 107, 0.5),
+    0 12px 30px rgba(15, 23, 42, 0.7);
+  border-color: rgba(251, 191, 36, 0.95); /* amber border */
+  background: radial-gradient(circle at 15% 0%, #fef9c3, #ffffff 40%, #e0f2fe);
+}
+
+/* bright outer ring */
+.journey-step.active-step::before {
+  border: 2px solid rgba(251, 191, 36, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(148, 163, 184, 0.7),
+    0 0 32px rgba(251, 191, 36, 1);
+  opacity: 1;
+  animation: step-pulse 1.2s ease-out infinite;
+}
+
+/* animated highlight bar sweeping across card */
+.journey-step.active-step::after {
+  inset: auto 14px 10px 14px; /* bottom bar */
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #032E6B, #D62829, #fbbf24);
+  opacity: 1;
+  animation: step-glow-sweep 1.2s linear infinite;
+}
+
+/* bump the icon circle on the active step */
+.journey-step.active-step .w-12.h-12 {
+  transform: scale(1.15);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.6);
+}
+
+/* dark mode tweak */
+.dark .journey-step.active-step {
+  background: radial-gradient(circle at 15% 0%, #1f2937, #020617 55%);
+}
+
+/* pulse for outer ring */
+@keyframes step-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+/* moving light sweep on bottom bar */
+@keyframes step-glow-sweep {
+  0% {
+    box-shadow: -40px 0 20px rgba(248, 250, 252, 0.9);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(248, 250, 252, 1);
+  }
+  100% {
+    box-shadow: 40px 0 20px rgba(248, 250, 252, 0.9);
+  }
+}
+
 
     /* Team card avatar + emoji badge */
     .team-card {
